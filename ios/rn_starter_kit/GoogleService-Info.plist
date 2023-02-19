@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>1015758483035-6fau183h9g10o9gt5kq50kta8mac8lf4.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1015758483035-6fau183h9g10o9gt5kq50kta8mac8lf4</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>763342324681-1e5jt62sfkli8r6t0aaqbh2isihtoq9r.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyD6LdEsMWCJXFWxUcXg3rN5Uthb0f4YrtQ</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1015758483035</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.gorillaminds.betfree</string>
+	<key>PROJECT_ID</key>
+	<string>bet-free-ed319</string>
+	<key>STORAGE_BUCKET</key>
+	<string>bet-free-ed319.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1015758483035:ios:b23138d3c69c36cbc4597e</string>
+	<key>DATABASE_URL</key>
+	<string>https://bet-free-ed319.firebaseio.com</string>
+</dict>
+</plist>
