@@ -4,7 +4,7 @@
  * <p>This source code is licensed under the MIT license found in the LICENSE file in the root
  * directory of this source tree.
  */
-package com.rn_starter_kit;
+/*package com.rn_starter_kit;
 
 import android.content.Context;
 import com.facebook.flipper.android.AndroidFlipperClient;
@@ -70,3 +70,4 @@ public class ReactNativeFlipper {
     }
   }
 }
+*/

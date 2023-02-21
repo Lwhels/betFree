@@ -1,4 +1,4 @@
-package com.rn_starter_kit;
+package com.gorillaminds.betfree;
 
 import android.app.Application;
 import android.content.Context;
@@ -44,7 +44,7 @@ public class MainApplication extends Application implements ReactApplication {
   public void onCreate() {
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
-    initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
+    //initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
   }
 
   /**
@@ -54,14 +54,14 @@ public class MainApplication extends Application implements ReactApplication {
    * @param context
    * @param reactInstanceManager
    */
-  private static void initializeFlipper(
+  /*private static void initializeFlipper(
       Context context, ReactInstanceManager reactInstanceManager) {
     if (BuildConfig.DEBUG) {
-      try {
-        /*
-         We use reflection here to pick up the class that initializes Flipper,
-        since Flipper library is not available in release mode
-        */
+      try { 
+        
+        //We use reflection here to pick up the class that initializes Flipper,
+        //since Flipper library is not available in release mode
+        
         Class<?> aClass = Class.forName("com.rn_starter_kit.ReactNativeFlipper");
         aClass
             .getMethod("initializeFlipper", Context.class, ReactInstanceManager.class)
@@ -76,5 +76,5 @@ public class MainApplication extends Application implements ReactApplication {
         e.printStackTrace();
       }
     }
-  }
+  }*/
 }

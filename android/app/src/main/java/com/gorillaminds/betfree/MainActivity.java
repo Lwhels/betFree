@@ -1,4 +1,4 @@
-package com.rn_starter_kit;
+package com.gorillaminds.betfree;
 
 import com.facebook.react.ReactActivity;
 
