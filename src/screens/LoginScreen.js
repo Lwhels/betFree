@@ -202,11 +202,6 @@ function LoginScreen({navigation}) {
         <Text style={styles.loginText}>Log in</Text>
       </TouchableOpacity>
       <Text style={styles.or}>OR</Text>
-      <TouchableOpacity
-        style={styles.facebookContainer}
-        onPress={() => onPressFacebook()}>
-        <Text style={styles.facebookText}>Login with Facebook</Text>
-      </TouchableOpacity>
       {loading ? (
         <ActivityIndicator
           style={{marginTop: 30}}
