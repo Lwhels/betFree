@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1015758483035-sjgjbb602sar6j0eg13ohemf5upra40j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gorillaminds.betfree",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
           "client_id": "1015758483035-a0kda0lgkhtlhilct215c3i6g77k7e2o.apps.googleusercontent.com",
           "client_type": 3
         }

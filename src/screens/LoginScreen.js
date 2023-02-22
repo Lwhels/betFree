@@ -33,7 +33,7 @@ function LoginScreen({navigation}) {
   useEffect(() => {
     GoogleSignin.configure({
       webClientId:
-        '1015758483035-6fau183h9g10o9gt5kq50kta8mac8lf4.apps.googleusercontent.com',
+        '1015758483035-a0kda0lgkhtlhilct215c3i6g77k7e2o.apps.googleusercontent.com',
     });
   }, []);
 
