@@ -23,7 +23,7 @@ const LoginStack = () => (
   <Stack.Navigator
     initialRouteName="Welcome"
     screenOptions={{
-      headerTintColor: 'red',
+      headerTintColor: 'green',
       headerTitleStyle: styles.headerTitleStyle,
       headerMode: 'float',
     }}>
@@ -38,7 +38,7 @@ const HomeStack = () => (
   <Stack.Navigator
     initialRouteName="Home"
     screenOptions={{
-      //headerTintColor: 'red',
+      headerTintColor: 'green',
       headerTitleStyle: styles.headerTitleStyle,
       headerMode: 'float',
     }}>
