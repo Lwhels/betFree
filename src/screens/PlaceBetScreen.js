@@ -22,8 +22,8 @@ function textOdds(data){
   var homeOdds = odds['0']['odd'];
   var awayOdds = odds['1']['odd'];
   homeOdds = convertOdds(homeOdds);
-  awayOdds = convertOdds(awayOdds);
-  return awayOdds + "                                " + homeOdds;
+  awayOdds = convertOdds(awayOdds);  
+  return awayOdds + "                                             " + homeOdds;
 }
 
 //convert odds from decimal to american moneyline
@@ -53,7 +53,7 @@ export default function PlaceBetScreen({navigation}) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}> Betting Page </Text>
+      <Text style={styles.title}> Place Bets Here! </Text>
       <Modal
         animationType="slide"
         transparent={true}
@@ -85,16 +85,18 @@ export default function PlaceBetScreen({navigation}) {
         renderItem={({item}) => (
           <View>
             <View>
-            <TouchableOpacity onPress={() => openModal(item)}>
+            <TouchableOpacity onPress={() => openModal(item)}
+                              style = {styles.touchable}
+            >
             <Text>
             <Image source={{uri: item['game']['teams']['away']['logo']}} style={styles.userPhoto}/>
             <Text>{textOdds(item)}</Text>
             <Image source={{uri: item['game']['teams']['home']['logo']}} style={styles.userPhoto}/>
             </Text>
             <Text>
-            <Text>{item['game']['teams']['away']['name']} </Text>
+            <Text style={styles.textStyle}>{item['game']['teams']['away']['name']} </Text>
             <Text> @ </Text>
-            <Text>{item['game']['teams']['home']['name']}</Text>
+            <Text >{item['game']['teams']['home']['name']}</Text>
             </Text>
             </TouchableOpacity>
             <Text> {'\n'}</Text>
@@ -102,7 +104,7 @@ export default function PlaceBetScreen({navigation}) {
           </View>
         )}
         keyExtractor={(item) => item['game']['id']}
-        style= {styles.list}
+        contentContainerStyle= {styles.list}
       />
     </View>
   );
@@ -111,28 +113,36 @@ export default function PlaceBetScreen({navigation}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'center',
     alignItems: 'center',
   },
   title: {
     fontWeight: 'bold',
-    color: AppStyles.color.title,
+    color: 'black',
     fontSize: 25,
     textAlign: 'center',
+    marginTop: 15,
+    marginBottom: 15,
   },
   userPhoto: {
     width: 40,
     height: 40,
+    alignSelf: 'flex-start',
   },
   btnStyle: {
     justifyContent: 'center',
-    width: '85%',
+    width: '100%',
     height: '8%',
     marginTop: 30,
     borderRadius: 15,
     backgroundColor: 'green',
   },
   list: {
-    width: '85%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
+        //flexDirection: 'column',
+
   },
   centeredView: {
     flex: 1,
@@ -167,12 +177,23 @@ const styles = StyleSheet.create({
     backgroundColor: '#2196F3',
   },
   textStyle: {
-    color: 'white',
-    fontWeight: 'bold',
+    color: 'black',
+    fontWeight: '400',
     textAlign: 'center',
   },
   modalText: {
     marginBottom: 15,
     textAlign: 'center'
+  },
+  touchable:{
+    justifyContent: 'center',
+    alignContent: 'center',
+    width: 320,
+    height: 80,
+    borderWidth: 1,
+    borderRadius: 7,
+
+    //flexDirection: 'column',
+
   },
 });
