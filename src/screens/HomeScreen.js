@@ -24,6 +24,7 @@ function getBets() {
     .catch((err) => {
       console.log(err);
     });
+    console.log(global.fetched_odds);
 }
 
 
