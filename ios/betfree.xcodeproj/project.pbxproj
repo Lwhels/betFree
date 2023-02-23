@@ -7,21 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00E356F31AD99517003FC87E /* rn_starter_kitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* rn_starter_kitTests.m */; };
+		00E356F31AD99517003FC87E /* betfreeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* betfreeTests.m */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		170EF9E626038E1C00D5F244 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 170EF9E526038E1C00D5F244 /* GoogleService-Info.plist */; };
 		170EF9E726038E1C00D5F244 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 170EF9E526038E1C00D5F244 /* GoogleService-Info.plist */; };
-		1DDD8478553F71443E290F87 /* libPods-rn_starter_kit-rn_starter_kitTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F2CBDEDECC74B184C4156C4 /* libPods-rn_starter_kit-rn_starter_kitTests.a */; };
+		1DDD8478553F71443E290F87 /* libPods-betfree-betfreeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F2CBDEDECC74B184C4156C4 /* libPods-betfree-betfreeTests.a */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		2DCD954D1E0B4F2C00145EB5 /* rn_starter_kitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* rn_starter_kitTests.m */; };
-		B0CDFDF5EADEDBE3515EA52E /* libPods-rn_starter_kit-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EB61CDD4227A7AF4D097BC32 /* libPods-rn_starter_kit-tvOS.a */; };
-		CA046896E60D98A334D4018A /* libPods-rn_starter_kit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF14DBECD77EDC78D8CC9EDE /* libPods-rn_starter_kit.a */; };
-		D0294A9E94B55C58B7308329 /* libPods-rn_starter_kit-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B76635116BBEDE058FB66583 /* libPods-rn_starter_kit-tvOSTests.a */; };
+		2DCD954D1E0B4F2C00145EB5 /* betfreeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* betfreeTests.m */; };
+		B0CDFDF5EADEDBE3515EA52E /* libPods-betfree-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EB61CDD4227A7AF4D097BC32 /* libPods-betfree-tvOS.a */; };
+		CA046896E60D98A334D4018A /* libPods-betfree.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF14DBECD77EDC78D8CC9EDE /* libPods-betfree.a */; };
+		D0294A9E94B55C58B7308329 /* libPods-betfree-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B76635116BBEDE058FB66583 /* libPods-betfree-tvOSTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,46 +30,46 @@
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
-			remoteInfo = rn_starter_kit;
+			remoteInfo = betfree;
 		};
 		2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 2D02E47A1E0B4A5D006451C7;
-			remoteInfo = "rn_starter_kit-tvOS";
+			remoteInfo = "betfree-tvOS";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
-		00E356EE1AD99517003FC87E /* rn_starter_kitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = rn_starter_kitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		00E356EE1AD99517003FC87E /* betfreeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = betfreeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		00E356F21AD99517003FC87E /* rn_starter_kitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = rn_starter_kitTests.m; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* rn_starter_kit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rn_starter_kit.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = rn_starter_kit/AppDelegate.h; sourceTree = "<group>"; };
-		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = rn_starter_kit/AppDelegate.m; sourceTree = "<group>"; };
+		00E356F21AD99517003FC87E /* betfreeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = betfreeTests.m; sourceTree = "<group>"; };
+		13B07F961A680F5B00A75B9A /* betfree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = betfree.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = betfree/AppDelegate.h; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = betfree/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = rn_starter_kit/Images.xcassets; sourceTree = "<group>"; };
-		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = rn_starter_kit/Info.plist; sourceTree = "<group>"; };
-		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = rn_starter_kit/main.m; sourceTree = "<group>"; };
-		170EF9E526038E1C00D5F244 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "rn_starter_kit/GoogleService-Info.plist"; sourceTree = "<group>"; };
-		1F2CBDEDECC74B184C4156C4 /* libPods-rn_starter_kit-rn_starter_kitTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-rn_starter_kit-rn_starter_kitTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2D02E47B1E0B4A5D006451C7 /* rn_starter_kit-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "rn_starter_kit-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2D02E4901E0B4A5D006451C7 /* rn_starter_kit-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "rn_starter_kit-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		309F68313865614C31FA9DC8 /* Pods-rn_starter_kit-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rn_starter_kit-tvOS.release.xcconfig"; path = "Target Support Files/Pods-rn_starter_kit-tvOS/Pods-rn_starter_kit-tvOS.release.xcconfig"; sourceTree = "<group>"; };
-		7214903180FB6044223A27B8 /* Pods-rn_starter_kit-rn_starter_kitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rn_starter_kit-rn_starter_kitTests.debug.xcconfig"; path = "Target Support Files/Pods-rn_starter_kit-rn_starter_kitTests/Pods-rn_starter_kit-rn_starter_kitTests.debug.xcconfig"; sourceTree = "<group>"; };
-		7343812BF67993E0BD209DA2 /* Pods-rn_starter_kit-rn_starter_kitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rn_starter_kit-rn_starter_kitTests.release.xcconfig"; path = "Target Support Files/Pods-rn_starter_kit-rn_starter_kitTests/Pods-rn_starter_kit-rn_starter_kitTests.release.xcconfig"; sourceTree = "<group>"; };
-		73C68A62DE1BE0F12AAD68CA /* Pods-rn_starter_kit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rn_starter_kit.release.xcconfig"; path = "Target Support Files/Pods-rn_starter_kit/Pods-rn_starter_kit.release.xcconfig"; sourceTree = "<group>"; };
-		8003D5BC11DA56E32E80E819 /* Pods-rn_starter_kit-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rn_starter_kit-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-rn_starter_kit-tvOSTests/Pods-rn_starter_kit-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
-		8FF6BC04A400CFA13326651B /* Pods-rn_starter_kit-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rn_starter_kit-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-rn_starter_kit-tvOS/Pods-rn_starter_kit-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
-		A3EC54A95C714D4D71B6799B /* Pods-rn_starter_kit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rn_starter_kit.debug.xcconfig"; path = "Target Support Files/Pods-rn_starter_kit/Pods-rn_starter_kit.debug.xcconfig"; sourceTree = "<group>"; };
-		B00E971559596CCD971BD5A6 /* Pods-rn_starter_kit-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rn_starter_kit-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-rn_starter_kit-tvOSTests/Pods-rn_starter_kit-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
-		B76635116BBEDE058FB66583 /* libPods-rn_starter_kit-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-rn_starter_kit-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		EB61CDD4227A7AF4D097BC32 /* libPods-rn_starter_kit-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-rn_starter_kit-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = betfree/Images.xcassets; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = betfree/Info.plist; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = betfree/main.m; sourceTree = "<group>"; };
+		170EF9E526038E1C00D5F244 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "betfree/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		1F2CBDEDECC74B184C4156C4 /* libPods-betfree-betfreeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-betfree-betfreeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D02E47B1E0B4A5D006451C7 /* betfree-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "betfree-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D02E4901E0B4A5D006451C7 /* betfree-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "betfree-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		309F68313865614C31FA9DC8 /* Pods-betfree-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-betfree-tvOS.release.xcconfig"; path = "Target Support Files/Pods-betfree-tvOS/Pods-betfree-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		7214903180FB6044223A27B8 /* Pods-betfree-betfreeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-betfree-betfreeTests.debug.xcconfig"; path = "Target Support Files/Pods-betfree-betfreeTests/Pods-betfree-betfreeTests.debug.xcconfig"; sourceTree = "<group>"; };
+		7343812BF67993E0BD209DA2 /* Pods-betfree-betfreeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-betfree-betfreeTests.release.xcconfig"; path = "Target Support Files/Pods-betfree-betfreeTests/Pods-betfree-betfreeTests.release.xcconfig"; sourceTree = "<group>"; };
+		73C68A62DE1BE0F12AAD68CA /* Pods-betfree.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-betfree.release.xcconfig"; path = "Target Support Files/Pods-betfree/Pods-betfree.release.xcconfig"; sourceTree = "<group>"; };
+		8003D5BC11DA56E32E80E819 /* Pods-betfree-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-betfree-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-betfree-tvOSTests/Pods-betfree-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		8FF6BC04A400CFA13326651B /* Pods-betfree-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-betfree-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-betfree-tvOS/Pods-betfree-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		A3EC54A95C714D4D71B6799B /* Pods-betfree.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-betfree.debug.xcconfig"; path = "Target Support Files/Pods-betfree/Pods-betfree.debug.xcconfig"; sourceTree = "<group>"; };
+		B00E971559596CCD971BD5A6 /* Pods-betfree-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-betfree-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-betfree-tvOSTests/Pods-betfree-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		B76635116BBEDE058FB66583 /* libPods-betfree-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-betfree-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB61CDD4227A7AF4D097BC32 /* libPods-betfree-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-betfree-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
-		EF14DBECD77EDC78D8CC9EDE /* libPods-rn_starter_kit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-rn_starter_kit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF14DBECD77EDC78D8CC9EDE /* libPods-betfree.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-betfree.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,7 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1DDD8478553F71443E290F87 /* libPods-rn_starter_kit-rn_starter_kitTests.a in Frameworks */,
+				1DDD8478553F71443E290F87 /* libPods-betfree-betfreeTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,7 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CA046896E60D98A334D4018A /* libPods-rn_starter_kit.a in Frameworks */,
+				CA046896E60D98A334D4018A /* libPods-betfree.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,7 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B0CDFDF5EADEDBE3515EA52E /* libPods-rn_starter_kit-tvOS.a in Frameworks */,
+				B0CDFDF5EADEDBE3515EA52E /* libPods-betfree-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,20 +101,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0294A9E94B55C58B7308329 /* libPods-rn_starter_kit-tvOSTests.a in Frameworks */,
+				D0294A9E94B55C58B7308329 /* libPods-betfree-tvOSTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		00E356EF1AD99517003FC87E /* rn_starter_kitTests */ = {
+		00E356EF1AD99517003FC87E /* betfreeTests */ = {
 			isa = PBXGroup;
 			children = (
-				00E356F21AD99517003FC87E /* rn_starter_kitTests.m */,
+				00E356F21AD99517003FC87E /* betfreeTests.m */,
 				00E356F01AD99517003FC87E /* Supporting Files */,
 			);
-			path = rn_starter_kitTests;
+			path = betfreeTests;
 			sourceTree = "<group>";
 		};
 		00E356F01AD99517003FC87E /* Supporting Files */ = {
@@ -125,7 +125,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		13B07FAE1A68108700A75B9A /* rn_starter_kit */ = {
+		13B07FAE1A68108700A75B9A /* betfree */ = {
 			isa = PBXGroup;
 			children = (
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
@@ -137,7 +137,7 @@
 				13B07FB71A68108700A75B9A /* main.m */,
 				170EF9E526038E1C00D5F244 /* GoogleService-Info.plist */,
 			);
-			name = rn_starter_kit;
+			name = betfree;
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
@@ -145,10 +145,10 @@
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
-				EF14DBECD77EDC78D8CC9EDE /* libPods-rn_starter_kit.a */,
-				1F2CBDEDECC74B184C4156C4 /* libPods-rn_starter_kit-rn_starter_kitTests.a */,
-				EB61CDD4227A7AF4D097BC32 /* libPods-rn_starter_kit-tvOS.a */,
-				B76635116BBEDE058FB66583 /* libPods-rn_starter_kit-tvOSTests.a */,
+				EF14DBECD77EDC78D8CC9EDE /* libPods-betfree.a */,
+				1F2CBDEDECC74B184C4156C4 /* libPods-betfree-betfreeTests.a */,
+				EB61CDD4227A7AF4D097BC32 /* libPods-betfree-tvOS.a */,
+				B76635116BBEDE058FB66583 /* libPods-betfree-tvOSTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -156,14 +156,14 @@
 		6EEB561ECB78D99AE8BC2B30 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				A3EC54A95C714D4D71B6799B /* Pods-rn_starter_kit.debug.xcconfig */,
-				73C68A62DE1BE0F12AAD68CA /* Pods-rn_starter_kit.release.xcconfig */,
-				7214903180FB6044223A27B8 /* Pods-rn_starter_kit-rn_starter_kitTests.debug.xcconfig */,
-				7343812BF67993E0BD209DA2 /* Pods-rn_starter_kit-rn_starter_kitTests.release.xcconfig */,
-				8FF6BC04A400CFA13326651B /* Pods-rn_starter_kit-tvOS.debug.xcconfig */,
-				309F68313865614C31FA9DC8 /* Pods-rn_starter_kit-tvOS.release.xcconfig */,
-				8003D5BC11DA56E32E80E819 /* Pods-rn_starter_kit-tvOSTests.debug.xcconfig */,
-				B00E971559596CCD971BD5A6 /* Pods-rn_starter_kit-tvOSTests.release.xcconfig */,
+				A3EC54A95C714D4D71B6799B /* Pods-betfree.debug.xcconfig */,
+				73C68A62DE1BE0F12AAD68CA /* Pods-betfree.release.xcconfig */,
+				7214903180FB6044223A27B8 /* Pods-betfree-betfreeTests.debug.xcconfig */,
+				7343812BF67993E0BD209DA2 /* Pods-betfree-betfreeTests.release.xcconfig */,
+				8FF6BC04A400CFA13326651B /* Pods-betfree-tvOS.debug.xcconfig */,
+				309F68313865614C31FA9DC8 /* Pods-betfree-tvOS.release.xcconfig */,
+				8003D5BC11DA56E32E80E819 /* Pods-betfree-tvOSTests.debug.xcconfig */,
+				B00E971559596CCD971BD5A6 /* Pods-betfree-tvOSTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -178,9 +178,9 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				13B07FAE1A68108700A75B9A /* rn_starter_kit */,
+				13B07FAE1A68108700A75B9A /* betfree */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
-				00E356EF1AD99517003FC87E /* rn_starter_kitTests */,
+				00E356EF1AD99517003FC87E /* betfreeTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				6EEB561ECB78D99AE8BC2B30 /* Pods */,
@@ -193,10 +193,10 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* rn_starter_kit.app */,
-				00E356EE1AD99517003FC87E /* rn_starter_kitTests.xctest */,
-				2D02E47B1E0B4A5D006451C7 /* rn_starter_kit-tvOS.app */,
-				2D02E4901E0B4A5D006451C7 /* rn_starter_kit-tvOSTests.xctest */,
+				13B07F961A680F5B00A75B9A /* betfree.app */,
+				00E356EE1AD99517003FC87E /* betfreeTests.xctest */,
+				2D02E47B1E0B4A5D006451C7 /* betfree-tvOS.app */,
+				2D02E4901E0B4A5D006451C7 /* betfree-tvOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -204,9 +204,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		00E356ED1AD99517003FC87E /* rn_starter_kitTests */ = {
+		00E356ED1AD99517003FC87E /* betfreeTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "rn_starter_kitTests" */;
+			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "betfreeTests" */;
 			buildPhases = (
 				0ACE866D9D4A56271F3E2B05 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
@@ -220,14 +220,14 @@
 			dependencies = (
 				00E356F51AD99517003FC87E /* PBXTargetDependency */,
 			);
-			name = rn_starter_kitTests;
-			productName = rn_starter_kitTests;
-			productReference = 00E356EE1AD99517003FC87E /* rn_starter_kitTests.xctest */;
+			name = betfreeTests;
+			productName = betfreeTests;
+			productReference = 00E356EE1AD99517003FC87E /* betfreeTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		13B07F861A680F5B00A75B9A /* rn_starter_kit */ = {
+		13B07F861A680F5B00A75B9A /* betfree */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "rn_starter_kit" */;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "betfree" */;
 			buildPhases = (
 				30B6E2A6162A2325C20A281C /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
@@ -243,14 +243,14 @@
 			);
 			dependencies = (
 			);
-			name = rn_starter_kit;
-			productName = rn_starter_kit;
-			productReference = 13B07F961A680F5B00A75B9A /* rn_starter_kit.app */;
+			name = betfree;
+			productName = betfree;
+			productReference = 13B07F961A680F5B00A75B9A /* betfree.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2D02E47A1E0B4A5D006451C7 /* rn_starter_kit-tvOS */ = {
+		2D02E47A1E0B4A5D006451C7 /* betfree-tvOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "rn_starter_kit-tvOS" */;
+			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "betfree-tvOS" */;
 			buildPhases = (
 				FF63924A31D867B79C5B3CBB /* [CP] Check Pods Manifest.lock */,
 				FD10A7F122414F3F0027D42C /* Start Packager */,
@@ -263,14 +263,14 @@
 			);
 			dependencies = (
 			);
-			name = "rn_starter_kit-tvOS";
-			productName = "rn_starter_kit-tvOS";
-			productReference = 2D02E47B1E0B4A5D006451C7 /* rn_starter_kit-tvOS.app */;
+			name = "betfree-tvOS";
+			productName = "betfree-tvOS";
+			productReference = 2D02E47B1E0B4A5D006451C7 /* betfree-tvOS.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2D02E48F1E0B4A5D006451C7 /* rn_starter_kit-tvOSTests */ = {
+		2D02E48F1E0B4A5D006451C7 /* betfree-tvOSTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "rn_starter_kit-tvOSTests" */;
+			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "betfree-tvOSTests" */;
 			buildPhases = (
 				091014991E3E60BCF9F20C38 /* [CP] Check Pods Manifest.lock */,
 				2D02E48C1E0B4A5D006451C7 /* Sources */,
@@ -282,9 +282,9 @@
 			dependencies = (
 				2D02E4921E0B4A5D006451C7 /* PBXTargetDependency */,
 			);
-			name = "rn_starter_kit-tvOSTests";
-			productName = "rn_starter_kit-tvOSTests";
-			productReference = 2D02E4901E0B4A5D006451C7 /* rn_starter_kit-tvOSTests.xctest */;
+			name = "betfree-tvOSTests";
+			productName = "betfree-tvOSTests";
+			productReference = 2D02E4901E0B4A5D006451C7 /* betfree-tvOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -313,7 +313,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "rn_starter_kit" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "betfree" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -326,10 +326,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				13B07F861A680F5B00A75B9A /* rn_starter_kit */,
-				00E356ED1AD99517003FC87E /* rn_starter_kitTests */,
-				2D02E47A1E0B4A5D006451C7 /* rn_starter_kit-tvOS */,
-				2D02E48F1E0B4A5D006451C7 /* rn_starter_kit-tvOSTests */,
+				13B07F861A680F5B00A75B9A /* betfree */,
+				00E356ED1AD99517003FC87E /* betfreeTests */,
+				2D02E47A1E0B4A5D006451C7 /* betfree-tvOS */,
+				2D02E48F1E0B4A5D006451C7 /* betfree-tvOSTests */,
 			);
 		};
 /* End PBXProject section */
@@ -400,7 +400,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-rn_starter_kit-tvOSTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-betfree-tvOSTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -422,7 +422,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-rn_starter_kit-rn_starter_kitTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-betfree-betfreeTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -458,7 +458,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-rn_starter_kit-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-betfree-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -471,7 +471,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-rn_starter_kit-rn_starter_kitTests/Pods-rn_starter_kit-rn_starter_kitTests-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-betfree-betfreeTests/Pods-betfree-betfreeTests-resources.sh",
 				"${PODS_ROOT}/FBSDKCoreKit/FacebookSDKStrings.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/GoogleSignIn/GoogleSignIn.bundle",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf",
@@ -518,7 +518,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-rn_starter_kit-rn_starter_kitTests/Pods-rn_starter_kit-rn_starter_kitTests-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-betfree-betfreeTests/Pods-betfree-betfreeTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		78798A84CA05C8E65C9D6174 /* [CP] Copy Pods Resources */ = {
@@ -527,7 +527,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-rn_starter_kit/Pods-rn_starter_kit-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-betfree/Pods-betfree-resources.sh",
 				"${PODS_ROOT}/FBSDKCoreKit/FacebookSDKStrings.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/GoogleSignIn/GoogleSignIn.bundle",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf",
@@ -574,7 +574,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-rn_starter_kit/Pods-rn_starter_kit-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-betfree/Pods-betfree-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		90F878A4A4CD885D0D2F8C71 /* [CP] Embed Pods Frameworks */ = {
@@ -583,7 +583,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-rn_starter_kit/Pods-rn_starter_kit-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-betfree/Pods-betfree-frameworks.sh",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/hermes-engine/hermes.framework/hermes",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -592,7 +592,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-rn_starter_kit/Pods-rn_starter_kit-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-betfree/Pods-betfree-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BE300587E0DA1339E5A9B6FA /* [CP-User] [RNFB] Core Configuration */ = {
@@ -614,7 +614,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-rn_starter_kit-rn_starter_kitTests/Pods-rn_starter_kit-rn_starter_kitTests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-betfree-betfreeTests/Pods-betfree-betfreeTests-frameworks.sh",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/hermes-engine/hermes.framework/hermes",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -623,7 +623,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-rn_starter_kit-rn_starter_kitTests/Pods-rn_starter_kit-rn_starter_kitTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-betfree-betfreeTests/Pods-betfree-betfreeTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
@@ -679,7 +679,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-rn_starter_kit-tvOS-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-betfree-tvOS-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -693,7 +693,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00E356F31AD99517003FC87E /* rn_starter_kitTests.m in Sources */,
+				00E356F31AD99517003FC87E /* betfreeTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -719,7 +719,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2DCD954D1E0B4F2C00145EB5 /* rn_starter_kitTests.m in Sources */,
+				2DCD954D1E0B4F2C00145EB5 /* betfreeTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -728,12 +728,12 @@
 /* Begin PBXTargetDependency section */
 		00E356F51AD99517003FC87E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 13B07F861A680F5B00A75B9A /* rn_starter_kit */;
+			target = 13B07F861A680F5B00A75B9A /* betfree */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
 		};
 		2D02E4921E0B4A5D006451C7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 2D02E47A1E0B4A5D006451C7 /* rn_starter_kit-tvOS */;
+			target = 2D02E47A1E0B4A5D006451C7 /* betfree-tvOS */;
 			targetProxy = 2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -745,7 +745,7 @@
 				13B07FB21A68108700A75B9A /* Base */,
 			);
 			name = LaunchScreen.xib;
-			path = rn_starter_kit;
+			path = betfree;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -753,14 +753,14 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7214903180FB6044223A27B8 /* Pods-rn_starter_kit-rn_starter_kitTests.debug.xcconfig */;
+			baseConfigurationReference = 7214903180FB6044223A27B8 /* Pods-betfree-betfreeTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = rn_starter_kitTests/Info.plist;
+				INFOPLIST_FILE = betfreeTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -770,17 +770,17 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/rn_starter_kit.app/rn_starter_kit";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/betfree.app/betfree";
 			};
 			name = Debug;
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7343812BF67993E0BD209DA2 /* Pods-rn_starter_kit-rn_starter_kitTests.release.xcconfig */;
+			baseConfigurationReference = 7343812BF67993E0BD209DA2 /* Pods-betfree-betfreeTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
-				INFOPLIST_FILE = rn_starter_kitTests/Info.plist;
+				INFOPLIST_FILE = betfreeTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -790,13 +790,13 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/rn_starter_kit.app/rn_starter_kit";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/betfree.app/betfree";
 			};
 			name = Release;
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A3EC54A95C714D4D71B6799B /* Pods-rn_starter_kit.debug.xcconfig */;
+			baseConfigurationReference = A3EC54A95C714D4D71B6799B /* Pods-betfree.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -806,7 +806,7 @@
 					"$(inherited)",
 					"FB_SONARKIT_ENABLED=1",
 				);
-				INFOPLIST_FILE = rn_starter_kit/Info.plist;
+				INFOPLIST_FILE = betfree/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -814,7 +814,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.instamobile.starterkit.rn.ios;
-				PRODUCT_NAME = rn_starter_kit;
+				PRODUCT_NAME = betfree;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -823,12 +823,12 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 73C68A62DE1BE0F12AAD68CA /* Pods-rn_starter_kit.release.xcconfig */;
+			baseConfigurationReference = 73C68A62DE1BE0F12AAD68CA /* Pods-betfree.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				INFOPLIST_FILE = rn_starter_kit/Info.plist;
+				INFOPLIST_FILE = betfree/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -836,7 +836,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.instamobile.starterkit.rn.ios;
-				PRODUCT_NAME = rn_starter_kit;
+				PRODUCT_NAME = betfree;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -844,7 +844,7 @@
 		};
 		2D02E4971E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8FF6BC04A400CFA13326651B /* Pods-rn_starter_kit-tvOS.debug.xcconfig */;
+			baseConfigurationReference = 8FF6BC04A400CFA13326651B /* Pods-betfree-tvOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -855,14 +855,14 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "rn_starter_kit-tvOS/Info.plist";
+				INFOPLIST_FILE = "betfree-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.rn_starter_kit-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.betfree-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -872,7 +872,7 @@
 		};
 		2D02E4981E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 309F68313865614C31FA9DC8 /* Pods-rn_starter_kit-tvOS.release.xcconfig */;
+			baseConfigurationReference = 309F68313865614C31FA9DC8 /* Pods-betfree-tvOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -883,14 +883,14 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "rn_starter_kit-tvOS/Info.plist";
+				INFOPLIST_FILE = "betfree-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.rn_starter_kit-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.betfree-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -900,7 +900,7 @@
 		};
 		2D02E4991E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8003D5BC11DA56E32E80E819 /* Pods-rn_starter_kit-tvOSTests.debug.xcconfig */;
+			baseConfigurationReference = 8003D5BC11DA56E32E80E819 /* Pods-betfree-tvOSTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -910,24 +910,24 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "rn_starter_kit-tvOSTests/Info.plist";
+				INFOPLIST_FILE = "betfree-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.rn_starter_kit-tvOSTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.betfree-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/rn_starter_kit-tvOS.app/rn_starter_kit-tvOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/betfree-tvOS.app/betfree-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 			};
 			name = Debug;
 		};
 		2D02E49A1E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B00E971559596CCD971BD5A6 /* Pods-rn_starter_kit-tvOSTests.release.xcconfig */;
+			baseConfigurationReference = B00E971559596CCD971BD5A6 /* Pods-betfree-tvOSTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -937,17 +937,17 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "rn_starter_kit-tvOSTests/Info.plist";
+				INFOPLIST_FILE = "betfree-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.rn_starter_kit-tvOSTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.betfree-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/rn_starter_kit-tvOS.app/rn_starter_kit-tvOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/betfree-tvOS.app/betfree-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 			};
 			name = Release;
@@ -1068,7 +1068,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "rn_starter_kitTests" */ = {
+		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "betfreeTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				00E356F61AD99517003FC87E /* Debug */,
@@ -1077,7 +1077,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "rn_starter_kit" */ = {
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "betfree" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
@@ -1086,7 +1086,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "rn_starter_kit-tvOS" */ = {
+		2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "betfree-tvOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2D02E4971E0B4A5E006451C7 /* Debug */,
@@ -1095,7 +1095,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "rn_starter_kit-tvOSTests" */ = {
+		2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "betfree-tvOSTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2D02E4991E0B4A5E006451C7 /* Debug */,
@@ -1104,7 +1104,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "rn_starter_kit" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "betfree" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,

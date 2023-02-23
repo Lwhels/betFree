@@ -9,20 +9,20 @@ pod 'FirebaseCore', :modular_headers => true
 pod 'FirebaseCoreInternal', :modular_headers => true
 pod 'GoogleUtilities', :modular_headers => true
 
-target 'rn_starter_kit' do
+target 'betfree' do
   config = use_native_modules!
   use_react_native!(:path => config[:reactNativePath],:hermes_enabled => true)
 
-  target 'rn_starter_kitTests' do
+  target 'betfreeTests' do
     inherit! :complete
     # Pods for testing
   end
 end
 
-target 'rn_starter_kit-tvOS' do
-  # Pods for rn_starter_kit-tvOS
+target 'betfree-tvOS' do
+  # Pods for betfree-tvOS
 
-  target 'rn_starter_kit-tvOSTests' do
+  target 'betfree-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end

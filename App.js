@@ -19,6 +19,6 @@ function StarterApp() {
   );
 }
 
-AppRegistry.registerComponent('rn_starter_kit', () => StarterApp);
+AppRegistry.registerComponent('betfree', () => StarterApp);
 
 export default StarterApp;
