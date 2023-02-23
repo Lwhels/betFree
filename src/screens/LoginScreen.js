@@ -21,6 +21,27 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useDispatch} from 'react-redux';
 import {login} from '../reducers';
 
+function firstTimeSetup(currentid) {
+  console.log('FIRST TIME LOGIN');
+  let data = {
+    balance: 10000,
+    betWins: 0,
+  };
+  firestore().collection('users').doc(currentid).set((data), { merge: true });
+}
+
+function standardGoogleLogin(currentid) {
+  let query = firestore().collection('users').doc(currentid);
+    query.get() .then(users =>{
+      var data = users.data();
+      let dataToSend = {
+        balance: data.balance,
+        betWins: data.betWins,
+      };
+      firestore().collection('users').doc(user.uid).set((dataToSend), { merge: true });
+    });
+}
+
 function LoginScreen({navigation}) {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
@@ -95,27 +116,8 @@ function LoginScreen({navigation}) {
         var user = result.user;
         const CurUser = firebase.auth().currentUser;
         CurUserMeta = CurUser.metadata;
-        console.log('TIMES SHITS', CurUserMeta.creationTime, CurUserMeta.lastSignInTime)
-        if (CurUserMeta.creationTime.slice(0, -6) == CurUserMeta.lastSignInTime.slice(0, -6) ) { 
-          console.log('FIRST TIME LOGIN');
-          let data = {
-            balance: 10000,
-            betWins: 0,
-          };
-          firestore().collection('users').doc(user.uid).set((data), { merge: true });
-        }
-        else {
-          let query = firestore().collection('users').doc(user.uid);
-          query.get() .then(users =>{
-            var data = users.data();
-            console.log('USER BALANCE AND BETWINS', data.balance, data.betWins);
-            let dataToSend = {
-              balance: data.balance,
-              betWins: data.betWins,
-            };
-            firestore().collection('users').doc(user.uid).set((dataToSend), { merge: true });
-            });
-        }
+        if (CurUserMeta.creationTime.slice(0, -6) == CurUserMeta.lastSignInTime.slice(0, -6) ) { firstTimeSetup(user.uid); } // if first time login call this
+        else { standardGoogleLogin(user.uid); } // call this every time a user logs in unless new user
         AsyncStorage.setItem('@loggedInUserID:id', user.uid);
         var userDict = {
           id: user.uid,
@@ -127,7 +129,7 @@ function LoginScreen({navigation}) {
           ...userDict,
           appIdentifier: 'betfree-googlesignin',
         };
-        console.log('data', data);
+        console.log('data stored in firestore', data);
         firestore().collection('users').doc(user.uid).set((data), { merge: true });
         dispatch(login(userDict));
         navigation.navigate('DrawerStack', {
