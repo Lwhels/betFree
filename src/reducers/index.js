@@ -23,6 +23,7 @@ function auth(state = initialAuthState, action) {
       AsyncStorage.removeItem('@loggedInUserID:id');
       AsyncStorage.removeItem('@loggedInUserID:key');
       AsyncStorage.removeItem('@loggedInUserID:password');
+      firebase.auth().signOut();
       return {...state, isLoggedIn: false, user: {}};
     default:
       return state;
