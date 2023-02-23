@@ -8,6 +8,10 @@ import HomeScreen from '../screens/HomeScreen';
 import LoginScreen from '../screens/LoginScreen';
 import SignupScreen from '../screens/SignupScreen';
 import WelcomeScreen from '../screens/WelcomeScreen';
+import PlaceBetScreen from '../screens/PlaceBetScreen';
+import CurrentBets from '../screens/CurrentBetsScreen';
+import NewsScreen from '../screens/NewsScreen';
+import Leaderboard from '../screens/LeaderboardScreen';
 import {AppIcon, AppStyles} from '../AppStyles';
 import {Configuration} from '../Configuration';
 import DrawerContainer from '../components/DrawerContainer';
@@ -34,7 +38,7 @@ const HomeStack = () => (
   <Stack.Navigator
     initialRouteName="Home"
     screenOptions={{
-      headerTintColor: 'red',
+      //headerTintColor: 'red',
       headerTitleStyle: styles.headerTitleStyle,
       headerMode: 'float',
     }}>
@@ -42,12 +46,61 @@ const HomeStack = () => (
       name="Home"
       component={HomeScreen}
       options={({navigation}) => ({
-        headerLeft: () => (
+        headerLeft: ()=> null,
+        headerRight: () => (
           <Pressable onPress={() => navigation.openDrawer()}>
             <Image style={styles.iconStyle} source={AppIcon.images.menu} />
           </Pressable>
         ),
-        headerLeftContainerStyle: {paddingLeft: 10},
+        headerRightContainerStyle: {paddingRight: 10},
+      })}
+    />
+    <Stack.Screen
+      name="Betting Page"
+      component={PlaceBetScreen}
+      options={({navigation}) => ({
+        headerRight: () => (
+          <Pressable onPress={() => navigation.openDrawer()}>
+            <Image style={styles.iconStyle} source={AppIcon.images.menu} />
+          </Pressable>
+        ),
+        headerRightContainerStyle: {paddingRight: 10},
+      })}
+    />
+    <Stack.Screen
+      name="Current Bets"
+      component={CurrentBets}
+      options={({navigation}) => ({
+        headerRight: () => (
+          <Pressable onPress={() => navigation.openDrawer()}>
+            <Image style={styles.iconStyle} source={AppIcon.images.menu} />
+          </Pressable>
+        ),
+        headerRightContainerStyle: {paddingRight: 10},
+      })}
+    />
+    <Stack.Screen
+      name="News"
+      component={NewsScreen}
+      options={({navigation}) => ({
+        headerRight: () => (
+          <Pressable onPress={() => navigation.openDrawer()}>
+            <Image style={styles.iconStyle} source={AppIcon.images.menu} />
+          </Pressable>
+        ),
+        headerRightContainerStyle: {paddingRight: 10},
+      })}
+    />
+     <Stack.Screen
+      name="Leaderboard"
+      component={Leaderboard}
+      options={({navigation}) => ({
+        headerRight: () => (
+          <Pressable onPress={() => navigation.openDrawer()}>
+            <Image style={styles.iconStyle} source={AppIcon.images.menu} />
+          </Pressable>
+        ),
+        headerRightContainerStyle: {paddingRight: 10},
       })}
     />
   </Stack.Navigator>
@@ -87,7 +140,7 @@ const DrawerStack = () => (
   <Drawer.Navigator
     screenOptions={{
       drawerStyle: {outerWidth: 200},
-      drawerPosition: 'left',
+      drawerPosition: 'right',
       headerShown: false,
     }}
     drawerContent={({navigation}) => (
