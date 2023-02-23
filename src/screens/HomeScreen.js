@@ -64,7 +64,7 @@ function HomeScreen({navigation}) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Welcome {auth.user?.fullname ?? 'User'}</Text>
+      <Text style={styles.title}>Welcome, {auth.user?.fullname ?? 'User'}!</Text>
       <BasicButton
         onPress = {() => navigation.navigate('Betting Page')}
         title = "Make Bets Here!"

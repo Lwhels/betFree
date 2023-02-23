@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-               BuildableName = "rn_starter_kit-tvOS.app"
-               BlueprintName = "rn_starter_kit-tvOS"
-               ReferencedContainer = "container:rn_starter_kit.xcodeproj">
+               BuildableName = "betfree-tvOS.app"
+               BlueprintName = "betfree-tvOS"
+               ReferencedContainer = "container:betfree.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
-               BuildableName = "rn_starter_kit-tvOSTests.xctest"
-               BlueprintName = "rn_starter_kit-tvOSTests"
-               ReferencedContainer = "container:rn_starter_kit.xcodeproj">
+               BuildableName = "betfree-tvOSTests.xctest"
+               BlueprintName = "betfree-tvOSTests"
+               ReferencedContainer = "container:betfree.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "rn_starter_kit-tvOS.app"
-            BlueprintName = "rn_starter_kit-tvOS"
-            ReferencedContainer = "container:rn_starter_kit.xcodeproj">
+            BuildableName = "betfree-tvOS.app"
+            BlueprintName = "betfree-tvOS"
+            ReferencedContainer = "container:betfree.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "rn_starter_kit-tvOS.app"
-            BlueprintName = "rn_starter_kit-tvOS"
-            ReferencedContainer = "container:rn_starter_kit.xcodeproj">
+            BuildableName = "betfree-tvOS.app"
+            BlueprintName = "betfree-tvOS"
+            ReferencedContainer = "container:betfree.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

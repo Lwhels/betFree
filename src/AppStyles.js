@@ -18,12 +18,13 @@ export const AppStyles = {
     starRating: "#2bdf85",
     location: "#a9a9a9",
     white: "white",
-    facebook: "#4267b2",
+    //facebook: "#4267b2",
     grey: "grey",
     greenBlue: "#00aea8",
     placeholder: "#a0a0a0",
     background: "#f2f2f2",
-    blue: "#3293fe"
+    blue: "#3293fe",
+    green: "#228B22",
   },
   fontSize: {
     title: 30,

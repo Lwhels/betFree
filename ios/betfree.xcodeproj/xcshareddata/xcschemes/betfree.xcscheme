@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "rn_starter_kit.app"
-               BlueprintName = "rn_starter_kit"
-               ReferencedContainer = "container:rn_starter_kit.xcodeproj">
+               BuildableName = "betfree.app"
+               BlueprintName = "betfree"
+               ReferencedContainer = "container:betfree.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "rn_starter_kitTests.xctest"
-               BlueprintName = "rn_starter_kitTests"
-               ReferencedContainer = "container:rn_starter_kit.xcodeproj">
+               BuildableName = "betfreeTests.xctest"
+               BlueprintName = "betfreeTests"
+               ReferencedContainer = "container:betfree.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "rn_starter_kit.app"
-            BlueprintName = "rn_starter_kit"
-            ReferencedContainer = "container:rn_starter_kit.xcodeproj">
+            BuildableName = "betfree.app"
+            BlueprintName = "betfree"
+            ReferencedContainer = "container:betfree.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "rn_starter_kit.app"
-            BlueprintName = "rn_starter_kit"
-            ReferencedContainer = "container:rn_starter_kit.xcodeproj">
+            BuildableName = "betfree.app"
+            BlueprintName = "betfree"
+            ReferencedContainer = "container:betfree.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

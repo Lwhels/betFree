@@ -19,9 +19,28 @@ import {
 } from '@react-native-google-signin/google-signin';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useDispatch} from 'react-redux';
-const FBSDK = require('react-native-fbsdk');
-const {LoginManager, AccessToken} = FBSDK;
 import {login} from '../reducers';
+
+function firstTimeSetup(currentid) {
+  console.log('FIRST TIME LOGIN');
+  let data = {
+    balance: 10000,
+    betWins: 0,
+  };
+  firestore().collection('users').doc(currentid).set((data), { merge: true });
+}
+
+function standardGoogleLogin(currentid) {
+  let query = firestore().collection('users').doc(currentid);
+    query.get() .then(users =>{
+      var data = users.data();
+      let dataToSend = {
+        balance: data.balance,
+        betWins: data.betWins,
+      };
+      firestore().collection('users').doc(user.uid).set((dataToSend), { merge: true });
+    });
+}
 
 function LoginScreen({navigation}) {
   const [loading, setLoading] = useState(false);
@@ -75,58 +94,6 @@ function LoginScreen({navigation}) {
       });
   };
 
-  const onPressFacebook = () => {
-    LoginManager.logInWithPermissions([
-      'public_profile',
-      'user_friends',
-      'email',
-    ]).then(
-      (result) => {
-        if (result.isCancelled) {
-          Alert.alert('Whoops!', 'You cancelled the sign in.');
-        } else {
-          AccessToken.getCurrentAccessToken().then((data) => {
-            const credential = firebase.auth.FacebookAuthProvider.credential(
-              data.accessToken,
-            );
-            const accessToken = data.accessToken;
-            auth()
-              .signInWithCredential(credential)
-              .then((result) => {
-                var user = result.user;
-                AsyncStorage.setItem(
-                  '@loggedInUserID:facebookCredentialAccessToken',
-                  accessToken,
-                );
-                AsyncStorage.setItem('@loggedInUserID:id', user.uid);
-                var userDict = {
-                  id: user.uid,
-                  fullname: user.displayName,
-                  email: user.email,
-                  profileURL: user.photoURL,
-                };
-                var userData = {
-                  ...userDict,
-                  appIdentifier: 'rn-android-universal-listings',
-                };
-                firestore().collection('users').doc(user.uid).set(userData);
-                dispatch(login(userDict));
-                navigation.navigate('DrawerStack', {
-                  user: userDict,
-                });
-              })
-              .catch((error) => {
-                alert('Please try again! ' + error);
-              });
-          });
-        }
-      },
-      (error) => {
-        Alert.alert('Sign in error', error);
-      },
-    );
-  };
-
   const onPressGoogle = () => {
     setLoading(true);
     GoogleSignin.signIn()
@@ -147,6 +114,10 @@ function LoginScreen({navigation}) {
       .then((result) => {
         setLoading(false);
         var user = result.user;
+        const CurUser = firebase.auth().currentUser;
+        CurUserMeta = CurUser.metadata;
+        if (CurUserMeta.creationTime.slice(0, -6) == CurUserMeta.lastSignInTime.slice(0, -6) ) { firstTimeSetup(user.uid); } // if first time login call this
+        else { standardGoogleLogin(user.uid); } // call this every time a user logs in unless new user
         AsyncStorage.setItem('@loggedInUserID:id', user.uid);
         var userDict = {
           id: user.uid,
@@ -156,10 +127,10 @@ function LoginScreen({navigation}) {
         };
         var data = {
           ...userDict,
-          appIdentifier: 'rn-android-universal-listings',
+          appIdentifier: 'betfree-googlesignin',
         };
-        console.log('data', data);
-        firestore().collection('users').doc(user.uid).set(data);
+        console.log('data stored in firestore', data);
+        firestore().collection('users').doc(user.uid).set((data), { merge: true });
         dispatch(login(userDict));
         navigation.navigate('DrawerStack', {
           user: userDict,

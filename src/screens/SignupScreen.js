@@ -23,6 +23,8 @@ function SignupScreen({navigation}) {
           email: email,
           fullname: fullname,
           phone: phone,
+          balance: 10000,
+          betWins: 0,
           appIdentifier: 'rn-android-universal-listings',
         };
         const user_uid = response.user._user.uid;
