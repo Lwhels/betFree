@@ -4,6 +4,51 @@ import {connect, useSelector} from 'react-redux';
 import { AppStyles} from '../AppStyles';
 import {Configuration} from '../Configuration';
 import BasicButton from '../components/BasicButton';
+import '../global.js';
+
+function getBets() {
+  fetch('https://v1.basketball.api-sports.io/odds?league=12&season=2022-2023', {
+    method: 'GET',
+    headers: {
+      'x-rapidapi-host': 'v1.basketball.api-sports.io',
+      'x-rapidapi-key': '28fac37d23a94d5717f67963c07baa3f',
+    },
+  })
+    .then((response) =>
+      response.json().then((data) => {
+        global.fetched_odds = data['response'];
+      }),
+    )
+
+
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
+
+function getGames() {
+  fetch(
+    'https://v1.basketball.api-sports.io/games?league=12&season=2022-2023',
+    {
+      method: 'GET',
+      headers: {
+        'x-rapidapi-host': 'v1.basketball.api-sports.io',
+        'x-rapidapi-key': '28fac37d23a94d5717f67963c07baa3f',
+      },
+    },
+  )
+    .then((response) =>
+      response.json().then((data) => {
+        global.fetched_games = data['response'];
+      }),
+    )
+
+
+    .catch((err) => {
+      console.log(err);
+    });
+}
 
 function HomeScreen({navigation}) {
   const auth = useSelector((state) => state.auth);
@@ -13,6 +58,8 @@ function HomeScreen({navigation}) {
       title: 'Home',
     });
   }, []);
+  getBets();
+  getGames();
 
   return (
     <View style={styles.container}>
