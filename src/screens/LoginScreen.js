@@ -38,7 +38,7 @@ function standardGoogleLogin(currentid) {
         balance: data.balance,
         betWins: data.betWins,
       };
-      firestore().collection('users').doc(user.uid).set((dataToSend), { merge: true });
+      firestore().collection('users').doc(currentid).set((dataToSend), { merge: true });
     });
 }
 

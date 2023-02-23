@@ -15,6 +15,7 @@ import Leaderboard from '../screens/LeaderboardScreen';
 import {AppIcon, AppStyles} from '../AppStyles';
 import {Configuration} from '../Configuration';
 import DrawerContainer from '../components/DrawerContainer';
+import ScoresScreen from '../screens/ScoresScreen';
 
 const Stack = createStackNavigator();
 
@@ -30,7 +31,6 @@ const LoginStack = () => (
     <Stack.Screen name="Welcome" component={WelcomeScreen} />
     <Stack.Screen name="Login" component={LoginScreen} />
     <Stack.Screen name="Signup" component={SignupScreen} />
-    
   </Stack.Navigator>
 );
 
@@ -46,7 +46,7 @@ const HomeStack = () => (
       name="Home"
       component={HomeScreen}
       options={({navigation}) => ({
-        headerLeft: ()=> null,
+        headerLeft: () => null,
         headerRight: () => (
           <Pressable onPress={() => navigation.openDrawer()}>
             <Image style={styles.iconStyle} source={AppIcon.images.menu} />
@@ -91,9 +91,21 @@ const HomeStack = () => (
         headerRightContainerStyle: {paddingRight: 10},
       })}
     />
-     <Stack.Screen
+    <Stack.Screen
       name="Leaderboard"
       component={Leaderboard}
+      options={({navigation}) => ({
+        headerRight: () => (
+          <Pressable onPress={() => navigation.openDrawer()}>
+            <Image style={styles.iconStyle} source={AppIcon.images.menu} />
+          </Pressable>
+        ),
+        headerRightContainerStyle: {paddingRight: 10},
+      })}
+    />
+    <Stack.Screen
+      name="Scores"
+      component={ScoresScreen}
       options={({navigation}) => ({
         headerRight: () => (
           <Pressable onPress={() => navigation.openDrawer()}>

@@ -9,42 +9,69 @@ import {
   FlatList,
   Modal,
   Alert,
+  TextInput,
 } from 'react-native';
 import {connect, useSelector} from 'react-redux';
 import {AppStyles} from '../AppStyles';
 import {Configuration} from '../Configuration';
 
-
-
 //
-function textOdds(data){
+function textOdds(data) {
   var odds = data['bookmakers'][0]['bets'][1]['values'];
   var homeOdds = odds['0']['odd'];
   var awayOdds = odds['1']['odd'];
   homeOdds = convertOdds(homeOdds);
   awayOdds = convertOdds(awayOdds);  
-  return awayOdds + "                                             " + homeOdds;
+  return awayOdds + '                                             ' + homeOdds;
 }
 
 //convert odds from decimal to american moneyline
-function convertOdds(odds){
-  if (odds < 2){
-      return (Math.round(-100 / (odds -1))).toFixed(0);
+function convertOdds(odds) {
+  if (odds < 2) {
+    return Math.round(-100 / (odds - 1)).toFixed(0);
   } else {
-      return "+" + (Math.round(100 * (odds -1))).toFixed(0);
+    return '+' + Math.round(100 * (odds - 1)).toFixed(0);
   }
 }
 
 export default function PlaceBetScreen({navigation}) {
   const [modalVisible, setModalVisible] = useState(false);
-  var currentBet =[];
+  const [currentBet, setCurrentBet] = useState(global.fetched_odds[0]);
+  const [selectedTeam, setSelectedTeam] = useState('No Team');
+  const [betAmount, setBetAmount] = useState('');
+  const [modalMessage, setModalMessage] = useState('Selected Team:');
 
-  function openModal(item){
-    currentBet = item;
+  function openModal(item) {
+    setCurrentBet(item);
     setModalVisible(!modalVisible);
-    console.log(currentBet);
+    console.log(currentBet['game']['teams']['away']['name']);
   }
 
+  function selectTeam(team) {
+    console.log(team);
+    setSelectedTeam(team);
+  }
+  function placeBet() {
+    if (selectedTeam == 'No Team') {
+      setModalMessage('Please Select Team, Selected Team: ');
+      return;
+    }
+    if (betAmount == 0) {
+      setModalMessage('Please set bet amount, Selected Team: ');
+      return;
+    }
+    setModalVisible(!modalVisible);
+    console.log('bet placed: ' + betAmount);
+    setBetAmount(0);
+    setSelectedTeam('No Team');
+    setModalMessage('Selected Team: ');
+  }
+  function closeBet() {
+    setModalVisible(!modalVisible);
+    setBetAmount(0);
+    setSelectedTeam('No Team');
+    setModalMessage('Selected Team: ');
+  }
   useLayoutEffect(() => {
     navigation.setOptions({
       title: 'Betting Page',
@@ -62,21 +89,53 @@ export default function PlaceBetScreen({navigation}) {
           Alert.alert('Modal has been closed.');
           setModalVisible(!modalVisible);
         }}>
-          <View style={styles.centeredView}>
+        <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={styles.modalText}>Hello World!</Text>
-
-            <TouchableOpacity
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}>
-              <Text style={styles.textStyle}>Hide Modal</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}>
-              <Text style={styles.textStyle}>close</Text>
-            </TouchableOpacity>
+            <Text>
+              {modalMessage} {selectedTeam}
+            </Text>
+            <Text>
+              <TouchableOpacity
+                onPress={() =>
+                  selectTeam(currentBet['game']['teams']['away']['name'])
+                }>
+                <Image
+                  source={{uri: currentBet['game']['teams']['away']['logo']}}
+                  style={styles.userPhoto}
+                />
+              </TouchableOpacity>
+              <Text> @ </Text>
+              <TouchableOpacity
+                onPress={() =>
+                  selectTeam(currentBet['game']['teams']['home']['name'])
+                }>
+                <Image
+                  source={{uri: currentBet['game']['teams']['home']['logo']}}
+                  style={styles.userPhoto}
+                />
+              </TouchableOpacity>
+            </Text>
+            <TextInput
+              style={styles.body}
+              placeholder="Amount"
+              placeholderTextColor={AppStyles.color.grey}
+              underlineColorAndroid="transparent"
+              onChangeText={setBetAmount}
+              value={betAmount}
+            />
+            <Text>
+              <TouchableOpacity
+                style={[styles.button, styles.buttonOpen]}
+                onPress={() => placeBet()}>
+                <Text style={styles.textStyle}>Bet</Text>
+              </TouchableOpacity>
+              <Text> </Text>
+              <TouchableOpacity
+                style={[styles.button, styles.buttonClose]}
+                onPress={() => closeBet()}>
+                <Text style={styles.textStyle}>close</Text>
+              </TouchableOpacity>
+            </Text>
           </View>
         </View>
       </Modal>
@@ -183,7 +242,13 @@ const styles = StyleSheet.create({
   },
   modalText: {
     marginBottom: 15,
-    textAlign: 'center'
+    textAlign: 'center',
+  },
+  body: {
+    height: 42,
+    paddingLeft: 20,
+    paddingRight: 20,
+    color: AppStyles.color.text,
   },
   touchable:{
     justifyContent: 'center',
