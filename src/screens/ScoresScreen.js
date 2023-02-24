@@ -20,8 +20,8 @@ export default function ScoresScreen({navigation}) {
   }, []);
 
   var allGames = [];
-  var allGames = global.fetched_games.reverse();
-  global.fetched_games.reverse();
+  var allGames = global.fetched_games;
+  allGames.reverse();
   var gamesToDisplay = [];
 
   for (let i = 0; i < allGames.length; i++) {
@@ -34,6 +34,8 @@ export default function ScoresScreen({navigation}) {
   function displayDate(date) {
     return date.substring(5, 10);
   }
+
+  allGames.reverse();
   return (
     <View style={styles.container}>
       <Text style={styles.title}> Scores Page </Text>
