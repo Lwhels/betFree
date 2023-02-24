@@ -15,16 +15,6 @@ import {connect, useSelector} from 'react-redux';
 import {AppStyles} from '../AppStyles';
 import {Configuration} from '../Configuration';
 
-//
-function textOdds(data) {
-  var odds = data['bookmakers'][0]['bets'][1]['values'];
-  var homeOdds = odds['0']['odd'];
-  var awayOdds = odds['1']['odd'];
-  homeOdds = convertOdds(homeOdds);
-  awayOdds = convertOdds(awayOdds);
-  return awayOdds + '                                             ' + homeOdds;
-}
-
 //convert odds from decimal to american moneyline
 function convertOdds(odds) {
   if (odds < 2) {
@@ -34,11 +24,20 @@ function convertOdds(odds) {
   }
 }
 
+function textOdds(data, index) {
+  if (index != 0 && index != 1) {
+    return;
+  }
+  var line = data['bookmakers'][0]['bets'][1]['values'];
+  var odds = line[index]['odd'];
+  return convertOdds(odds);
+}
+
 export default function PlaceBetScreen({navigation}) {
   const [modalVisible, setModalVisible] = useState(false);
   const [currentBet, setCurrentBet] = useState(global.fetched_odds[0]);
   const [selectedTeam, setSelectedTeam] = useState('No Team');
-  const [betAmount, setBetAmount] = useState('');
+  const [betAmount, setBetAmount] = useState(0);
 
   function openModal(item) {
     setCurrentBet(item);
@@ -86,28 +85,62 @@ export default function PlaceBetScreen({navigation}) {
         }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text>Selected Team: {selectedTeam}</Text>
-            <Text>
-              <TouchableOpacity
-                onPress={() =>
-                  selectTeam(currentBet['game']['teams']['away']['name'])
-                }>
-                <Image
-                  source={{uri: currentBet['game']['teams']['away']['logo']}}
-                  style={styles.userPhoto}
-                />
-              </TouchableOpacity>
-              <Text> {textOdds(currentBet)} </Text>
-              <TouchableOpacity
-                onPress={() =>
-                  selectTeam(currentBet['game']['teams']['home']['name'])
-                }>
-                <Image
-                  source={{uri: currentBet['game']['teams']['home']['logo']}}
-                  style={styles.userPhoto}
-                />
-              </TouchableOpacity>
-            </Text>
+            <View
+              style={[
+                {
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                },
+              ]}>
+              <Text>Selected Team: {selectedTeam}</Text>
+              <View
+                style={[
+                  {
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                  },
+                ]}>
+                <View
+                  style={[
+                    {
+                      alignSelf: 'flex-start',
+                    },
+                  ]}>
+                  <TouchableOpacity
+                    onPress={() =>
+                      selectTeam(currentBet['game']['teams']['away']['name'])
+                    }>
+                    <Image
+                      source={{
+                        uri: currentBet['game']['teams']['away']['logo'],
+                      }}
+                      style={styles.userPhoto}
+                    />
+                  </TouchableOpacity>
+                  <Text> {textOdds(currentBet, 1)} </Text>
+                </View>
+                <Text> @ </Text>
+                <View
+                  style={[
+                    {
+                      alignSelf: 'flex-end',
+                    },
+                  ]}>
+                  <TouchableOpacity
+                    onPress={() =>
+                      selectTeam(currentBet['game']['teams']['home']['name'])
+                    }>
+                    <Image
+                      source={{
+                        uri: currentBet['game']['teams']['home']['logo'],
+                      }}
+                      style={styles.userPhoto}
+                    />
+                  </TouchableOpacity>
+                  <Text> {textOdds(currentBet, 0)} </Text>
+                </View>
+              </View>
+            </View>
             <TextInput
               style={styles.body}
               placeholder="Amount"
@@ -140,22 +173,76 @@ export default function PlaceBetScreen({navigation}) {
               <TouchableOpacity
                 onPress={() => openModal(item)}
                 style={styles.touchable}>
-                <Text>
-                  <Image
-                    source={{uri: item['game']['teams']['away']['logo']}}
-                    style={styles.userPhoto}
-                  />
-                  <Text>{textOdds(item)}</Text>
-                  <Image
-                    source={{uri: item['game']['teams']['home']['logo']}}
-                    style={styles.userPhoto}
-                  />
-                </Text>
-                <Text style={styles.textStyle}>
-                  <Text>{item['game']['teams']['away']['name']} </Text>
-                  <Text> @ </Text>
-                  <Text>{item['game']['teams']['home']['name']}</Text>
-                </Text>
+                <View
+                  style={[
+                    {
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                    },
+                  ]}>
+                  <View
+                    style={[
+                      {
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                      },
+                    ]}>
+                    <View
+                      style={[
+                        {
+                          flexDirection: 'column',
+                          alignItems: 'center',
+                        },
+                      ]}>
+                      <View
+                        style={[
+                          {
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                          },
+                        ]}>
+                        <Image
+                          source={{uri: item['game']['teams']['away']['logo']}}
+                          style={styles.userPhoto}
+                        />
+                        <Text> {textOdds(item, 1)} </Text>
+                      </View>
+
+                      <Text>{item['game']['teams']['away']['name']} </Text>
+                    </View>
+                    <View
+                      style={[
+                        {
+                          flexDirection: 'column',
+                          alignItems: 'center',
+                        },
+                      ]}>
+                      <Text> @ </Text>
+                    </View>
+                    <View
+                      style={[
+                        {
+                          flexDirection: 'column',
+                          alignItems: 'center',
+                        },
+                      ]}>
+                      <View
+                        style={[
+                          {
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                          },
+                        ]}>
+                        <Text> {textOdds(item, 0)} </Text>
+                        <Image
+                          source={{uri: item['game']['teams']['home']['logo']}}
+                          style={styles.userPhoto}
+                        />
+                      </View>
+                      <Text>{item['game']['teams']['home']['name']}</Text>
+                    </View>
+                  </View>
+                </View>
               </TouchableOpacity>
               <Text> {'\n'}</Text>
             </View>
@@ -185,7 +272,7 @@ const styles = StyleSheet.create({
   userPhoto: {
     width: 40,
     height: 40,
-    alignSelf: 'flex-start',
+    alignSelf: 'center',
   },
   btnStyle: {
     justifyContent: 'center',
