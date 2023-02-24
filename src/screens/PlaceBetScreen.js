@@ -21,7 +21,7 @@ function textOdds(data) {
   var homeOdds = odds['0']['odd'];
   var awayOdds = odds['1']['odd'];
   homeOdds = convertOdds(homeOdds);
-  awayOdds = convertOdds(awayOdds);  
+  awayOdds = convertOdds(awayOdds);
   return awayOdds + '                                             ' + homeOdds;
 }
 
@@ -39,38 +39,33 @@ export default function PlaceBetScreen({navigation}) {
   const [currentBet, setCurrentBet] = useState(global.fetched_odds[0]);
   const [selectedTeam, setSelectedTeam] = useState('No Team');
   const [betAmount, setBetAmount] = useState('');
-  const [modalMessage, setModalMessage] = useState('Selected Team:');
 
   function openModal(item) {
     setCurrentBet(item);
     setModalVisible(!modalVisible);
-    console.log(currentBet['game']['teams']['away']['name']);
   }
 
   function selectTeam(team) {
-    console.log(team);
     setSelectedTeam(team);
   }
   function placeBet() {
     if (selectedTeam == 'No Team') {
-      setModalMessage('Please Select Team, Selected Team: ');
+      Alert.alert('please select a team');
       return;
     }
     if (betAmount == 0) {
-      setModalMessage('Please set bet amount, Selected Team: ');
+      Alert.alert('please enter a bet amount');
       return;
     }
     setModalVisible(!modalVisible);
     console.log('bet placed: ' + betAmount);
     setBetAmount(0);
     setSelectedTeam('No Team');
-    setModalMessage('Selected Team: ');
   }
   function closeBet() {
     setModalVisible(!modalVisible);
     setBetAmount(0);
     setSelectedTeam('No Team');
-    setModalMessage('Selected Team: ');
   }
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -91,9 +86,7 @@ export default function PlaceBetScreen({navigation}) {
         }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text>
-              {modalMessage} {selectedTeam}
-            </Text>
+            <Text>Selected Team: {selectedTeam}</Text>
             <Text>
               <TouchableOpacity
                 onPress={() =>
@@ -104,7 +97,7 @@ export default function PlaceBetScreen({navigation}) {
                   style={styles.userPhoto}
                 />
               </TouchableOpacity>
-              <Text> @ </Text>
+              <Text> {textOdds(currentBet)} </Text>
               <TouchableOpacity
                 onPress={() =>
                   selectTeam(currentBet['game']['teams']['home']['name'])
@@ -144,26 +137,32 @@ export default function PlaceBetScreen({navigation}) {
         renderItem={({item}) => (
           <View>
             <View>
-            <TouchableOpacity onPress={() => openModal(item)}
-                              style = {styles.touchable}
-            >
-            <Text>
-            <Image source={{uri: item['game']['teams']['away']['logo']}} style={styles.userPhoto}/>
-            <Text>{textOdds(item)}</Text>
-            <Image source={{uri: item['game']['teams']['home']['logo']}} style={styles.userPhoto}/>
-            </Text>
-            <Text>
-            <Text style={styles.textStyle}>{item['game']['teams']['away']['name']} </Text>
-            <Text> @ </Text>
-            <Text >{item['game']['teams']['home']['name']}</Text>
-            </Text>
-            </TouchableOpacity>
-            <Text> {'\n'}</Text>
+              <TouchableOpacity
+                onPress={() => openModal(item)}
+                style={styles.touchable}>
+                <Text>
+                  <Image
+                    source={{uri: item['game']['teams']['away']['logo']}}
+                    style={styles.userPhoto}
+                  />
+                  <Text>{textOdds(item)}</Text>
+                  <Image
+                    source={{uri: item['game']['teams']['home']['logo']}}
+                    style={styles.userPhoto}
+                  />
+                </Text>
+                <Text style={styles.textStyle}>
+                  <Text>{item['game']['teams']['away']['name']} </Text>
+                  <Text> @ </Text>
+                  <Text>{item['game']['teams']['home']['name']}</Text>
+                </Text>
+              </TouchableOpacity>
+              <Text> {'\n'}</Text>
             </View>
           </View>
         )}
         keyExtractor={(item) => item['game']['id']}
-        contentContainerStyle= {styles.list}
+        contentContainerStyle={styles.list}
       />
     </View>
   );
@@ -197,11 +196,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'green',
   },
   list: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '100%',
-        //flexDirection: 'column',
-
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    //flexDirection: 'column',
   },
   centeredView: {
     flex: 1,
@@ -250,7 +248,7 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     color: AppStyles.color.text,
   },
-  touchable:{
+  touchable: {
     justifyContent: 'center',
     alignContent: 'center',
     width: 320,
@@ -259,6 +257,5 @@ const styles = StyleSheet.create({
     borderRadius: 7,
 
     //flexDirection: 'column',
-
   },
 });

@@ -51,7 +51,7 @@ export default function ScoresScreen({navigation}) {
               />
               <Text>
                 {item['scores']['away']['total']}
-                {item['status']['short']}
+                {item['status']['long']}
                 {item['scores']['home']['total']}
               </Text>
               <Image

@@ -27,19 +27,22 @@ function firstTimeSetup(currentid) {
     balance: 10000,
     betWins: 0,
   };
-  firestore().collection('users').doc(currentid).set((data), { merge: true });
+  firestore().collection('users').doc(currentid).set(data, {merge: true});
 }
 
 function standardGoogleLogin(currentid) {
   let query = firestore().collection('users').doc(currentid);
-    query.get() .then(users =>{
-      var data = users.data();
-      let dataToSend = {
-        balance: data.balance,
-        betWins: data.betWins,
-      };
-      firestore().collection('users').doc(currentid).set((dataToSend), { merge: true });
-    });
+  query.get().then((users) => {
+    var data = users.data();
+    let dataToSend = {
+      balance: data.balance,
+      betWins: data.betWins,
+    };
+    firestore()
+      .collection('users')
+      .doc(currentid)
+      .set(dataToSend, {merge: true});
+  });
 }
 
 function LoginScreen({navigation}) {
@@ -116,8 +119,15 @@ function LoginScreen({navigation}) {
         var user = result.user;
         const CurUser = firebase.auth().currentUser;
         CurUserMeta = CurUser.metadata;
-        if (CurUserMeta.creationTime.slice(0, -6) == CurUserMeta.lastSignInTime.slice(0, -6) ) { firstTimeSetup(user.uid); } // if first time login call this
-        else { standardGoogleLogin(user.uid); } // call this every time a user logs in unless new user
+        if (
+          CurUserMeta.creationTime.slice(0, -6) ==
+          CurUserMeta.lastSignInTime.slice(0, -6)
+        ) {
+          firstTimeSetup(user.uid);
+        } // if first time login call this
+        else {
+          standardGoogleLogin(user.uid);
+        } // call this every time a user logs in unless new user
         AsyncStorage.setItem('@loggedInUserID:id', user.uid);
         var userDict = {
           id: user.uid,
@@ -130,7 +140,7 @@ function LoginScreen({navigation}) {
           appIdentifier: 'betfree-googlesignin',
         };
         console.log('data stored in firestore', data);
-        firestore().collection('users').doc(user.uid).set((data), { merge: true });
+        firestore().collection('users').doc(user.uid).set(data, {merge: true});
         dispatch(login(userDict));
         navigation.navigate('DrawerStack', {
           user: userDict,
