@@ -14,6 +14,8 @@ import {
 import {connect, useSelector} from 'react-redux';
 import {AppStyles} from '../AppStyles';
 import {Configuration} from '../Configuration';
+import firestore from '@react-native-firebase/firestore';
+import '../global.js'
 
 //convert odds from decimal to american moneyline
 function convertOdds(odds) {
@@ -40,6 +42,10 @@ export default function PlaceBetScreen({navigation}) {
   const [betAmount, setBetAmount] = useState(0);
 
   function openModal(item) {
+    if (item['game']['status']['short'] == 'FT' || item['game']['status']['short'] == 'AOT'){
+      Alert.alert('Game has already ended');
+      return;
+    }
     setCurrentBet(item);
     setModalVisible(!modalVisible);
   }
@@ -52,10 +58,30 @@ export default function PlaceBetScreen({navigation}) {
       Alert.alert('please select a team');
       return;
     }
-    if (betAmount == 0) {
-      Alert.alert('please enter a bet amount');
+    if (betAmount <= 0) {
+      Alert.alert('please enter a valid bet amount');
       return;
     }
+    firestore().collection('users').doc(global.currentuid).get().then((users) => {
+      var data = users.data();
+      if (data.balance < betAmount) { 
+        Alert.alert('insufficient funds');
+        return;
+      } 
+      let gameID = currentBet['game']['id'];
+      let stringID = gameID.toString();
+      let dataToSend = {
+        balance: data.balance - betAmount,
+      }
+      let bets = {
+        teamBetOn: selectedTeam,
+        dateOfGame: currentBet['game']['date'].substring(5, 10),
+        gameID: gameID,
+        betAmount: betAmount,
+      }
+      firestore().collection('users').doc(global.currentuid).update(dataToSend);
+      firestore().collection('users').doc(global.currentuid).collection('activebets').doc(stringID).set(bets, { merge: true });
+    });
     setModalVisible(!modalVisible);
     console.log('bet placed: ' + betAmount);
     setBetAmount(0);

@@ -20,6 +20,7 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useDispatch} from 'react-redux';
 import {login} from '../reducers';
+import '../global.js';
 
 function firstTimeSetup(currentid) {
   console.log('FIRST TIME LOGIN');
@@ -68,6 +69,7 @@ function LoginScreen({navigation}) {
       .signInWithEmailAndPassword(email, password)
       .then((response) => {
         const user_uid = response.user._user.uid;
+        global.currentuid = user_uid;
         firestore()
           .collection('users')
           .doc(user_uid)
@@ -119,15 +121,8 @@ function LoginScreen({navigation}) {
         var user = result.user;
         const CurUser = firebase.auth().currentUser;
         CurUserMeta = CurUser.metadata;
-        if (
-          CurUserMeta.creationTime.slice(0, -6) ==
-          CurUserMeta.lastSignInTime.slice(0, -6)
-        ) {
-          firstTimeSetup(user.uid);
-        } // if first time login call this
-        else {
-          standardGoogleLogin(user.uid);
-        } // call this every time a user logs in unless new user
+        if (CurUserMeta.creationTime.slice(0, -6) == CurUserMeta.lastSignInTime.slice(0, -6)) { firstTimeSetup(user.uid); } // if first time login call this
+        else { standardGoogleLogin(user.uid); } // call this every time a user logs in unless new user
         AsyncStorage.setItem('@loggedInUserID:id', user.uid);
         var userDict = {
           id: user.uid,
@@ -140,6 +135,7 @@ function LoginScreen({navigation}) {
           appIdentifier: 'betfree-googlesignin',
         };
         console.log('data stored in firestore', data);
+        global.currentuid = user.uid;
         firestore().collection('users').doc(user.uid).set(data, {merge: true});
         dispatch(login(userDict));
         navigation.navigate('DrawerStack', {

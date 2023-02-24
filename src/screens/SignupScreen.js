@@ -6,6 +6,7 @@ import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import {useDispatch} from 'react-redux';
 import {login} from '../reducers';
+import '../global.js';
 
 function SignupScreen({navigation}) {
   const [fullname, setFullname] = useState('');
@@ -25,10 +26,11 @@ function SignupScreen({navigation}) {
           phone: phone,
           balance: 10000,
           betWins: 0,
-          appIdentifier: 'rn-android-universal-listings',
+          appIdentifier: 'betfree-emailsignup',
         };
         const user_uid = response.user._user.uid;
         firestore().collection('users').doc(user_uid).set(data);
+        global.currentuid = user_uid;
         firestore()
           .collection('users')
           .doc(user_uid)
