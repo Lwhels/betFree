@@ -15,7 +15,7 @@ import {connect, useSelector} from 'react-redux';
 import {AppStyles} from '../AppStyles';
 import {Configuration} from '../Configuration';
 import firestore from '@react-native-firebase/firestore';
-import '../global.js'
+import '../global.js';
 
 //convert odds from decimal to american moneyline
 function convertOdds(odds) {
@@ -40,9 +40,27 @@ export default function PlaceBetScreen({navigation}) {
   const [currentBet, setCurrentBet] = useState(global.fetched_odds[0]);
   const [selectedTeam, setSelectedTeam] = useState('No Team');
   const [betAmount, setBetAmount] = useState(0);
+  const [balance, setBalance] = useState(0);
+
+  // Remove games that are already finished from flatlist here
+  var allOdds = [];
+  var allOdds = global.fetched_odds;
+  var oddsToDisplay = [];
+
+  for (let i = 0; i < allOdds.length; i++) {
+    if (
+      allOdds[i]['game']['status']['short'] != 'FT' &&
+      allOdds[i]['game']['status']['short'] != 'AOT'
+    ) {
+      oddsToDisplay.push(allOdds[i]);
+    }
+  }
 
   function openModal(item) {
-    if (item['game']['status']['short'] == 'FT' || item['game']['status']['short'] == 'AOT'){
+    if (
+      item['game']['status']['short'] == 'FT' ||
+      item['game']['status']['short'] == 'AOT'
+    ) {
       Alert.alert('Game has already ended');
       return;
     }
@@ -62,26 +80,38 @@ export default function PlaceBetScreen({navigation}) {
       Alert.alert('please enter a valid bet amount');
       return;
     }
-    firestore().collection('users').doc(global.currentuid).get().then((users) => {
-      var data = users.data();
-      if (data.balance < betAmount) { 
-        Alert.alert('insufficient funds');
-        return;
-      } 
-      let gameID = currentBet['game']['id'];
-      let stringID = gameID.toString();
-      let dataToSend = {
-        balance: data.balance - betAmount,
-      }
-      let bets = {
-        teamBetOn: selectedTeam,
-        dateOfGame: currentBet['game']['date'].substring(5, 10),
-        gameID: gameID,
-        betAmount: betAmount,
-      }
-      firestore().collection('users').doc(global.currentuid).update(dataToSend);
-      firestore().collection('users').doc(global.currentuid).collection('activebets').doc(stringID).set(bets, { merge: true });
-    });
+    firestore()
+      .collection('users')
+      .doc(global.currentuid)
+      .get()
+      .then((users) => {
+        var data = users.data();
+        if (data.balance < betAmount) {
+          Alert.alert('insufficient funds');
+          return;
+        }
+        let gameID = currentBet['game']['id'];
+        let stringID = gameID.toString();
+        let dataToSend = {
+          balance: data.balance - betAmount,
+        };
+        let bets = {
+          teamBetOn: selectedTeam,
+          dateOfGame: currentBet['game']['date'].substring(5, 10),
+          gameID: gameID,
+          betAmount: betAmount,
+        };
+        firestore()
+          .collection('users')
+          .doc(global.currentuid)
+          .update(dataToSend);
+        firestore()
+          .collection('users')
+          .doc(global.currentuid)
+          .collection('activebets')
+          .doc(stringID)
+          .set(bets, {merge: true});
+      });
     setModalVisible(!modalVisible);
     console.log('bet placed: ' + betAmount);
     setBetAmount(0);
@@ -98,9 +128,18 @@ export default function PlaceBetScreen({navigation}) {
     });
   }, []);
 
+  firestore()
+    .collection('users')
+    .doc(global.currentuid)
+    .get()
+    .then((users) => {
+      setBalance(users.data().balance);
+    });
+  console.log(balance);
   return (
     <View style={styles.container}>
       <Text style={styles.title}> Place Bets Here! </Text>
+      <Text style={styles.body}> Balance: {balance} </Text>
       <Modal
         animationType="slide"
         transparent={true}
@@ -192,7 +231,7 @@ export default function PlaceBetScreen({navigation}) {
         </View>
       </Modal>
       <FlatList
-        data={global.fetched_odds}
+        data={oddsToDisplay}
         renderItem={({item}) => (
           <View>
             <View>
