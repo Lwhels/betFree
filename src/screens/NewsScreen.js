@@ -4,19 +4,20 @@ import { AppStyles} from '../AppStyles';
 import {Configuration} from '../Configuration';
 
 const API_KEY = 'b9b100b8e33845dab3ba0f41512008bd';
+const keyword = 'nba';
 
 export default function NewsScreen({navigation}){
   const [articles, setArticles] = useState([]);
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      title: 'News',
+      title: 'NBA News',
     });
   }, []);
 
   useEffect(() => {
     const fetchNews = async () => {
-      const url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}`;
+      const url = `https://newsapi.org/v2/everything?q=${keyword}&apiKey=${API_KEY}`;
       try {
         const response = await fetch(url);
         const data = await response.json();
