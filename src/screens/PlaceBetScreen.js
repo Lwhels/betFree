@@ -30,7 +30,11 @@ function textOdds(data, index) {
   if (index != 0 && index != 1) {
     return;
   }
-  var line = data['bookmakers'][0]['bets'][1]['values'];
+  var bookmaker = data['bookmakers'][0]['bets'];
+  if (bookmaker.length < 2) {
+    return ' ';
+  }
+  var line = bookmaker[1]['values'];
   var odds = line[index]['odd'];
   return convertOdds(odds);
 }
@@ -43,16 +47,14 @@ export default function PlaceBetScreen({navigation}) {
   const [balance, setBalance] = useState(0);
 
   // Remove games that are already finished from flatlist here
-  var allOdds = [];
-  var allOdds = global.fetched_odds;
-  var oddsToDisplay = [];
 
-  for (let i = 0; i < allOdds.length; i++) {
+  var oddsToDisplay = [];
+  for (let i = 0; i < global.fetched_odds.length; i++) {
     if (
-      allOdds[i]['game']['status']['short'] != 'FT' &&
-      allOdds[i]['game']['status']['short'] != 'AOT'
+      global.fetched_odds[i]['game']['status']['short'] != 'FT' &&
+      global.fetched_odds[i]['game']['status']['short'] != 'AOT'
     ) {
-      oddsToDisplay.push(allOdds[i]);
+      oddsToDisplay.push(global.fetched_odds[i]);
     }
   }
 
@@ -150,21 +152,9 @@ export default function PlaceBetScreen({navigation}) {
         }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <View
-              style={[
-                {
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                },
-              ]}>
+            <View style={styles.flexCol}>
               <Text>Selected Team: {selectedTeam}</Text>
-              <View
-                style={[
-                  {
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                  },
-                ]}>
+              <View style={styles.flexRow}>
                 <View
                   style={[
                     {
@@ -238,34 +228,10 @@ export default function PlaceBetScreen({navigation}) {
               <TouchableOpacity
                 onPress={() => openModal(item)}
                 style={styles.touchable}>
-                <View
-                  style={[
-                    {
-                      flexDirection: 'column',
-                      alignItems: 'center',
-                    },
-                  ]}>
-                  <View
-                    style={[
-                      {
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                      },
-                    ]}>
-                    <View
-                      style={[
-                        {
-                          flexDirection: 'column',
-                          alignItems: 'center',
-                        },
-                      ]}>
-                      <View
-                        style={[
-                          {
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                          },
-                        ]}>
+                <View style={styles.flexCol}>
+                  <View style={styles.flexRow}>
+                    <View style={styles.flexCol}>
+                      <View style={styles.flexRow}>
                         <Image
                           source={{uri: item['game']['teams']['away']['logo']}}
                           style={styles.userPhoto}
@@ -275,29 +241,11 @@ export default function PlaceBetScreen({navigation}) {
 
                       <Text>{item['game']['teams']['away']['name']} </Text>
                     </View>
-                    <View
-                      style={[
-                        {
-                          flexDirection: 'column',
-                          alignItems: 'center',
-                        },
-                      ]}>
+                    <View style={styles.flexCol}>
                       <Text> @ </Text>
                     </View>
-                    <View
-                      style={[
-                        {
-                          flexDirection: 'column',
-                          alignItems: 'center',
-                        },
-                      ]}>
-                      <View
-                        style={[
-                          {
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                          },
-                        ]}>
+                    <View style={styles.flexCol}>
+                      <View style={styles.flexRow}>
                         <Text> {textOdds(item, 0)} </Text>
                         <Image
                           source={{uri: item['game']['teams']['home']['logo']}}
@@ -409,5 +357,13 @@ const styles = StyleSheet.create({
     borderRadius: 7,
 
     //flexDirection: 'column',
+  },
+  flexCol: {
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  flexRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 });
