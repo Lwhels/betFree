@@ -11,6 +11,21 @@ export default function DrawerContainer({navigation}) {
   return (
     <View style={styles.content}>
       <View style={styles.container}>
+      <MenuButton
+          title="MY PROFILE"
+          source={AppIcon.images.profile}
+          onPress={()=>
+          //   () => {
+          //   auther()
+          //     .signOut()
+          //     .then(() => {
+          //       dispatch(logout());
+          //       navigation.navigate('LoginStack');
+          //     }); //logout on redux
+  
+          // }
+          navigation.navigate('Profile Page')}
+        />
         <MenuButton
           title="LOG OUT"
           source={AppIcon.images.logout}
