@@ -16,6 +16,7 @@ import {AppIcon, AppStyles} from '../AppStyles';
 import {Configuration} from '../Configuration';
 import DrawerContainer from '../components/DrawerContainer';
 import ScoresScreen from '../screens/ScoresScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 
 const Stack = createStackNavigator();
 
@@ -115,6 +116,18 @@ const HomeStack = () => (
         headerRightContainerStyle: {paddingRight: 10},
       })}
     />
+    <Stack.Screen
+      name="Profile Page"
+      component={ProfileScreen}
+      options={({navigation}) => ({
+        headerRight: () => (
+          <Pressable onPress={() => navigation.openDrawer()}>
+            <Image style={styles.iconStyle} source={AppIcon.images.menu} />
+          </Pressable>
+        ),
+        headerRightContainerStyle: {paddingRight: 10},
+      })}
+    />
   </Stack.Navigator>
 );
 
@@ -161,6 +174,8 @@ const DrawerStack = () => (
     <Drawer.Screen name="Tab" component={TabNavigator} />
   </Drawer.Navigator>
 );
+
+
 
 // Manifest of possible screens
 const RootNavigator = () => (
