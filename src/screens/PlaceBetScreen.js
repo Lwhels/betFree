@@ -78,40 +78,44 @@ export default function PlaceBetScreen({navigation}) {
       Alert.alert('please select a team');
       return;
     }
-    if (betAmount <= 0) {
+    if (betAmount <= 0 || typeof(betAmount) != 'number') {
       Alert.alert('please enter a valid bet amount');
       return;
     }
-    firestore()
+    firestore() // check if the user has enough balance
       .collection('users')
       .doc(global.currentuid)
       .get()
       .then((users) => {
         var data = users.data();
         if (data.balance < betAmount) {
-          Alert.alert('insufficient funds');
+          Alert.alert('Insufficient funds');
           return;
-        }
-        let gameID = currentBet['game']['id'];
-        let stringID = gameID.toString();
+        } // if they have enough balance, allow the bet to be placed.
+
+        let current = new Date();
+        let cDate = current.getFullYear() + '-' + (current.getMonth() + 1) + '-' + current.getDate();
+        let cTime = current.getHours() + ":" + current.getMinutes() + ":" + current.getSeconds();
+        let dateTime = cDate + ',' + cTime; // current time used to distinguish bet
+
         let dataToSend = {
           balance: data.balance - betAmount,
         };
         let bets = {
           teamBetOn: selectedTeam,
           dateOfGame: currentBet['game']['date'].substring(5, 10),
-          gameID: gameID,
+          gameID: currentBet['game']['id'],
           betAmount: betAmount,
         };
         firestore()
           .collection('users')
           .doc(global.currentuid)
           .update(dataToSend);
-        firestore()
+        firestore() // store the results of the bet
           .collection('users')
           .doc(global.currentuid)
           .collection('activebets')
-          .doc(stringID)
+          .doc(dateTime)
           .set(bets, {merge: true});
       });
     setModalVisible(!modalVisible);
@@ -130,14 +134,6 @@ export default function PlaceBetScreen({navigation}) {
     });
   }, []);
 
-  firestore()
-    .collection('users')
-    .doc(global.currentuid)
-    .get()
-    .then((users) => {
-      setBalance(users.data().balance);
-    });
-  console.log(balance);
   return (
     <View style={styles.container}>
       <Text style={styles.title}> Place Bets Here! </Text>
