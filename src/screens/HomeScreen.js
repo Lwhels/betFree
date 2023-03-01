@@ -21,31 +21,6 @@ function HomeScreen({navigation}) {
       title: 'Home',
     });
   }, []);
-  const [odds, setOdds] = useState([]);
-
-  useEffect(() => {
-    const fetchBets = async () => {
-      try {
-        const response = await fetch(
-          'https://v1.basketball.api-sports.io/odds?league=12&season=2022-2023',
-          {
-            method: 'GET',
-            headers: {
-              'x-rapidapi-host': 'v1.basketball.api-sports.io',
-              'x-rapidapi-key': '28fac37d23a94d5717f67963c07baa3f',
-            },
-          },
-        );
-        const data = await response.json();
-        setOdds(data['response']);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchBets();
-  }, []);
-
-  global.fetched_odds = odds;
   return (
     <View style={styles.container}>
       <Text style={styles.title}>
