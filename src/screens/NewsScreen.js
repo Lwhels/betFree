@@ -1,13 +1,22 @@
 import React, {useLayoutEffect, useState, useEffect} from 'react';
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
-import { AppStyles} from '../AppStyles';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  ActivityIndicator,
+  RefreshControl,
+} from 'react-native';
+import {AppStyles} from '../AppStyles';
 import {Configuration} from '../Configuration';
 
 const API_KEY = 'b9b100b8e33845dab3ba0f41512008bd';
 const keyword = 'nba';
 
-export default function NewsScreen({navigation}){
+export default function NewsScreen({navigation}) {
   const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(true);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -16,32 +25,50 @@ export default function NewsScreen({navigation}){
   }, []);
 
   useEffect(() => {
-    const fetchNews = async () => {
-      const url = `https://newsapi.org/v2/everything?q=${keyword}&apiKey=${API_KEY}`;
-      try {
-        const response = await fetch(url);
-        const data = await response.json();
-        setArticles(data.articles);
-      } catch (error) {
-        console.log(error);
-      }
-    }
     fetchNews();
   }, []);
 
-  return (
-    <View style={styles.container}>
-      <ScrollView>
-        {articles.map((article, index) => (
-          <View key={index} style={styles.articleContainer}>
-            <Text style={styles.title}>{article.title}</Text>
-            <Text style={styles.author}>{article.author}</Text>
-            <Text style={styles.description}>{article.description}</Text>
-          </View>
-        ))}
-      </ScrollView>
-    </View>
-  );
+  const fetchNews = async () => {
+    setLoading(true);
+    const url = `https://newsapi.org/v2/everything?q=${keyword}&apiKey=${API_KEY}`;
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      setArticles(data.articles);
+    } catch (error) {
+      console.log(error);
+    }
+    setLoading(false);
+    setRefreshing(false);
+  };
+
+  if (loading) {
+    return (
+      <ActivityIndicator
+        style={{marginTop: 30}}
+        size="large"
+        animating={loading}
+        color={AppStyles.color.tint}
+      />
+    );
+  } else {
+    return (
+      <View style={styles.container}>
+        <ScrollView
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={fetchNews} />
+          }>
+          {articles.map((article, index) => (
+            <View key={index} style={styles.articleContainer}>
+              <Text style={styles.title}>{article.title}</Text>
+              <Text style={styles.author}>{article.author}</Text>
+              <Text style={styles.description}>{article.description}</Text>
+            </View>
+          ))}
+        </ScrollView>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({

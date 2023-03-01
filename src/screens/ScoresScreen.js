@@ -6,6 +6,8 @@ import {
   View,
   FlatList,
   Image,
+  ActivityIndicator,
+  RefreshControl,
 } from 'react-native';
 import {connect, useSelector} from 'react-redux';
 import {AppStyles} from '../AppStyles';
@@ -33,6 +35,9 @@ function gameStatus(item) {
   return ret;
 }
 export default function ScoresScreen({navigation}) {
+  const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(true);
+
   useLayoutEffect(() => {
     navigation.setOptions({
       title: 'Scores',
@@ -40,26 +45,29 @@ export default function ScoresScreen({navigation}) {
   }, []);
   const [games, setGames] = useState([]);
   useEffect(() => {
-    const fetchGames = async () => {
-      try {
-        const response = await fetch(
-          'https://v1.basketball.api-sports.io/games?league=12&season=2022-2023',
-          {
-            method: 'GET',
-            headers: {
-              'x-rapidapi-host': 'v1.basketball.api-sports.io',
-              'x-rapidapi-key': '28fac37d23a94d5717f67963c07baa3f',
-            },
-          },
-        );
-        const data = await response.json();
-        setGames(data['response']);
-      } catch (error) {
-        console.log(error);
-      }
-    };
     fetchGames();
   }, []);
+  const fetchGames = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(
+        'https://v1.basketball.api-sports.io/games?league=12&season=2022-2023',
+        {
+          method: 'GET',
+          headers: {
+            'x-rapidapi-host': 'v1.basketball.api-sports.io',
+            'x-rapidapi-key': '28fac37d23a94d5717f67963c07baa3f',
+          },
+        },
+      );
+      const data = await response.json();
+      setGames(data['response']);
+    } catch (error) {
+      console.log(error);
+    }
+    setLoading(false);
+    setRefreshing(false);
+  };
   var allGames = [];
   var allGames = games;
   console.log(typeof allGames);
@@ -86,61 +94,75 @@ export default function ScoresScreen({navigation}) {
     return game['scores']['home']['total'] > game['scores']['away']['total'];
   }
   allGames.reverse();
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}> Scores Page </Text>
-      <FlatList
-        data={gamesToDisplay}
-        renderItem={({item}) => (
-          <View style={styles.flexCol}>
-            <Text> {'\n'}</Text>
-            <View style={styles.outerView}>
-              <View style={styles.flexCol}>
-                <View style={styles.logoTeam}>
-                  <Image
-                    source={{uri: item['teams']['away']['logo']}}
-                    style={styles.userPhoto}
-                  />
-                  <Text style={styles.body}>
-                    {item['teams']['away']['name']}{' '}
-                  </Text>
-                  <Text style={styles.flexRight}>
-                    {' '}
-                    {item['scores']['away']['total']}
-                  </Text>
-                  {!homeWin(item) ? (
-                    <View style={[styles.triangle, styles.arrowLeft]} />
-                  ) : null}
+  if (loading) {
+    return (
+      <ActivityIndicator
+        style={{marginTop: 30}}
+        size="large"
+        animating={loading}
+        color={AppStyles.color.tint}
+      />
+    );
+  } else {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.title}> Scores Page </Text>
+        <FlatList
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={fetchGames} />
+          }
+          data={gamesToDisplay}
+          renderItem={({item}) => (
+            <View style={styles.flexCol}>
+              <Text> {'\n'}</Text>
+              <View style={styles.outerView}>
+                <View style={styles.flexCol}>
+                  <View style={styles.logoTeam}>
+                    <Image
+                      source={{uri: item['teams']['away']['logo']}}
+                      style={styles.userPhoto}
+                    />
+                    <Text style={styles.body}>
+                      {item['teams']['away']['name']}{' '}
+                    </Text>
+                    <Text style={styles.flexRight}>
+                      {' '}
+                      {item['scores']['away']['total']}
+                    </Text>
+                    {!homeWin(item) ? (
+                      <View style={[styles.triangle, styles.arrowLeft]} />
+                    ) : null}
+                  </View>
+                  <View style={styles.logoTeam}>
+                    <Image
+                      source={{uri: item['teams']['home']['logo']}}
+                      style={styles.userPhoto}
+                    />
+                    <Text style={styles.body}>
+                      {item['teams']['home']['name']}{' '}
+                    </Text>
+                    <Text style={styles.flexRight}>
+                      {item['scores']['home']['total']}
+                    </Text>
+                    {homeWin(item) ? (
+                      <View style={[styles.triangle, styles.arrowLeft]} />
+                    ) : null}
+                  </View>
                 </View>
-                <View style={styles.logoTeam}>
-                  <Image
-                    source={{uri: item['teams']['home']['logo']}}
-                    style={styles.userPhoto}
-                  />
-                  <Text style={styles.body}>
-                    {item['teams']['home']['name']}{' '}
-                  </Text>
-                  <Text style={styles.flexRight}>
-                    {item['scores']['home']['total']}
-                  </Text>
-                  {homeWin(item) ? (
-                    <View style={[styles.triangle, styles.arrowLeft]} />
-                  ) : null}
+                <View style={styles.verticleLine}></View>
+                <View style={styles.dateStatus}>
+                  <Text>{gameStatus(item)}</Text>
+                  <Text>{displayDate(item['date'])}</Text>
                 </View>
-              </View>
-              <View style={styles.verticleLine}></View>
-              <View style={styles.dateStatus}>
-                <Text>{gameStatus(item)}</Text>
-                <Text>{displayDate(item['date'])}</Text>
               </View>
             </View>
-          </View>
-        )}
-        keyExtractor={(item) => item['id']}
-        style={styles.list}
-      />
-    </View>
-  );
+          )}
+          keyExtractor={(item) => item['id']}
+          style={styles.list}
+        />
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
