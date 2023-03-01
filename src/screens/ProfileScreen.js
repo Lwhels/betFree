@@ -3,13 +3,13 @@ import auth from '@react-native-firebase/auth';
 import firebase from '@react-native-firebase/app';
 import firestore from '@react-native-firebase/firestore';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
-import {AppStyles} from '../AppStyles';
-
+import {AppStyles} from '../AppStyles'; 
+import { Image } from 'react-native';
 
 function ProfileScreen({navigation}) {
   return (
     <View >
-      <Text >profile goes here</Text>
+      <Image> </Image>
     </View>
   );
 }
