@@ -10,6 +10,8 @@ import {
   Modal,
   Alert,
   TextInput,
+  ActivityIndicator,
+  RefreshControl,
 } from 'react-native';
 import {connect, useSelector} from 'react-redux';
 import {AppStyles} from '../AppStyles';
@@ -46,7 +48,7 @@ export default function PlaceBetScreen({navigation}) {
       game: {
         status: {short: 'done'},
         id: 1,
-        date: 'today',
+        date: 'practice',
         teams: {
           away: {
             logo: 'https://media.api-sports.io/basketball/teams/155.png',
@@ -67,30 +69,31 @@ export default function PlaceBetScreen({navigation}) {
   const [balance, setBalance] = useState(0);
   const [odds, setOdds] = useState(defaultOdds);
   const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchBets = async () => {
-      try {
-        const response = await fetch(
-          'https://v1.basketball.api-sports.io/odds?league=12&season=2022-2023',
-          {
-            method: 'GET',
-            headers: {
-              'x-rapidapi-host': 'v1.basketball.api-sports.io',
-              'x-rapidapi-key': '28fac37d23a94d5717f67963c07baa3f',
-            },
+  const [refreshing, setRefreshing] = useState(true);
+  const fetchBets = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(
+        'https://v1.basketball.api-sports.io/odds?league=12&season=2022-2023',
+        {
+          method: 'GET',
+          headers: {
+            'x-rapidapi-host': 'v1.basketball.api-sports.io',
+            'x-rapidapi-key': '28fac37d23a94d5717f67963c07baa3f',
           },
-        );
-        const data = await response.json();
-        setOdds(data['response']);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchBets();
+        },
+      );
+      const data = await response.json();
+      setOdds(data['response']);
+    } catch (error) {
+      console.log(error);
+    }
     setLoading(false);
+    setRefreshing(false);
+  };
+  useEffect(() => {
+    fetchBets();
   }, []);
-
   // Remove games that are already finished from flatlist here
 
   var oddsToDisplay = [];
@@ -112,6 +115,10 @@ export default function PlaceBetScreen({navigation}) {
       Alert.alert('Game has already ended');
       return;
     }
+    //if (item['game']['date'] == 'practice') {
+    // console.log('hi');
+    // closeBet();
+    //}
     setCurrentBet(item);
     setModalVisible(!modalVisible);
   }
@@ -201,7 +208,14 @@ export default function PlaceBetScreen({navigation}) {
 
   console.log(loading);
   if (loading) {
-    return <Text>loading</Text>;
+    return (
+      <ActivityIndicator
+        style={{marginTop: 30}}
+        size="large"
+        animating={loading}
+        color={AppStyles.color.tint}
+      />
+    );
   } else {
     return (
       <View style={styles.container} visible={!loading}>
@@ -286,6 +300,9 @@ export default function PlaceBetScreen({navigation}) {
           </View>
         </Modal>
         <FlatList
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={fetchBets} />
+          }
           data={oddsToDisplay}
           renderItem={({item}) => (
             <View>
