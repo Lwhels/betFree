@@ -1,4 +1,4 @@
-import React, {useLayoutEffect, useState} from 'react';
+import React, {useLayoutEffect, useState, useEffect} from 'react';
 import {
   ScrollView,
   StyleSheet,
@@ -52,7 +52,8 @@ export default function PlaceBetScreen({navigation}) {
   for (let i = 0; i < global.fetched_odds.length; i++) {
     if (
       global.fetched_odds[i]['game']['status']['short'] != 'FT' &&
-      global.fetched_odds[i]['game']['status']['short'] != 'AOT'
+      global.fetched_odds[i]['game']['status']['short'] != 'AOT' &&
+      global.fetched_odds[i]['bookmakers'][0]['bets'].length >= 2
     ) {
       oddsToDisplay.push(global.fetched_odds[i]);
     }
@@ -137,7 +138,6 @@ export default function PlaceBetScreen({navigation}) {
     .then((users) => {
       setBalance(users.data().balance);
     });
-  console.log(balance);
   return (
     <View style={styles.container}>
       <Text style={styles.title}> Place Bets Here! </Text>

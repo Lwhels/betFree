@@ -1,4 +1,4 @@
-import React, {useLayoutEffect} from 'react';
+import React, {useLayoutEffect, useEffect, useState} from 'react';
 import {
   ScrollView,
   StyleSheet,
@@ -38,9 +38,32 @@ export default function ScoresScreen({navigation}) {
       title: 'Scores',
     });
   }, []);
-
+  const [games, setGames] = useState([]);
+  useEffect(() => {
+    const fetchGames = async () => {
+      try {
+        const response = await fetch(
+          'https://v1.basketball.api-sports.io/games?league=12&season=2022-2023',
+          {
+            method: 'GET',
+            headers: {
+              'x-rapidapi-host': 'v1.basketball.api-sports.io',
+              'x-rapidapi-key': '28fac37d23a94d5717f67963c07baa3f',
+            },
+          },
+        );
+        const data = await response.json();
+        setGames(data['response']);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchGames();
+  }, []);
   var allGames = [];
-  var allGames = global.fetched_games;
+  var allGames = games;
+  console.log(typeof allGames);
+  console.log(typeof games);
   allGames.reverse();
   var gamesToDisplay = [];
 
