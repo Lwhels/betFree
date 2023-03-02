@@ -19,6 +19,9 @@ import {Configuration} from '../Configuration';
 import firestore from '@react-native-firebase/firestore';
 import '../global.js';
 
+function expectedReturn(selectedTeam, currentBet, betAmount) {
+  return (500);
+}
 //convert odds from decimal to american moneyline
 function convertOdds(odds) {
   if (odds < 2) {
@@ -145,8 +148,6 @@ export default function PlaceBetScreen({navigation}) {
           Alert.alert('Insufficient funds');
           return;
         } // if they have enough balance, allow the bet to be placed.
-        let gameID = currentBet['game']['id'];
-        let stringID = gameID.toString();
         let current = new Date();
         let cDate =
           current.getFullYear() +
@@ -161,7 +162,6 @@ export default function PlaceBetScreen({navigation}) {
           ':' +
           current.getSeconds();
         let dateTime = cDate + ',' + cTime; // current time used to distinguish bet
-
         let dataToSend = {
           balance: data.balance - betAmount,
         };
@@ -170,6 +170,8 @@ export default function PlaceBetScreen({navigation}) {
           dateOfGame: currentBet['game']['date'].substring(5, 10),
           gameID: currentBet['game']['id'],
           betAmount: betAmount,
+          moneyToBePaid: expectedReturn(selectedTeam, currentBet, betAmount),
+          dateTimeID: dateTime,
         };
         firestore()
           .collection('users')
