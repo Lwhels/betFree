@@ -86,8 +86,10 @@ export default function ScoresScreen({navigation}) {
   gamesToDisplay = gamesToDisplay.splice(0, 50);
 
   function displayDate(date) {
-    var shortDate = date.substring(5, 10);
-    shortDate = shortDate.replace('-', '/');
+    var localDate = new Date(date);
+    localDate = String(localDate);
+    var shortDate = localDate.substring(0, 10);
+    shortDate = shortDate.substring(0, 3) + ',' + shortDate.substring(3, 10);
     return shortDate;
   }
   function homeWin(game) {
@@ -129,7 +131,9 @@ export default function ScoresScreen({navigation}) {
                       {' '}
                       {item['scores']['away']['total']}
                     </Text>
-                    {!homeWin(item) ? (
+                    {!homeWin(item) &&
+                    (item['status']['short'] == 'FT' ||
+                      item['status']['short'] == 'AOT') ? (
                       <View style={[styles.triangle, styles.arrowLeft]} />
                     ) : null}
                   </View>
@@ -144,7 +148,9 @@ export default function ScoresScreen({navigation}) {
                     <Text style={styles.flexRight}>
                       {item['scores']['home']['total']}
                     </Text>
-                    {homeWin(item) ? (
+                    {homeWin(item) &&
+                    (item['status']['short'] == 'FT' ||
+                      item['status']['short'] == 'AOT') ? (
                       <View style={[styles.triangle, styles.arrowLeft]} />
                     ) : null}
                   </View>

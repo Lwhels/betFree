@@ -20,7 +20,34 @@ import firestore from '@react-native-firebase/firestore';
 import '../global.js';
 
 function expectedReturn(selectedTeam, currentBet, betAmount) {
-  return (500);
+  var converted = 0;
+  var odds;
+  if (selectedTeam == currentBet['game']['teams']['home']['name']) {
+    odds = convertOdds(
+      currentBet['bookmakers'][0]['bets'][1]['values'][0]['odd'],
+    );
+  } else if (selectedTeam == currentBet['game']['teams']['away']['name']) {
+    odds = convertOdds(
+      currentBet['bookmakers'][0]['bets'][1]['values'][1]['odd'],
+    );
+  } else {
+    return NaN;
+  }
+  if (odds[0] == '+') {
+    odds = odds.substring(1, odds.length);
+    odds = Number(odds);
+    odds = odds / 100;
+    converted = betAmount * odds;
+    return Number(Number(converted).toFixed(2));
+  } else if (odds[0] == '-') {
+    odds = odds.substring(1, odds.length);
+    odds = Number(odds);
+    odds = 100 / odds;
+    converted = betAmount * odds;
+  } else {
+    return NaN;
+  }
+  return Number((Number(betAmount) + Number(converted)).toFixed(2));
 }
 //convert odds from decimal to american moneyline
 function convertOdds(odds) {
@@ -118,10 +145,7 @@ export default function PlaceBetScreen({navigation}) {
       Alert.alert('Game has already ended');
       return;
     }
-    //if (item['game']['date'] == 'practice') {
-    // console.log('hi');
-    // closeBet();
-    //}
+
     setCurrentBet(item);
     setModalVisible(!modalVisible);
   }
@@ -134,7 +158,14 @@ export default function PlaceBetScreen({navigation}) {
       Alert.alert('please select a team');
       return;
     }
-    if (betAmount <= 0 || typeof betAmount != 'number') {
+    for (let i = 0; i < betAmount.length; i++) {
+      if (betAmount[i] < '0' || betAmount[i] > 9) {
+        Alert.alert('please enter an positive integer bet amount');
+        return;
+      }
+    }
+
+    if (betAmount <= 0) {
       Alert.alert('please enter a valid bet amount');
       return;
     }
@@ -169,7 +200,7 @@ export default function PlaceBetScreen({navigation}) {
           teamBetOn: selectedTeam,
           dateOfGame: currentBet['game']['date'].substring(5, 10),
           gameID: currentBet['game']['id'],
-          betAmount: betAmount,
+          betAmount: Number(betAmount),
           moneyToBePaid: expectedReturn(selectedTeam, currentBet, betAmount),
           dateTimeID: dateTime,
         };
@@ -185,7 +216,7 @@ export default function PlaceBetScreen({navigation}) {
           .set(bets, {merge: true});
       });
     setModalVisible(!modalVisible);
-    console.log('bet placed: ' + betAmount);
+    Alert.alert('bet placed!');
     setBetAmount(0);
     setSelectedTeam('No Team');
   }
@@ -208,7 +239,6 @@ export default function PlaceBetScreen({navigation}) {
       setBalance(users.data().balance);
     });
 
-  console.log(loading);
   if (loading) {
     return (
       <ActivityIndicator
@@ -284,6 +314,7 @@ export default function PlaceBetScreen({navigation}) {
                 underlineColorAndroid="transparent"
                 onChangeText={setBetAmount}
                 value={betAmount}
+                keyboardType="numeric"
               />
               <Text>
                 <TouchableOpacity
