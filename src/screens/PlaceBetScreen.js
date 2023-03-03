@@ -22,6 +22,9 @@ import '../global.js';
 function expectedReturn(selectedTeam, currentBet, betAmount) {
   var converted = 0;
   var odds;
+  if (selectedTeam == 'No Team' || betAmount == 0) {
+    return betAmount;
+  }
   if (selectedTeam == currentBet['game']['teams']['home']['name']) {
     odds = convertOdds(
       currentBet['bookmakers'][0]['bets'][1]['values'][0]['odd'],
@@ -307,15 +310,24 @@ export default function PlaceBetScreen({navigation}) {
                   </View>
                 </View>
               </View>
-              <TextInput
-                style={styles.body}
-                placeholder="Amount"
-                placeholderTextColor={AppStyles.color.grey}
-                underlineColorAndroid="transparent"
-                onChangeText={setBetAmount}
-                value={betAmount}
-                keyboardType="numeric"
-              />
+              <View>
+                <TextInput
+                  style={styles.body}
+                  placeholder="Stake:"
+                  placeholderTextColor={AppStyles.color.grey}
+                  underlineColorAndroid="transparent"
+                  onChangeText={setBetAmount}
+                  value={betAmount}
+                  keyboardType="numeric"
+                />
+                <Text style={styles.body}>
+                  Win:{' '}
+                  {(
+                    expectedReturn(selectedTeam, currentBet, betAmount) -
+                    betAmount
+                  ).toFixed(2)}
+                </Text>
+              </View>
               <Text>
                 <TouchableOpacity
                   style={[styles.button, styles.buttonOpen]}
