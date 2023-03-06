@@ -27,6 +27,7 @@ function SignupScreen({navigation}) {
           balance: 10000,
           betWins: 0,
           appIdentifier: 'betfree-emailsignup',
+          id: response.user._user.uid,
         };
         const user_uid = response.user._user.uid;
         firestore().collection('users').doc(user_uid).set(data);
