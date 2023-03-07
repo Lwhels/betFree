@@ -5,17 +5,11 @@ import firestore from '@react-native-firebase/firestore';
 import {StyleSheet, Text, View, TextInput, TouchableOpacity} from 'react-native';
 import {AppIcon, AppStyles} from '../AppStyles'; 
 import { Image } from 'react-native';
-
+import '../global.js'
 
 
 function ProfileScreen({navigation}) {
   const balance = 100;
-  const [showPass, setShowPass] = useState (true); 
-  const password =  'kayleetran';
-
-  const showPassword = () => {
-    setShowPass(!showPass); 
-  }
 
   return (
     <View >
@@ -26,15 +20,8 @@ function ProfileScreen({navigation}) {
       <Text style = {styles.fields} > name </Text>
       <Text style = {styles.fieldTitles}> email </Text>
       <Text style = {styles.fields} > email </Text>
-      <Text style = {styles.fieldTitles}> password </Text>
-      <View style = {styles.container}>
-      <TextInput style = {styles.password} value = {password} secureTextEntry = {showPass}></TextInput>
-      <TouchableOpacity onPress = {showPassword}>
-        <Image 
-          style = {styles.showPasswordButton}
-          source = {showPass? require('../../assets/icons/openeye.png') : require('../../assets/icons/closeeye.png') }></Image>
-      </TouchableOpacity>
-      </View>
+      <Text style = {styles.fieldTitles}> referral code: </Text>
+      <Text style = {styles.fields} > ur mom 420  </Text>
     </View>
   );
 }
