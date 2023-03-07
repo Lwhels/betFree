@@ -60,7 +60,10 @@ export const AppIcon = {
     defaultUser: require("../assets/icons/default_user.jpg"),
     logout: require("../assets/icons/shutdown.png"),
     menu: require("../assets/icons/menu.png"),
-    profile: require ("../assets/icons/profile.png")
+    profile: require ("../assets/icons/profile.png"),
+    basketball: require("../assets/images/basketballProfilePic.png"),
+    openeye: require("../assets/icons/openeye.png"),
+    closeeye: require("../assets/icons/closeeye.png"),
   }
 };
 
