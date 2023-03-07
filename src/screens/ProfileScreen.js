@@ -5,23 +5,60 @@ import firestore from '@react-native-firebase/firestore';
 import {StyleSheet, Text, View, TextInput, TouchableOpacity} from 'react-native';
 import {AppIcon, AppStyles} from '../AppStyles'; 
 import { Image } from 'react-native';
+import { Alert } from 'react-native';
 import '../global.js'
 
 
 function ProfileScreen({navigation}) {
-  const balance = 100;
+  const [balance, setBalance]  = useState(0) 
+  const [email, setEmail]  = useState('')
+  const [username, setUsername] = useState('')
+  firestore() // check if the user has enough balance
+      .collection('users')
+      .doc(global.currentuid)
+      .get()
+      .then((users) => {
+        data = users.data();
+        setUsername(data.fullname)
+        setBalance(data.balance)
+        setEmail(data.email)
+      });
+    
+  const removefromfirebase = () => {
+    console.log ("you have reached this function")
+    firestore().collection('users').doc(global.currentuid).delete(
+      {recursive: true, yes: true}
+    );
+    navigation.navigate('LoginStack');
+  }
+  const deleteAccount = () => {
+    Alert.alert('Are you sure?', 'This action cannot be undone.', [
+      {
+        text: 'Cancel',
+        onPress: () => console.log('Cancel Pressed'),
+        style: 'cancel',
+      },
+      {
+        text: 'OK', onPress: () =>  {removefromfirebase()},
+      },
+    ]);
+  }
 
   return (
     <View >
       <Image style = {styles.userImg} source={AppIcon.images.basketball}/> 
-      <Text style = {styles.username}> username </Text>
+      <Text style = {styles.username}> {username} </Text>
       <Text style = {styles.balance}> Your balance: ${balance}</Text>
-      <Text style = {styles.fieldTitles}> name </Text>
-      <Text style = {styles.fields} > name </Text>
-      <Text style = {styles.fieldTitles}> email </Text>
-      <Text style = {styles.fields} > email </Text>
-      <Text style = {styles.fieldTitles}> referral code: </Text>
+      <Text style = {styles.fieldTitles}> Email </Text>
+      <Text style = {styles.fields} > {email} </Text>
+      <Text style = {styles.fieldTitles}> Your referral code: </Text>
       <Text style = {styles.fields} > ur mom 420  </Text>
+      <TouchableOpacity onPress={deleteAccount}>
+        <Text style = {{
+          textAlign: 'center',
+          color: 'red',
+        }}> delte acc</Text>
+        </TouchableOpacity>
     </View>
   );
 }
