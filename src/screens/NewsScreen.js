@@ -12,7 +12,7 @@ import {AppStyles} from '../AppStyles';
 import {Configuration} from '../Configuration';
 
 const API_KEY = 'b9b100b8e33845dab3ba0f41512008bd';
-const keyword = 'nba';
+const keyword = 'nba odds';
 
 export default function NewsScreen({navigation}) {
   const [articles, setArticles] = useState([]);
@@ -50,8 +50,10 @@ export default function NewsScreen({navigation}) {
     <View style={styles.articleContainer}>
       {item.urlToImage ? (
         <ImageBackground source={{uri: item.urlToImage}} style={styles.image}>
-          <Text style={styles.title}>{item.title}</Text>
-          <Text style={styles.author}>{item.author}</Text>
+          <View style={styles.textContainer}>
+            <Text style={styles.title}>{item.title}</Text>
+            <Text style={styles.author}>{item.author}</Text>
+          </View>
         </ImageBackground>
       ) : null}
     </View>
@@ -98,6 +100,9 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
     justifyContent: 'flex-end',
     alignItems: 'flex-start',
+  },
+  textContainer: {
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
     padding: 10,
   },
   title: {
