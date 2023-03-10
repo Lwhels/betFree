@@ -35,7 +35,7 @@ export default function NewsScreen({navigation}) {
     try {
       const response = await fetch(url);
       const data = await response.json();
-      setArticles(data.articles);
+      setArticles(data.articles.slice(0, 5));
     } catch (error) {
       console.log(error);
     }
