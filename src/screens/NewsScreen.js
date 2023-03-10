@@ -67,7 +67,6 @@ export default function NewsScreen({navigation}) {
                 <Text style={styles.title}>{article.title}</Text>
                 <Text style={styles.author}>{article.author}</Text>
               </ImageBackground>
-              <Text style={styles.description}>{article.description}</Text>
             </View>
           ))}
         </ScrollView>
@@ -103,8 +102,5 @@ const styles = StyleSheet.create({
   author: {
     color: '#fff',
     marginBottom: 5,
-  },
-  description: {
-    color: '#666',
   },
 });
