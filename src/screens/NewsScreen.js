@@ -1,6 +1,6 @@
 import React, {useLayoutEffect, useState, useEffect} from 'react';
 import {
-  ScrollView,
+  FlatList,
   StyleSheet,
   Text,
   View,
@@ -35,13 +35,27 @@ export default function NewsScreen({navigation}) {
     try {
       const response = await fetch(url);
       const data = await response.json();
-      setArticles(data.articles.slice(0, 5));
+      const filteredArticles = data.articles.filter(
+        article => article.urlToImage !== null && article.urlToImage !== '',
+      );
+      setArticles(filteredArticles.slice(0, 5));
     } catch (error) {
       console.log(error);
     }
     setLoading(false);
     setRefreshing(false);
   };
+
+  const renderItem = ({item}) => (
+    <View style={styles.articleContainer}>
+      {item.urlToImage ? (
+        <ImageBackground source={{uri: item.urlToImage}} style={styles.image}>
+          <Text style={styles.title}>{item.title}</Text>
+          <Text style={styles.author}>{item.author}</Text>
+        </ImageBackground>
+      ) : null}
+    </View>
+  );
 
   if (loading) {
     return (
@@ -55,21 +69,14 @@ export default function NewsScreen({navigation}) {
   } else {
     return (
       <View style={styles.container}>
-        <ScrollView
+        <FlatList
+          data={articles}
+          renderItem={renderItem}
+          keyExtractor={(item, index) => index.toString()}
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={fetchNews} />
-          }>
-          {articles.map((article, index) => (
-            <View key={index} style={styles.articleContainer}>
-              <ImageBackground
-                source={{uri: article.urlToImage}}
-                style={styles.image}>
-                <Text style={styles.title}>{article.title}</Text>
-                <Text style={styles.author}>{article.author}</Text>
-              </ImageBackground>
-            </View>
-          ))}
-        </ScrollView>
+          }
+        />
       </View>
     );
   }
