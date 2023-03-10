@@ -6,6 +6,7 @@ import {
   View,
   ActivityIndicator,
   RefreshControl,
+  ImageBackground,
 } from 'react-native';
 import {AppStyles} from '../AppStyles';
 import {Configuration} from '../Configuration';
@@ -20,7 +21,7 @@ export default function NewsScreen({navigation}) {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      title: 'NBA News',
+      title: 'NBA Media',
     });
   }, []);
 
@@ -60,8 +61,12 @@ export default function NewsScreen({navigation}) {
           }>
           {articles.map((article, index) => (
             <View key={index} style={styles.articleContainer}>
-              <Text style={styles.title}>{article.title}</Text>
-              <Text style={styles.author}>{article.author}</Text>
+              <ImageBackground
+                source={{uri: article.urlToImage}}
+                style={styles.image}>
+                <Text style={styles.title}>{article.title}</Text>
+                <Text style={styles.author}>{article.author}</Text>
+              </ImageBackground>
               <Text style={styles.description}>{article.description}</Text>
             </View>
           ))}
@@ -82,17 +87,24 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
   },
+  image: {
+    height: 200,
+    resizeMode: 'cover',
+    justifyContent: 'flex-end',
+    alignItems: 'flex-start',
+    padding: 10,
+  },
   title: {
     fontWeight: 'bold',
     fontSize: 16,
     marginBottom: 5,
+    color: '#fff',
   },
   author: {
-    color: '#999',
+    color: '#fff',
     marginBottom: 5,
   },
   description: {
     color: '#666',
   },
 });
-// Second Test
