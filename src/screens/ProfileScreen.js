@@ -7,12 +7,28 @@ import {AppIcon, AppStyles} from '../AppStyles';
 import { Image } from 'react-native';
 import { Alert } from 'react-native';
 import '../global.js'
+import { appDistributionOrigin } from 'firebase-tools/lib/api';
 
 
 function ProfileScreen({navigation}) {
   const [balance, setBalance]  = useState(0) 
   const [email, setEmail]  = useState('')
   const [username, setUsername] = useState('')
+  
+  // const [image, setImage] = useState[0];
+  // const profilePhotoID = useState(1); 
+
+
+  // const profilePhotoDisplay = () => {
+  //   if (profilePhotoID == 0){
+  //     setImage = "../../assets/icons/profile.png"; 
+  //   } else if (profilePhotoID == 1 ){
+  //     setImage = "../../assets/images/basketballProfilePic.png";
+  //   }
+  // }
+  const image = require('../../assets/images/basketballProfilePic.png');
+
+
   firestore() // check if the user has enough balance
       .collection('users')
       .doc(global.currentuid)
@@ -24,41 +40,43 @@ function ProfileScreen({navigation}) {
         setEmail(data.email)
       });
     
-  const removefromfirebase = () => {
-    console.log ("you have reached this function")
-    firestore().collection('users').doc(global.currentuid).delete(
-      {recursive: true, yes: true}
-    );
-    navigation.navigate('LoginStack');
-  }
-  const deleteAccount = () => {
-    Alert.alert('Are you sure?', 'This action cannot be undone.', [
-      {
-        text: 'Cancel',
-        onPress: () => console.log('Cancel Pressed'),
-        style: 'cancel',
-      },
-      {
-        text: 'OK', onPress: () =>  {removefromfirebase()},
-      },
-    ]);
-  }
+  // const removefromfirebase = () => {
+  //   console.log ("you have reached this function")
+  //   firestore().collection('users').doc(global.currentuid).delete(
+  //     {recursive: true, yes: true}
+  //   );
+  //   navigation.navigate('LoginStack');
+  // }
+  // const deleteAccount = () => {
+  //   Alert.alert('Are you sure?', 'This action cannot be undone.', [
+  //     {
+  //       text: 'Cancel',
+  //       onPress: () => console.log('Cancel Pressed'),
+  //       style: 'cancel',
+  //     },
+  //     {
+  //       text: 'OK', onPress: () =>  {removefromfirebase()},
+  //     },
+  //   ]);
+  // }
+
+
 
   return (
     <View >
-      <Image style = {styles.userImg} source={AppIcon.images.basketball}/> 
+      <Image style = {styles.userImg} source={image}/> 
       <Text style = {styles.username}> {username} </Text>
       <Text style = {styles.balance}> Your balance: ${balance}</Text>
       <Text style = {styles.fieldTitles}> Email </Text>
       <Text style = {styles.fields} > {email} </Text>
       <Text style = {styles.fieldTitles}> Your referral code: </Text>
       <Text style = {styles.fields} > ur mom 420  </Text>
-      <TouchableOpacity onPress={deleteAccount}>
+      {/* <TouchableOpacity onPress={deleteAccount}>
         <Text style = {{
           textAlign: 'center',
           color: 'red',
         }}> delte acc</Text>
-        </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
   );
 }
