@@ -29,7 +29,7 @@ function ProfileScreen({navigation}) {
   const image = require('../../assets/images/basketballProfilePic.png');
 
 
-  firestore() // check if the user has enough balance
+  firestore() 
       .collection('users')
       .doc(global.currentuid)
       .get()
