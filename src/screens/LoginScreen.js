@@ -24,9 +24,11 @@ import '../global.js';
 
 function firstTimeSetup(currentid) {
   console.log('FIRST TIME LOGIN');
+  let random = Math.floor(Math.random()*(6-1+1))+1;
   let data = {
     balance: 10000,
     betWins: 0,
+    profilePhotoNum: random,
   };
   firestore().collection('users').doc(currentid).set(data, {merge: true});
 }
