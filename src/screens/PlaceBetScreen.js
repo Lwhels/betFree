@@ -254,8 +254,8 @@ export default function PlaceBetScreen({navigation}) {
   } else {
     return (
       <View style={styles.container} visible={!loading}>
-        <Text style={styles.title}> Place Bets Here! </Text>
-        <Text style={styles.body}> Balance: {balance} </Text>
+        <Text style={styles.title}> Bets</Text>
+        <Text style={styles.balance}> Balance: {balance} </Text>
         <Modal
           animationType="slide"
           transparent={true}
@@ -486,8 +486,8 @@ const styles = StyleSheet.create({
     width: 320,
     height: 80,
     borderWidth: 1,
-    borderRadius: 7,
-
+    borderRadius: 20,
+    backgroundColor: '#c5edf3',
     //flexDirection: 'column',
   },
   flexCol: {
@@ -497,5 +497,11 @@ const styles = StyleSheet.create({
   flexRow: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  balance: {
+    color: '#00aea8',
+    fontWeight: '400',
+    textAlign: 'center',
+    marginBottom: '5%',
   },
 });

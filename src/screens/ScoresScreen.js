@@ -19,6 +19,7 @@ import {Configuration} from '../Configuration';
 import SelectDropdown from 'react-native-select-dropdown';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import '../global.js';
+import {AppIcon} from '../AppStyles';
 
 function gameStatus(item) {
   var apiStatus;
@@ -155,22 +156,21 @@ export default function ScoresScreen({navigation}) {
       allGames[i]['status']['short'] != 'NS' &&
       allGames[i]['status']['short'] != 'CANC'
     ) {
-      if (team != 'All') {
-        if (
-          team != allGames[i]['teams']['home']['name'] &&
-          team != allGames[i]['teams']['away']['name']
-        ) {
-          continue;
-        }
-      }
-      if (dateComp(allGames[i]['date'], filterDate, filterMonth, filterYear)) {
+      if (
+        team == 'All' ||
+        team == allGames[i]['teams']['home']['name'] ||
+        team == allGames[i]['teams']['away']['name']
+      ) {
         gamesToDisplay.push(allGames[i]);
-      } else {
-        break;
       }
     }
+    // if (dateComp(allGames[i]['date'], filterDate, filterMonth, filterYear)) {
+
+    //} else {
+    // break;
+    // }
   }
-  gamesToDisplay.reverse();
+
   function displayDate(date) {
     var localDate = new Date(date);
     localDate = String(localDate);
@@ -195,6 +195,32 @@ export default function ScoresScreen({navigation}) {
     //setTeam(teams[0]);
   }
 
+  /*               <Text>Date:</Text>
+              <TouchableOpacity
+                onPress={() => setDateVisible(true)}
+                style={styles.matchSelectDropdownButton}>
+                <Text style={styles.matchSelectDropdownText}>
+                  Up Until:{[' ', date.toString().substring(0, 16)]}
+                </Text>
+              </TouchableOpacity> 
+                            <Modal
+                visible={dateVisible}
+                animationType="slide"
+                transparent={true}
+                onRequestClose={() => {
+                  Alert.alert('Modal has been closed.');
+                  setDateVisible(!dateVisible);
+                }}>
+                <DateTimePicker
+                  testID="dateTimePicker"
+                  value={date}
+                  mode="date"
+                  onChange={onChange}
+                />
+              </Modal>
+              */
+  gamesToDisplay.reverse();
+  gamesToDisplay = gamesToDisplay.splice(0, 50);
   if (loading) {
     return (
       <ActivityIndicator
@@ -236,31 +262,6 @@ export default function ScoresScreen({navigation}) {
                 defaultValue={team}
               />
 
-              <Text>Date:</Text>
-              <TouchableOpacity
-                onPress={() => setDateVisible(true)}
-                style={styles.matchSelectDropdownButton}>
-                <Text style={styles.matchSelectDropdownText}>
-                  Up Until:{[' ', date.toString().substring(0, 16)]}
-                </Text>
-              </TouchableOpacity>
-
-              <Modal
-                visible={dateVisible}
-                animationType="slide"
-                transparent={true}
-                onRequestClose={() => {
-                  Alert.alert('Modal has been closed.');
-                  setDateVisible(!dateVisible);
-                }}>
-                <DateTimePicker
-                  testID="dateTimePicker"
-                  value={date}
-                  mode="date"
-                  onChange={onChange}
-                />
-              </Modal>
-
               <TouchableOpacity
                 style={[styles.button, styles.buttonOpen]}
                 onPress={() => closeModal()}>
@@ -271,9 +272,11 @@ export default function ScoresScreen({navigation}) {
         </Modal>
         <Text style={styles.title}> Scores Page </Text>
         <TouchableOpacity
-          style={[styles.button, styles.buttonFilter, styles.listSpacing]}
+          style={[styles.button, styles.buttonFilter]}
           onPress={() => openFilters()}>
-          <Text>Filters</Text>
+          <Image
+            source={AppIcon.images.filter}
+            style={{width: 24, height: 24}}></Image>
         </TouchableOpacity>
         <FlatList
           refreshControl={
@@ -380,7 +383,7 @@ const styles = StyleSheet.create({
   },
   outerView: {
     borderWidth: 1,
-    borderRadius: 7,
+    borderRadius: 15,
     flexDirection: 'row',
     alignItems: 'center',
     padding: 10,
