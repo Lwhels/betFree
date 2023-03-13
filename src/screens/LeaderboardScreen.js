@@ -75,7 +75,7 @@ export default function LeaderboardScreen({navigation}){
           style = {styles.toggleButton}
           onPress={() => setShow(!show)}
         >
-          <Text>Bet Wins Leaderboard</Text>
+          <Text>Bet Wins</Text>
         </TouchableHighlight>
         )}
       else {
@@ -84,7 +84,7 @@ export default function LeaderboardScreen({navigation}){
           style = {styles.toggleButton}
           onPress={() => setShow(!show)}
         >
-        <Text>Highest Balance Leaderboard</Text>
+        <Text>Highest Balance</Text>
         </TouchableHighlight>
 
       )};
@@ -143,7 +143,7 @@ export default function LeaderboardScreen({navigation}){
                   flexBasis: 50,
                   flexGrow: 0,
                   flexShrink: 1,
-                  paddingLeft: 10,
+                  paddingLeft: 20,
                   //backgroundColor: 'powderblue',
                   justifyContent: "space-around",
                 },
@@ -158,10 +158,10 @@ export default function LeaderboardScreen({navigation}){
                 style={[
                 styles.box,
                 {
-                  flexBasis: 150,
+                  flexBasis: 200,
                   flexGrow: 1,
                   flexShrink: 0,
-                  paddingLeft: 20,
+                  paddingLeft: 50,
                   //backgroundColor: 'powderblue',
                   justifyContent: 'center',
                   justifyContent: 'space-evenly',
@@ -192,7 +192,7 @@ export default function LeaderboardScreen({navigation}){
                   flexBasis: 50,
                   flexGrow: 0,
                   flexShrink: 1,
-                  paddingLeft: 10,
+                  paddingLeft: 20,
                   //backgroundColor: 'powderblue',
                   justifyContent: "space-around",
                 },
@@ -207,10 +207,10 @@ export default function LeaderboardScreen({navigation}){
                 style={[
                 styles.box,
                 {
-                  flexBasis: 150,
+                  flexBasis: 200,
                   flexGrow: 1,
                   flexShrink: 0,
-                  paddingLeft: 20,
+                  paddingLeft: 50,
                   //backgroundColor: 'powderblue',
                   justifyContent: 'center',
                   justifyContent: 'space-evenly',
@@ -245,15 +245,16 @@ const styles = StyleSheet.create({
   },
   toggleButton:{
     backgroundColor: 'aliceblue',
-    borderRadius: 10,
+    borderRadius: 30,
     padding: 10,
     borderWidth: 1,
+    marginTop: 10,
   },
   previewContainer:{
     flex: 1,
     flexDirection: 'row',
     backgroundColor: 'aliceblue',
-    marginBottom: 20,
+    marginBottom: 50,
     borderWidth: 1,
     borderRadius: 15,
   },
@@ -270,7 +271,6 @@ const styles = StyleSheet.create({
   box: {
     flex: 1,
     height: 100,
-    width: 100,
   },
   userPhoto: {
     width: 30,
