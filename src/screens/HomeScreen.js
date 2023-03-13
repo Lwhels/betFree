@@ -5,13 +5,17 @@ import {
   StyleSheet,
   Text,
   TouchableHighlight,
+  TouchableOpacity,
+  Image,
 } from 'react-native';
 import {connect, useSelector} from 'react-redux';
 import {AppStyles} from '../AppStyles';
 import {Configuration} from '../Configuration';
 import BasicButton from '../components/BasicButton';
+import Card from 'react-native-elements';
 import '../global.js';
 import {set} from 'react-native-reanimated';
+import {AppIcon} from '../AppStyles';
 
 function HomeScreen({navigation}) {
   const auth = useSelector((state) => state.auth);
@@ -26,23 +30,75 @@ function HomeScreen({navigation}) {
       <Text style={styles.title}>
         Welcome, {auth.user?.fullname ?? 'User'}!
       </Text>
-      <BasicButton
-        onPress={() => navigation.navigate('Betting Page')}
-        title="Make Bets Here!"
-      />
-      <BasicButton
-        onPress={() => navigation.navigate('Current Bets')}
-        title="My Bets"
-      />
-      <BasicButton onPress={() => navigation.navigate('News')} title="News" />
-      <BasicButton
-        onPress={() => navigation.navigate('Leaderboard')}
-        title="Leaderboard"
-      />
-      <BasicButton
-        onPress={() => navigation.navigate('Scores')}
-        title="Scores"
-      />
+      <View style={styles.rowOfCards}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Betting Page')}
+          style={styles.card}>
+          <View style={styles.insideCard}>
+            <Image
+              source={AppIcon.images.menu}
+              style={styles.cardImage}></Image>
+            <Text style={styles.cardText}>Place Bets</Text>
+          </View>
+        </TouchableOpacity>
+        <View style={{flexGrow: 1}}></View>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Current Bets')}
+          style={styles.card}>
+          <View style={styles.insideCard}>
+            <Image
+              source={AppIcon.images.menu}
+              style={styles.cardImage}></Image>
+            <Text style={styles.cardText}>My Bets</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.rowOfCards}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('News')}
+          style={styles.card}>
+          <View style={styles.insideCard}>
+            <Image
+              source={AppIcon.images.menu}
+              style={styles.cardImage}></Image>
+            <Text style={styles.cardText}>News</Text>
+          </View>
+        </TouchableOpacity>
+        <View style={{flexGrow: 1}}></View>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Leaderboard')}
+          style={styles.card}>
+          <View style={styles.insideCard}>
+            <Image
+              source={AppIcon.images.menu}
+              style={styles.cardImage}></Image>
+            <Text style={styles.cardText}>Leaderboard</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.rowOfCards}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Scores')}
+          style={styles.card}>
+          <View style={styles.insideCard}>
+            <Image
+              source={AppIcon.images.menu}
+              style={styles.cardImage}></Image>
+            <Text style={styles.cardText}>Scores</Text>
+          </View>
+        </TouchableOpacity>
+        <View style={{flexGrow: 1}}></View>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Profile')}
+          style={styles.card}>
+          <View style={styles.insideCard}>
+            <Image
+              source={AppIcon.images.menu}
+              style={styles.cardImage}></Image>
+            <Text style={styles.cardText}>Profile</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -67,6 +123,20 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     marginLeft: 5,
   },
+  rowOfCards: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: '10%',
+    marginTop: '10%',
+  },
+  card: {
+    borderWidth: 2,
+    flexGrow: 2,
+    height: '100%',
+  },
+  insideCard: {flexDirection: 'column', alignItems: 'center'},
+  cardImage: {marginBottom: '10%', marginTop: '10%'},
+  cardText: {marginBottom: '3%'},
 });
 
 const mapStateToProps = (state) => ({
