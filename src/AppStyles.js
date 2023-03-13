@@ -62,6 +62,11 @@ export const AppIcon = {
     menu: require("../assets/icons/menu.png"),
     profile: require ("../assets/icons/profile.png"),
     basketball: require("../assets/images/basketballProfilePic.png"),
+    hoop: require("../assets/images/hoopProfilePic.png"),
+    jersey: require("../assets/images/jerseyProfilePic.png"),
+    shoe: require("../assets/images/shoeProfilePic.png"),
+    timer: require("../assets/images/timerProfilePic.png"),
+    whistle: require("../assets/images/whistleProfilePic.png"),
     openeye: require("../assets/icons/openeye.png"),
     closeeye: require("../assets/icons/closeeye.png"),
   }
