@@ -284,50 +284,97 @@ export default function ScoresScreen({navigation}) {
           }
           data={gamesToDisplay}
           renderItem={({item}) => (
-            <View style={[styles.flexCol, styles.listSpacing]}>
-              <View style={styles.outerView}>
-                <View style={styles.flexCol}>
-                  <View style={styles.logoTeam}>
-                    <Image
-                      source={{uri: item['teams']['away']['logo']}}
-                      style={styles.userPhoto}
-                    />
-                    <Text style={styles.body}>
-                      {item['teams']['away']['name']}{' '}
-                    </Text>
-                    <Text style={styles.flexRight}>
-                      {' '}
-                      {item['scores']['away']['total']}
-                    </Text>
-                    {!homeWin(item) &&
-                    (item['status']['short'] == 'FT' ||
-                      item['status']['short'] == 'AOT') ? (
-                      <View style={[styles.triangle, styles.arrowLeft]} />
-                    ) : null}
-                  </View>
-                  <View style={styles.logoTeam}>
-                    <Image
-                      source={{uri: item['teams']['home']['logo']}}
-                      style={styles.userPhoto}
-                    />
-                    <Text style={styles.body}>
-                      {item['teams']['home']['name']}{' '}
-                    </Text>
-                    <Text style={styles.flexRight}>
-                      {item['scores']['home']['total']}
-                    </Text>
-                    {homeWin(item) &&
-                    (item['status']['short'] == 'FT' ||
-                      item['status']['short'] == 'AOT') ? (
-                      <View style={[styles.triangle, styles.arrowLeft]} />
-                    ) : null}
-                  </View>
-                </View>
+            <View style={styles.previewContainer}>
+              <View
+                style={[
+                  styles.box,
+                  {
+                    flexBasis: 55,
+                    flexGrow: 0,
+                    flexShrink: 1,
+                    //backgroundColor: 'powderblue',
+                    justifyContent: 'space-around',
+                  },
+                ]}>
+                <Image
+                  source={{uri: item['teams']['away']['logo']}}
+                  style={styles.userPhoto}
+                />
+                <Image
+                  source={{uri: item['teams']['home']['logo']}}
+                  style={styles.userPhoto}
+                />
+              </View>
+              <View
+                style={[
+                  styles.box,
+                  {
+                    flexBasis: 100,
+                    flexGrow: 1,
+                    flexShrink: 0,
+                    //backgroundColor: 'skyblue',
+                    justifyContent: 'space-around',
+                  },
+                ]}>
+                <Text>{item['teams']['away']['name']}</Text>
+                <Text>{item['teams']['home']['name']}</Text>
+              </View>
+              <View
+                style={[
+                  styles.box,
+                  {
+                    flexBasis: 60,
+                    flexGrow: 0,
+                    flexShrink: 1,
+                    //backgroundColor: 'powderblue',
+                    justifyContent: 'space-around',
+                    paddingLeft: 10,
+                    //alignItems: 'center',
+                  },
+                ]}>
+                <Text>
+                  {item['scores']['away']['total']}{' '}
+                  {!homeWin(item) ? (
+                    <View style={[styles.triangle, styles.arrowLeft]} />
+                  ) : null}
+                </Text>
+
+                <Text>
+                  {item['scores']['home']['total']}{' '}
+                  {homeWin(item) ? (
+                    <View style={[styles.triangle, styles.arrowLeft]} />
+                  ) : null}
+                </Text>
+              </View>
+              <View
+                style={[
+                  styles.box,
+                  {
+                    flexBasis: 1,
+                    flexGrow: 0,
+                    flexShrink: 1,
+                    //backgroundColor: 'steelblue',
+                    justifyContent: 'space-around',
+                    paddingLeft: 0,
+                  },
+                ]}>
                 <View style={styles.verticleLine}></View>
-                <View style={styles.dateStatus}>
-                  <Text>{gameStatus(item)}</Text>
-                  <Text>{displayDate(item['date'])}</Text>
-                </View>
+              </View>
+              <View
+                style={[
+                  styles.box,
+                  {
+                    flexBasis: 100,
+                    flexGrow: 0,
+                    flexShrink: 1,
+                    //backgroundColor: 'steelblue',
+                    justifyContent: 'center',
+                    alignSelf: 'center',
+                    paddingLeft: 20,
+                  },
+                ]}>
+                <Text>{gameStatus(item)}</Text>
+                <Text>{displayDate(item['date'])}</Text>
               </View>
             </View>
           )}
@@ -342,11 +389,19 @@ export default function ScoresScreen({navigation}) {
 const {width} = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
-    margin: 0,
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    padding: Configuration.home.listing_item.offset,
+    paddingLeft: 30,
+    paddingRight: 30,
+    paddingTop: 10,
+    flexDirection: 'column',
+  },
+  previewContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    backgroundColor: 'aliceblue',
+    marginBottom: 20,
+    borderWidth: 1,
+    borderRadius: 15,
   },
   title: {
     fontWeight: 'bold',
@@ -357,11 +412,17 @@ const styles = StyleSheet.create({
   body: {
     fontSize: 13,
   },
+  box: {
+    flex: 1,
+    height: 100,
+    width: 100,
+  },
   userPhoto: {
     width: 30,
     height: 30,
-    borderRadius: 10,
-    marginRight: 5,
+    alignItems: 'center',
+    //borderRadius: 10,
+    marginLeft: 10,
   },
   flexCol: {
     flexDirection: 'column',
@@ -440,6 +501,9 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 10,
     elevation: 2,
+    width: 75,
+    alignSelf: 'center',
+    alignItems: 'center',
   },
   buttonOpen: {
     backgroundColor: '#F194FF',
