@@ -1,11 +1,7 @@
-import React, {useEffect, useState} from 'react';
-import auth from '@react-native-firebase/auth';
-import firebase from '@react-native-firebase/app';
+import React, {useState} from 'react';
 import firestore from '@react-native-firebase/firestore';
-import {StyleSheet, Text, View, TextInput, TouchableOpacity} from 'react-native';
-import {AppIcon, AppStyles} from '../AppStyles'; 
+import {StyleSheet, Text, View} from 'react-native';
 import { Image } from 'react-native';
-import { Alert } from 'react-native';
 import '../global.js'
 
 
@@ -17,7 +13,6 @@ function ProfileScreen({navigation}) {
 
   const [profilePhotoID, setProfilePhotoID] = useState(1) 
 
-  // const image = require("../../assets/images/hoopProfilePic.png");
 
 
   firestore() 
@@ -45,51 +40,6 @@ function ProfileScreen({navigation}) {
         }
       });
 
-  // function getProfilePhotoID (profilePhotoID) {
-  //   switch (profilePhotoID) {
-  //     case 1:
-  //       setImage (require("../../assets/images/basketballProfilePic.png"))
-  //       break;
-  //     case 2:
-  //       setImage (require ("../../assets/images/hoopProfilePic.png"))
-  //       break;
-  //     case 3:
-  //       setImage (require ("../../assets/images/jerseyProfilePic.png"))
-  //       break;
-  //     case 4:
-  //       setImage (require ("../../assets/images/shoeProfilePic.png"))
-  //       break;
-  //     case 5:
-  //       setImage (require ("../../assets/images/timerProfilePic.png"))
-  //       break;
-  //     case 6:
-  //       setImage (require ("../../assets/images/whistleProfilePic.png"))
-  //       break;
-  //     default:
-  //       setImage (require ("../../assets/icons/profile.png"))
-  //       break;
-  //   }
-  // }
-    
-  // const removefromfirebase = () => {
-  //   console.log ("you have reached this function")
-  //   firestore().collection('users').doc(global.currentuid).delete(
-  //     {recursive: true, yes: true}
-  //   );
-  //   navigation.navigate('LoginStack');
-  // }
-  // const deleteAccount = () => {
-  //   Alert.alert('Are you sure?', 'This action cannot be undone.', [
-  //     {
-  //       text: 'Cancel',
-  //       onPress: () => console.log('Cancel Pressed'),
-  //       style: 'cancel',
-  //     },
-  //     {
-  //       text: 'OK', onPress: () =>  {removefromfirebase()},
-  //     },
-  //   ]);
-  // }
 
   return (
     <View >
@@ -100,12 +50,6 @@ function ProfileScreen({navigation}) {
       <Text style = {styles.fields} > {email} </Text>
       <Text style = {styles.fieldTitles}> Your referral code: </Text>
       <Text style = {styles.fields} > ur mom 420  </Text>
-      {/* <TouchableOpacity onPress={deleteAccount}>
-        <Text style = {{
-          textAlign: 'center',
-          color: 'red',
-        }}> delte acc</Text>
-        </TouchableOpacity> */}
     </View>
   );
 }
