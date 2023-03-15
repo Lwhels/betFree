@@ -62,6 +62,12 @@ export const AppIcon = {
     menu: require('../assets/icons/menu.png'),
     profile: require('../assets/icons/profile.png'),
     filter: require('../assets/icons/filters.png'),
+    news: require('../assets/icons/news.png'),
+    makebets: require('../assets/icons/makebets.png'),
+    mybets: require('../assets/icons/mybets.png'),
+    scores: require('../assets/icons/scores.png'),
+    leaderboard: require('../assets/icons/leaderboard.png'),
+    basketball: require('../assets/icons/basketball.png'),
   },
 };
 
