@@ -1,10 +1,11 @@
 import React, {useLayoutEffect, useEffect, useState} from 'react';
-import {ScrollView, StyleSheet, Text, View, FlatList, ActivityIndicator, RefreshControl, Pressable, Button} from 'react-native';
+import {ScrollView, StyleSheet, Text, View, FlatList, ActivityIndicator, RefreshControl, Pressable, Button, Image, TouchableHighlight} from 'react-native';
 import {connect, useSelector} from 'react-redux';
 import { AppStyles} from '../AppStyles';
 import {Configuration} from '../Configuration';
 import firestore from '@react-native-firebase/firestore';
 import 'firebase/compat/firestore';
+import {AppIcon} from '../AppStyles';
 
 /* ///////////////////////////////////////////   CREATE LEADERBOARD BACKEND   //////////////////////////////////////////////// */
 
@@ -70,20 +71,36 @@ export default function LeaderboardScreen({navigation}){
     function renderButton(show){
       if(show){
         return (
-        <Button
-          title="Correct bets leaderboard"
-          color="#f194ff"
+        <TouchableHighlight
+          style = {styles.toggleButton}
           onPress={() => setShow(!show)}
-        />
+        >
+          <Text>Bet Wins</Text>
+        </TouchableHighlight>
         )}
       else {
         return (
-        <Button
-          title="Top balance leaderboard"
-          color="#f194ff"
+        <TouchableHighlight
+          style = {styles.toggleButton}
           onPress={() => setShow(!show)}
-        />
+        >
+        <Text>Highest Balance</Text>
+        </TouchableHighlight>
+
       )};
+    }
+
+    function renderTitle(show){
+      if(show){
+        return(
+          <Text>Account Balance Leaderboard</Text>
+        )
+      }
+      else {
+        return(
+        <Text>Total Bets Won Leaderboard</Text>
+        )
+      };
     }
 
     useLayoutEffect(() => {
@@ -107,8 +124,8 @@ export default function LeaderboardScreen({navigation}){
     else {
     return (
         <View style={styles.container}>
-          <Text style={styles.title}> Leaderboard Page </Text>
-          <Text> {'\n'} </Text>
+          <Text style={styles.title}> {renderTitle(show)} </Text>
+          <Text> Toggle to: </Text>
           {renderButton(show)} 
           <Text> {'\n'} </Text>
           {show === true ?   
@@ -118,8 +135,44 @@ export default function LeaderboardScreen({navigation}){
             }
             data={balanceLeaders}
             renderItem={({item}) => 
-            <View>
-              <Text> {item.name} {item.balance}</Text> 
+            <View style = {styles.previewContainer}>
+            <View
+                style={[
+                styles.box,
+                {
+                  flexBasis: 50,
+                  flexGrow: 0,
+                  flexShrink: 1,
+                  paddingLeft: 20,
+                  //backgroundColor: 'powderblue',
+                  justifyContent: "space-around",
+                },
+                ]}>
+
+              <Image 
+                source={AppIcon.images.basketball}
+                style={{width: 40, height: 40}}
+               />
+              </View>
+               <View
+                style={[
+                styles.box,
+                {
+                  flexBasis: 200,
+                  flexGrow: 1,
+                  flexShrink: 0,
+                  paddingLeft: 50,
+                  //backgroundColor: 'powderblue',
+                  justifyContent: 'center',
+                  justifyContent: 'space-evenly',
+                },
+                ]}>
+
+              <Text style = {styles.nameText}> {item.name} </Text> 
+              <Text>${item.balance} </Text> 
+              </View>
+
+        
             </View>
             }
             keyExtractor={item => item.id}
@@ -131,8 +184,44 @@ export default function LeaderboardScreen({navigation}){
             }
             data={betWinLeaders}
             renderItem={({item}) => 
-            <View>
-              <Text> {item.name} {item.betWins}</Text> 
+            <View style = {styles.previewContainer}>
+            <View
+                style={[
+                styles.box,
+                {
+                  flexBasis: 50,
+                  flexGrow: 0,
+                  flexShrink: 1,
+                  paddingLeft: 20,
+                  //backgroundColor: 'powderblue',
+                  justifyContent: "space-around",
+                },
+                ]}>
+
+              <Image 
+                source={AppIcon.images.basketball}
+                style={{width: 40, height: 40}}
+               />
+              </View>
+               <View
+                style={[
+                styles.box,
+                {
+                  flexBasis: 200,
+                  flexGrow: 1,
+                  flexShrink: 0,
+                  paddingLeft: 50,
+                  //backgroundColor: 'powderblue',
+                  justifyContent: 'center',
+                  justifyContent: 'space-evenly',
+                },
+                ]}>
+
+              <Text style = {styles.nameText}> {item.name} </Text> 
+              <Text>Total Wins: {item.betWins} </Text> 
+              </View>
+
+        
             </View>
             }
             keyExtractor={item => item.id}
@@ -151,14 +240,37 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: Configuration.home.listing_item.offset,
   },
+  nameText:{
+    fontWeight: '600',
+  },
+  toggleButton:{
+    backgroundColor: 'aliceblue',
+    borderRadius: 30,
+    padding: 10,
+    borderWidth: 1,
+    marginTop: 10,
+  },
+  previewContainer:{
+    flex: 1,
+    flexDirection: 'row',
+    backgroundColor: 'aliceblue',
+    marginBottom: 50,
+    borderWidth: 1,
+    borderRadius: 15,
+  },
   title: {
     fontWeight: 'bold',
     color: AppStyles.color.title,
     fontSize: 25,
     textAlign: 'center',
+    paddingBottom: 10,
   },
   body: {
     fontSize: 13,
+  },
+  box: {
+    flex: 1,
+    height: 100,
   },
   userPhoto: {
     width: 30,
