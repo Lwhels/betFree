@@ -22,6 +22,9 @@ import '../global.js';
 function expectedReturn(selectedTeam, currentBet, betAmount) {
   var converted = 0;
   var odds;
+  if (selectedTeam == 'No Team' || betAmount == 0) {
+    return betAmount;
+  }
   if (selectedTeam == currentBet['game']['teams']['home']['name']) {
     odds = convertOdds(
       currentBet['bookmakers'][0]['bets'][1]['values'][0]['odd'],
@@ -251,8 +254,8 @@ export default function PlaceBetScreen({navigation}) {
   } else {
     return (
       <View style={styles.container} visible={!loading}>
-        <Text style={styles.title}> Place Bets Here! </Text>
-        <Text style={styles.body}> Balance: {balance} </Text>
+        <Text style={styles.title}> Bets</Text>
+        <Text style={styles.balance}> Balance: {balance} </Text>
         <Modal
           animationType="slide"
           transparent={true}
@@ -307,15 +310,24 @@ export default function PlaceBetScreen({navigation}) {
                   </View>
                 </View>
               </View>
-              <TextInput
-                style={styles.body}
-                placeholder="Amount"
-                placeholderTextColor={AppStyles.color.grey}
-                underlineColorAndroid="transparent"
-                onChangeText={setBetAmount}
-                value={betAmount}
-                keyboardType="numeric"
-              />
+              <View>
+                <TextInput
+                  style={styles.body}
+                  placeholder="Stake:"
+                  placeholderTextColor={AppStyles.color.grey}
+                  underlineColorAndroid="transparent"
+                  onChangeText={setBetAmount}
+                  value={betAmount}
+                  keyboardType="numeric"
+                />
+                <Text style={styles.body}>
+                  Win:{' '}
+                  {(
+                    expectedReturn(selectedTeam, currentBet, betAmount) -
+                    betAmount
+                  ).toFixed(2)}
+                </Text>
+              </View>
               <Text>
                 <TouchableOpacity
                   style={[styles.button, styles.buttonOpen]}
@@ -474,8 +486,8 @@ const styles = StyleSheet.create({
     width: 320,
     height: 80,
     borderWidth: 1,
-    borderRadius: 7,
-
+    borderRadius: 20,
+    backgroundColor: '#c5edf3',
     //flexDirection: 'column',
   },
   flexCol: {
@@ -485,5 +497,11 @@ const styles = StyleSheet.create({
   flexRow: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  balance: {
+    color: '#00aea8',
+    fontWeight: '400',
+    textAlign: 'center',
+    marginBottom: '5%',
   },
 });
