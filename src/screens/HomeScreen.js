@@ -97,7 +97,7 @@ function HomeScreen({navigation}) {
           style={styles.card}>
           <View style={styles.insideCard}>
             <Image
-              source={AppIcon.images.basketball}
+              source={AppIcon.images.basketball2}
               style={[styles.cardImage, {height: 55, width: 55}]}></Image>
             <Text style={styles.cardText}>Profile</Text>
           </View>

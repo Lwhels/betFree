@@ -67,7 +67,17 @@ export const AppIcon = {
     mybets: require('../assets/icons/mybets.png'),
     scores: require('../assets/icons/scores.png'),
     leaderboard: require('../assets/icons/leaderboard.png'),
-    basketball: require('../assets/icons/basketball.png'),
+    basketball2: require('../assets/icons/basketball.png'),
+    basketball: require("../assets/images/basketballProfilePic.png"),
+    hoop: require("../assets/images/hoopProfilePic.png"),
+    jersey: require("../assets/images/jerseyProfilePic.png"),
+    shoe: require("../assets/images/shoeProfilePic.png"),
+    timer: require("../assets/images/timerProfilePic.png"),
+    whistle: require("../assets/images/whistleProfilePic.png"),
+    openeye: require("../assets/icons/openeye.png"),
+    closeeye: require("../assets/icons/closeeye.png"),
+    medal: require("../assets/icons/medal.png"),
+    trophy: require("../assets/icons/trophy.png"),
   },
 };
 
