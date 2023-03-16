@@ -123,31 +123,7 @@ export default function ScoresScreen({navigation}) {
     setLoading(false);
     setRefreshing(false);
   };
-  function dateComp(apiDate, filterDate, filterMonth, filterYear) {
-    var apiYear = Number(apiDate.substring(0, 4));
-    var apiMonth = Number(apiDate.substring(5, 7));
-    var apiDay = Number(apiDate.substring(8, 10));
-    filterMonth = filterMonth + 1;
-    filterDate = filterDate + 1;
 
-    if (apiYear < filterYear) {
-      return true;
-    }
-    if (apiYear == filterYear) {
-      if (apiMonth < filterMonth) {
-        return true;
-      }
-      if (apiMonth == filterMonth) {
-        if (apiDay <= filterDate) {
-          return true;
-        }
-      }
-    }
-    return false;
-  }
-  var filterYear = date.getFullYear();
-  var filterMonth = date.getMonth();
-  var filterDate = date.getDate();
   var allGames = [];
   var allGames = games;
   var gamesToDisplay = [];
@@ -164,11 +140,6 @@ export default function ScoresScreen({navigation}) {
         gamesToDisplay.push(allGames[i]);
       }
     }
-    // if (dateComp(allGames[i]['date'], filterDate, filterMonth, filterYear)) {
-
-    //} else {
-    // break;
-    // }
   }
 
   function displayDate(date) {
@@ -192,33 +163,9 @@ export default function ScoresScreen({navigation}) {
   function openFilters() {
     setModalVisible(!modalVisible);
     //setDate(date);
-    //setTeam(teams[0]);
+    setTeam(teams[0]);
   }
 
-  /*               <Text>Date:</Text>
-              <TouchableOpacity
-                onPress={() => setDateVisible(true)}
-                style={styles.matchSelectDropdownButton}>
-                <Text style={styles.matchSelectDropdownText}>
-                  Up Until:{[' ', date.toString().substring(0, 16)]}
-                </Text>
-              </TouchableOpacity> 
-                            <Modal
-                visible={dateVisible}
-                animationType="slide"
-                transparent={true}
-                onRequestClose={() => {
-                  Alert.alert('Modal has been closed.');
-                  setDateVisible(!dateVisible);
-                }}>
-                <DateTimePicker
-                  testID="dateTimePicker"
-                  value={date}
-                  mode="date"
-                  onChange={onChange}
-                />
-              </Modal>
-              */
   gamesToDisplay.reverse();
   gamesToDisplay = gamesToDisplay.splice(0, 50);
   if (loading) {
@@ -272,7 +219,11 @@ export default function ScoresScreen({navigation}) {
         </Modal>
         <Text style={styles.title}> Scores Page </Text>
         <TouchableOpacity
-          style={[styles.button, styles.buttonFilter]}
+          style={[
+            styles.button,
+            styles.buttonFilter,
+            {marginBottom: '3%', marginTop: '2%'},
+          ]}
           onPress={() => openFilters()}>
           <Image
             source={AppIcon.images.filter}
@@ -316,8 +267,12 @@ export default function ScoresScreen({navigation}) {
                     justifyContent: 'space-around',
                   },
                 ]}>
-                <Text>{item['teams']['away']['name']}</Text>
-                <Text>{item['teams']['home']['name']}</Text>
+                <Text style={styles.textColor}>
+                  {item['teams']['away']['name']}
+                </Text>
+                <Text style={styles.textColor}>
+                  {item['teams']['home']['name']}
+                </Text>
               </View>
               <View
                 style={[
@@ -332,14 +287,14 @@ export default function ScoresScreen({navigation}) {
                     //alignItems: 'center',
                   },
                 ]}>
-                <Text>
+                <Text style={styles.textColor}>
                   {item['scores']['away']['total']}{' '}
                   {!homeWin(item) ? (
                     <View style={[styles.triangle, styles.arrowLeft]} />
                   ) : null}
                 </Text>
 
-                <Text>
+                <Text style={styles.textColor}>
                   {item['scores']['home']['total']}{' '}
                   {homeWin(item) ? (
                     <View style={[styles.triangle, styles.arrowLeft]} />
@@ -373,8 +328,10 @@ export default function ScoresScreen({navigation}) {
                     paddingLeft: 20,
                   },
                 ]}>
-                <Text>{gameStatus(item)}</Text>
-                <Text>{displayDate(item['date'])}</Text>
+                <Text style={styles.textColor}>{gameStatus(item)}</Text>
+                <Text style={styles.textColor}>
+                  {displayDate(item['date'])}
+                </Text>
               </View>
             </View>
           )}
@@ -398,9 +355,16 @@ const styles = StyleSheet.create({
   previewContainer: {
     flex: 1,
     flexDirection: 'row',
-    backgroundColor: 'aliceblue',
+    backgroundColor: '#2c6f99',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 1,
+    shadowRadius: 20,
+    elevation: 8,
     marginBottom: 20,
-    borderWidth: 1,
     borderRadius: 15,
   },
   title: {
@@ -546,5 +510,8 @@ const styles = StyleSheet.create({
     color: '#000000',
     textAlign: 'center',
     marginHorizontal: 8,
+  },
+  textColor: {
+    color: 'white',
   },
 });

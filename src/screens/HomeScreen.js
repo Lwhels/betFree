@@ -120,6 +120,7 @@ const styles = StyleSheet.create({
     color: AppStyles.color.title,
     fontSize: 25,
     textAlign: 'center',
+    marginBottom: '7%',
   },
   userPhoto: {
     width: 40,
@@ -131,9 +132,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: '90%',
     alignItems: 'center',
-    marginBottom: '11%',
+    marginBottom: '10%',
     height: '17%',
-    marginTop: '11%',
+    marginTop: '10%',
   },
   card: {
     height: '100%',

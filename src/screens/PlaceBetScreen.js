@@ -127,7 +127,6 @@ export default function PlaceBetScreen({navigation}) {
   useEffect(() => {
     fetchBets();
   }, []);
-  // Remove games that are already finished from flatlist here
 
   var oddsToDisplay = [];
   for (let i = 0; i < odds.length; i++) {
@@ -365,17 +364,25 @@ export default function PlaceBetScreen({navigation}) {
                             }}
                             style={styles.userPhoto}
                           />
-                          <Text> {textOdds(item, 1)} </Text>
+                          <Text style={styles.textStyle}>
+                            {' '}
+                            {textOdds(item, 1)}{' '}
+                          </Text>
                         </View>
 
-                        <Text>{item['game']['teams']['away']['name']} </Text>
+                        <Text style={styles.textStyle}>
+                          {item['game']['teams']['away']['name']}{' '}
+                        </Text>
                       </View>
                       <View style={styles.flexCol}>
-                        <Text> @ </Text>
+                        <Text style={styles.textStyle}> @ </Text>
                       </View>
                       <View style={styles.flexCol}>
                         <View style={styles.flexRow}>
-                          <Text> {textOdds(item, 0)} </Text>
+                          <Text style={styles.textStyle}>
+                            {' '}
+                            {textOdds(item, 0)}{' '}
+                          </Text>
                           <Image
                             source={{
                               uri: item['game']['teams']['home']['logo'],
@@ -383,7 +390,9 @@ export default function PlaceBetScreen({navigation}) {
                             style={styles.userPhoto}
                           />
                         </View>
-                        <Text>{item['game']['teams']['home']['name']}</Text>
+                        <Text style={styles.textStyle}>
+                          {item['game']['teams']['home']['name']}
+                        </Text>
                       </View>
                     </View>
                   </View>
@@ -407,12 +416,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    fontWeight: 'bold',
+    fontWeight: '500',
     color: 'black',
     fontSize: 25,
     textAlign: 'center',
     marginTop: 15,
-    marginBottom: 15,
+    marginBottom: 10,
   },
   userPhoto: {
     width: 40,
@@ -466,9 +475,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#2196F3',
   },
   textStyle: {
-    color: 'black',
+    color: 'white',
     fontWeight: '400',
-    textAlign: 'center',
   },
   modalText: {
     marginBottom: 15,
@@ -485,10 +493,16 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     width: 320,
     height: 80,
-    borderWidth: 1,
     borderRadius: 20,
-    backgroundColor: '#c5edf3',
-    //flexDirection: 'column',
+    backgroundColor: '#2c6f99',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 1,
+    shadowRadius: 20,
+    elevation: 8,
   },
   flexCol: {
     flexDirection: 'column',
@@ -499,7 +513,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   balance: {
-    color: '#00aea8',
+    color: '#2c6f99',
     fontWeight: '400',
     textAlign: 'center',
     marginBottom: '5%',

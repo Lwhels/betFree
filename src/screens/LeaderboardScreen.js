@@ -1,7 +1,19 @@
 import React, {useLayoutEffect, useEffect, useState} from 'react';
-import {ScrollView, StyleSheet, Text, View, FlatList, ActivityIndicator, RefreshControl, Pressable, Button, Image, TouchableHighlight} from 'react-native';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  ActivityIndicator,
+  RefreshControl,
+  Pressable,
+  Button,
+  Image,
+  TouchableHighlight,
+} from 'react-native';
 import {connect, useSelector} from 'react-redux';
-import { AppStyles} from '../AppStyles';
+import {AppStyles} from '../AppStyles';
 import {Configuration} from '../Configuration';
 import firestore from '@react-native-firebase/firestore';
 import 'firebase/compat/firestore';
@@ -12,8 +24,13 @@ import {AppIcon} from '../AppStyles';
 var balanceLeaders = [];
 var betWinLeaders = [];
 
-async function createBetWinLeaders(){
-  await firestore().collection("users").orderBy('betWins', 'desc').limit(10).get().then((querySnapshot) => {
+async function createBetWinLeaders() {
+  await firestore()
+    .collection('users')
+    .orderBy('betWins', 'desc')
+    .limit(10)
+    .get()
+    .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
         var data = doc.data();
         // doc.data() is never undefined for query doc snapshots
@@ -25,11 +42,16 @@ async function createBetWinLeaders(){
         //console.log(doc.balance, " => ", doc.data());
       });
     });
-    // [END get_multiple_all]
+  // [END get_multiple_all]
 }
 
-async function createBalanceLeaders(){
-  await firestore().collection("users").orderBy('balance', 'desc').limit(10).get().then((querySnapshot) => {
+async function createBalanceLeaders() {
+  await firestore()
+    .collection('users')
+    .orderBy('balance', 'desc')
+    .limit(10)
+    .get()
+    .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
         var data = doc.data();
         // doc.data() is never undefined for query doc snapshots
@@ -41,198 +63,205 @@ async function createBalanceLeaders(){
         //console.log(doc.balance, " => ", doc.data());
       });
     });
-    // [END get_multiple_all]
+  // [END get_multiple_all]
 }
 
 /* ///////////////////////////////////////////   END CREATE LEADERBOARD BACKEND   //////////////////////////////////////////////// */
 
-export default function LeaderboardScreen({navigation}){
-    const [loading, setLoading] = useState(true);
-    const [refreshing, setRefreshing] = useState(true);
-    const [show, setShow] = useState(false);
+export default function LeaderboardScreen({navigation}) {
+  const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(true);
+  const [show, setShow] = useState(false);
 
-    async function leaderboard(){
-      setLoading(true);
-      balanceLeaders = [];
-      betWinLeaders = [];
-      await createBalanceLeaders();
-      for (let i = 0; i < balanceLeaders.length; i++){
-        console.log('Rank ' + (i + 1) + ' in balance: ' + balanceLeaders[i].name + ' with $' + balanceLeaders[i].balance);
-      }
-      console.log('\n\n');
-      await createBetWinLeaders();
-      for (let i = 0; i < betWinLeaders.length; i++){
-        console.log('Rank ' + (i + 1) + ' in correct bets: ' + betWinLeaders[i].name + ' with ' + betWinLeaders[i].betWins + ' correct bets.');
-      }
-      setLoading(false);
-      setRefreshing(false);
+  async function leaderboard() {
+    setLoading(true);
+    balanceLeaders = [];
+    betWinLeaders = [];
+    await createBalanceLeaders();
+    for (let i = 0; i < balanceLeaders.length; i++) {
+      console.log(
+        'Rank ' +
+          (i + 1) +
+          ' in balance: ' +
+          balanceLeaders[i].name +
+          ' with $' +
+          balanceLeaders[i].balance,
+      );
     }
+    console.log('\n\n');
+    await createBetWinLeaders();
+    for (let i = 0; i < betWinLeaders.length; i++) {
+      console.log(
+        'Rank ' +
+          (i + 1) +
+          ' in correct bets: ' +
+          betWinLeaders[i].name +
+          ' with ' +
+          betWinLeaders[i].betWins +
+          ' correct bets.',
+      );
+    }
+    setLoading(false);
+    setRefreshing(false);
+  }
 
-    function renderButton(show){
-      if(show){
-        return (
+  function renderButton(show) {
+    if (show) {
+      return (
         <TouchableHighlight
-          style = {styles.toggleButton}
-          onPress={() => setShow(!show)}
-        >
-          <Text>Bet Wins</Text>
+          style={styles.toggleButton}
+          onPress={() => setShow(!show)}>
+          <Text style={styles.toggleText}>Bet Wins</Text>
         </TouchableHighlight>
-        )}
-      else {
-        return (
+      );
+    } else {
+      return (
         <TouchableHighlight
-          style = {styles.toggleButton}
-          onPress={() => setShow(!show)}
-        >
-        <Text>Highest Balance</Text>
+          style={styles.toggleButton}
+          onPress={() => setShow(!show)}>
+          <Text style={styles.toggleText}>Highest Balance</Text>
         </TouchableHighlight>
-
-      )};
+      );
     }
+  }
 
-    function renderTitle(show){
-      if(show){
-        return(
-          <Text>Account Balance</Text>
-        )
-      }
-      else {
-        return(
-        <Text>Total Bets Won</Text>
-        )
-      };
+  function renderTitle(show) {
+    if (show) {
+      return <Text>Account Balance</Text>;
+    } else {
+      return <Text>Total Bets Won</Text>;
     }
+  }
 
-    useLayoutEffect(() => {
-        navigation.setOptions({
-          title: 'Leaderboard',
-        });
-      }, []);
-    
-    useEffect(() => {
-      leaderboard();
-    }, []);
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title: 'Leaderboard',
+    });
+  }, []);
 
-    if (loading){
-      return(<ActivityIndicator
+  useEffect(() => {
+    leaderboard();
+  }, []);
+
+  if (loading) {
+    return (
+      <ActivityIndicator
         style={{marginTop: 30}}
         size="large"
         animating={loading}
         color={AppStyles.color.tint}
-      />);
-    }
-    else {
+      />
+    );
+  } else {
     return (
-        <View style={styles.container}>
-          <Image source = {AppIcon.images.trophy}
-            style = {{width: 150, height: 150, marginTop: 10}}
-             />
-            <Text style={styles.title}> {renderTitle(show)} </Text>
-          <Text style = {{marginTop: 15, fontSize: 20, fontWeight:'300'}}> Sort by: </Text>
-          {renderButton(show)} 
-          <Text> {'\n'} </Text>
-          {show === true ?   
+      <View style={styles.container}>
+        <Image
+          source={AppIcon.images.trophy}
+          style={{width: 150, height: 150, marginTop: 10}}
+        />
+        <Text style={styles.title}> {renderTitle(show)} </Text>
+        <Text style={{marginTop: 15, fontSize: 20, fontWeight: '300'}}>
+          {' '}
+          Sort by:{' '}
+        </Text>
+        {renderButton(show)}
+        <Text> {'\n'} </Text>
+        {show === true ? (
           <FlatList
             refreshControl={
               <RefreshControl refreshing={refreshing} onRefresh={leaderboard} />
             }
             data={balanceLeaders}
-            renderItem={({item}) => 
-            <View style = {styles.previewContainer}>
-            <View
-                style={[
-                styles.box,
-                {
-                  flexBasis: 50,
-                  flexGrow: 0,
-                  flexShrink: 1,
-                  paddingLeft: 20,
-                  //backgroundColor: 'powderblue',
-                  justifyContent: "space-around",
-                },
-                ]}>
-
-              <Image 
-                source={AppIcon.images.medal}
-                style={{width: 45, height: 48}}
-               />
+            renderItem={({item}) => (
+              <View style={styles.previewContainer}>
+                <View
+                  style={[
+                    styles.box,
+                    {
+                      flexBasis: 50,
+                      flexGrow: 0,
+                      flexShrink: 1,
+                      paddingLeft: 20,
+                      //backgroundColor: 'powderblue',
+                      justifyContent: 'space-around',
+                    },
+                  ]}>
+                  <Image
+                    source={AppIcon.images.medal}
+                    style={{width: 45, height: 48}}
+                  />
+                </View>
+                <View
+                  style={[
+                    styles.box,
+                    {
+                      flexBasis: 200,
+                      flexGrow: 1,
+                      flexShrink: 0,
+                      paddingLeft: 50,
+                      //backgroundColor: 'powderblue',
+                      justifyContent: 'center',
+                      justifyContent: 'space-evenly',
+                    },
+                  ]}>
+                  <Text style={styles.nameText}> {item.name} </Text>
+                  <Text>${item.balance.toFixed(2)} </Text>
+                </View>
               </View>
-               <View
-                style={[
-                styles.box,
-                {
-                  flexBasis: 200,
-                  flexGrow: 1,
-                  flexShrink: 0,
-                  paddingLeft: 50,
-                  //backgroundColor: 'powderblue',
-                  justifyContent: 'center',
-                  justifyContent: 'space-evenly',
-                },
-                ]}>
-
-              <Text style = {styles.nameText}> {item.name} </Text> 
-              <Text>${item.balance.toFixed(2)} </Text> 
-              </View>
-
-        
-            </View>
-            }
-            keyExtractor={item => item.id}
+            )}
+            keyExtractor={(item) => item.id}
           />
-          :
+        ) : (
           <FlatList
             refreshControl={
               <RefreshControl refreshing={refreshing} onRefresh={leaderboard} />
             }
             data={betWinLeaders}
-            renderItem={({item}) => 
-            <View style = {styles.previewContainer}>
-            <View
-                style={[
-                styles.box,
-                {
-                  flexBasis: 50,
-                  flexGrow: 0,
-                  flexShrink: 1,
-                  paddingLeft: 20,
-                  //backgroundColor: 'powderblue',
-                  justifyContent: "space-around",
-                },
-                ]}>
-
-              <Image 
-                source={AppIcon.images.medal}
-                style={{width: 45, height: 48}}
-               />
+            renderItem={({item}) => (
+              <View style={styles.previewContainer}>
+                <View
+                  style={[
+                    styles.box,
+                    {
+                      flexBasis: 50,
+                      flexGrow: 0,
+                      flexShrink: 1,
+                      paddingLeft: 20,
+                      //backgroundColor: 'powderblue',
+                      justifyContent: 'space-around',
+                    },
+                  ]}>
+                  <Image
+                    source={AppIcon.images.medal}
+                    style={{width: 45, height: 48}}
+                  />
+                </View>
+                <View
+                  style={[
+                    styles.box,
+                    {
+                      flexBasis: 200,
+                      flexGrow: 1,
+                      flexShrink: 0,
+                      paddingLeft: 50,
+                      //backgroundColor: 'powderblue',
+                      justifyContent: 'center',
+                      justifyContent: 'space-evenly',
+                    },
+                  ]}>
+                  <Text style={styles.nameText}> {item.name} </Text>
+                  <Text style={styles.winText}>
+                    Total Wins: {item.betWins}{' '}
+                  </Text>
+                </View>
               </View>
-               <View
-                style={[
-                styles.box,
-                {
-                  flexBasis: 200,
-                  flexGrow: 1,
-                  flexShrink: 0,
-                  paddingLeft: 50,
-                  //backgroundColor: 'powderblue',
-                  justifyContent: 'center',
-                  justifyContent: 'space-evenly',
-                },
-                ]}>
-
-              <Text style = {styles.nameText}> {item.name} </Text> 
-              <Text>Total Wins: {item.betWins} </Text> 
-              </View>
-
-        
-            </View>
-            }
-            keyExtractor={item => item.id}
+            )}
+            keyExtractor={(item) => item.id}
           />
-          }
-        </View>
-      );
-    }
+        )}
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -243,22 +272,43 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: Configuration.home.listing_item.offset,
   },
-  nameText:{
+  nameText: {
     fontWeight: '600',
+    color: 'white',
   },
-  toggleButton:{
-    backgroundColor: 'aliceblue',
+  winText: {
+    color: 'white',
+  },
+  toggleButton: {
+    backgroundColor: '#2c6f99',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 1,
+    shadowRadius: 20,
+    elevation: 8,
     borderRadius: 30,
     padding: 10,
-    borderWidth: 1,
     marginTop: 10,
   },
-  previewContainer:{
+  toggleText: {
+    color: 'white',
+  },
+  previewContainer: {
     flex: 1,
     flexDirection: 'row',
-    backgroundColor: 'aliceblue',
+    backgroundColor: '#2c6f99',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 2,
+      height: 6,
+    },
+    shadowOpacity: 1,
+    shadowRadius: 15,
+    elevation: 7,
     marginBottom: 45,
-    borderWidth: 1,
     borderRadius: 15,
   },
   title: {
@@ -267,7 +317,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     textAlign: 'center',
     paddingBottom: 10,
-    marginTop:20,
+    marginTop: 20,
   },
   body: {
     fontSize: 13,
