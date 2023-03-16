@@ -50,7 +50,7 @@ function HomeScreen({navigation}) {
             <Image
               source={AppIcon.images.mybets}
               style={[styles.cardImage, {height: 60, width: 43}]}></Image>
-            <Text style={styles.cardText}>My Bets</Text>
+            <Text style={[styles.cardText, {marginTop: -5}]}>My Bets</Text>
           </View>
         </TouchableOpacity>
       </View>
@@ -72,8 +72,11 @@ function HomeScreen({navigation}) {
           <View style={styles.insideCard}>
             <Image
               source={AppIcon.images.leaderboard}
-              style={[styles.cardImage, {height: 60, width: 45}]}></Image>
-            <Text style={styles.cardText}>Leaderboard</Text>
+              style={[
+                styles.cardImage,
+                {height: 60, width: 45, marginLeft: 7},
+              ]}></Image>
+            <Text style={[styles.cardText, {marginTop: -5}]}>Leaderboard</Text>
           </View>
         </TouchableOpacity>
       </View>
@@ -84,7 +87,7 @@ function HomeScreen({navigation}) {
           <View style={styles.insideCard}>
             <Image
               source={AppIcon.images.scores}
-              style={[styles.cardImage, {height: 55, width: 55}]}></Image>
+              style={[styles.cardImage, {height: 55, width: 60}]}></Image>
             <Text style={styles.cardText}>Scores</Text>
           </View>
         </TouchableOpacity>
@@ -113,7 +116,7 @@ const styles = StyleSheet.create({
     padding: Configuration.home.listing_item.offset,
   },
   title: {
-    fontWeight: 'bold',
+    fontWeight: '300',
     color: AppStyles.color.title,
     fontSize: 25,
     textAlign: 'center',
@@ -136,7 +139,7 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '42.5%',
     borderRadius: 10,
-    backgroundColor: '#0C85D2',
+    backgroundColor: '#2c6f99',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -151,7 +154,13 @@ const styles = StyleSheet.create({
     marginBottom: '10%',
     marginTop: '10%',
   },
-  cardText: {marginBottom: '3%', color: 'white', fontFamily: 'Montserrat'},
+  cardText: {
+    marginBottom: '3%',
+    color: 'white',
+    fontFamily: 'Montserrat',
+    fontWeight: '600',
+    fontSize: 18,
+  },
 });
 
 const mapStateToProps = (state) => ({
