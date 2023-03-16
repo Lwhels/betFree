@@ -93,12 +93,12 @@ export default function LeaderboardScreen({navigation}){
     function renderTitle(show){
       if(show){
         return(
-          <Text>Account Balance Leaderboard</Text>
+          <Text>Account Balance</Text>
         )
       }
       else {
         return(
-        <Text>Total Bets Won Leaderboard</Text>
+        <Text>Total Bets Won</Text>
         )
       };
     }
@@ -124,8 +124,11 @@ export default function LeaderboardScreen({navigation}){
     else {
     return (
         <View style={styles.container}>
-          <Text style={styles.title}> {renderTitle(show)} </Text>
-          <Text> Toggle to: </Text>
+          <Image source = {AppIcon.images.trophy}
+            style = {{width: 150, height: 150, marginTop: 10}}
+             />
+            <Text style={styles.title}> {renderTitle(show)} </Text>
+          <Text style = {{marginTop: 15, fontSize: 20, fontWeight:'300'}}> Sort by: </Text>
           {renderButton(show)} 
           <Text> {'\n'} </Text>
           {show === true ?   
@@ -150,8 +153,8 @@ export default function LeaderboardScreen({navigation}){
                 ]}>
 
               <Image 
-                source={AppIcon.images.basketball}
-                style={{width: 40, height: 40}}
+                source={AppIcon.images.medal}
+                style={{width: 45, height: 48}}
                />
               </View>
                <View
@@ -169,7 +172,7 @@ export default function LeaderboardScreen({navigation}){
                 ]}>
 
               <Text style = {styles.nameText}> {item.name} </Text> 
-              <Text>${item.balance} </Text> 
+              <Text>${item.balance.toFixed(2)} </Text> 
               </View>
 
         
@@ -199,8 +202,8 @@ export default function LeaderboardScreen({navigation}){
                 ]}>
 
               <Image 
-                source={AppIcon.images.basketball}
-                style={{width: 40, height: 40}}
+                source={AppIcon.images.medal}
+                style={{width: 45, height: 48}}
                />
               </View>
                <View
@@ -254,7 +257,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     backgroundColor: 'aliceblue',
-    marginBottom: 50,
+    marginBottom: 45,
     borderWidth: 1,
     borderRadius: 15,
   },
@@ -264,6 +267,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     textAlign: 'center',
     paddingBottom: 10,
+    marginTop:20,
   },
   body: {
     fontSize: 13,

@@ -69,6 +69,8 @@ export const AppIcon = {
     whistle: require("../assets/images/whistleProfilePic.png"),
     openeye: require("../assets/icons/openeye.png"),
     closeeye: require("../assets/icons/closeeye.png"),
+    medal: require("../assets/icons/medal.png"),
+    trophy: require("../assets/icons/trophy.png"),
   }
 };
 
