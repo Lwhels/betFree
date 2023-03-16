@@ -32,6 +32,7 @@ function SignupScreen({navigation}) {
         const user_uid = response.user._user.uid;
         firestore().collection('users').doc(user_uid).set(data);
         global.currentuid = user_uid;
+        firestore().collection('validReferralCodes').doc(user_uid.slice(0, 8)).set({id: user_uid});
         firestore()
           .collection('users')
           .doc(user_uid)
@@ -49,6 +50,7 @@ function SignupScreen({navigation}) {
         const {code, message} = error;
         Alert.alert(message);
       });
+      global.first_time_logged = true; 
   };
 
   return (
