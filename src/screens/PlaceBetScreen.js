@@ -266,7 +266,7 @@ export default function PlaceBetScreen({navigation}) {
           <View style={styles.centeredView}>
             <View style={[styles.modalView, {backgroundColor: 'grey'}]}>
               <View style={styles.flexCol}>
-                <Text style={{color: 'white'}}>
+                <Text style={{color: 'white', marginBottom: 5}}>
                   Selected Team: {selectedTeam}
                 </Text>
                 <View style={styles.flexRow}>
@@ -292,7 +292,11 @@ export default function PlaceBetScreen({navigation}) {
                       {textOdds(currentBet, 1)}{' '}
                     </Text>
                   </View>
-                  <Text> @ </Text>
+                  <Text
+                    style={{color: 'white', marginLeft: 10, marginRight: 10}}>
+                    {' '}
+                    @{' '}
+                  </Text>
                   <View
                     style={[
                       {
@@ -318,21 +322,37 @@ export default function PlaceBetScreen({navigation}) {
                 </View>
               </View>
               <View>
-                <TextInput
+                <View
                   style={[
                     styles.body,
                     {
                       backgroundColor: '#D3D3D3',
                       borderRadius: 20,
+                      padding: 8,
+                      marginTop: 5,
+                      marginBottom: 5,
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      alignContent: 'center',
                     },
-                  ]}
-                  placeholder="Stake:"
-                  placeholderTextColor={AppStyles.color.grey}
-                  underlineColorAndroid="transparent"
-                  onChangeText={setBetAmount}
-                  value={betAmount}
-                  keyboardType="numeric"
-                />
+                  ]}>
+                  <Text style={{color: AppStyles.color.text, marginRight: -4}}>
+                    Stake: $
+                  </Text>
+                  <TextInput
+                    style={{
+                      color: AppStyles.color.grey,
+                      height: 36,
+                      marginTop: 5,
+                    }}
+                    placeholder="0.00"
+                    placeholderTextColor={AppStyles.color.text}
+                    underlineColorAndroid="transparent"
+                    onChangeText={setBetAmount}
+                    value={betAmount}
+                    keyboardType="numeric"
+                  />
+                </View>
                 <Text
                   style={[
                     styles.body,
@@ -340,12 +360,13 @@ export default function PlaceBetScreen({navigation}) {
                       backgroundColor: '#D3D3D3',
                       borderRadius: 20,
                       alignSelf: 'center',
-                      paddingTop: 8,
+                      padding: 8,
                       marginTop: 5,
                       marginBottom: 5,
+                      width: 110,
                     },
                   ]}>
-                  Win:{' '}
+                  Win: $
                   {(
                     expectedReturn(selectedTeam, currentBet, betAmount) -
                     betAmount
@@ -509,8 +530,6 @@ const styles = StyleSheet.create({
   },
   body: {
     height: 36,
-    paddingLeft: 20,
-    paddingRight: 20,
     color: AppStyles.color.text,
   },
   touchable: {
