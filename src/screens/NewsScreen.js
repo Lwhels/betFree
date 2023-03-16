@@ -7,11 +7,11 @@ import {
   ActivityIndicator,
   RefreshControl,
   ImageBackground,
+  TouchableOpacity, // Added import
+  Linking, // Added import
 } from 'react-native';
 import {AppStyles} from '../AppStyles';
 import {Configuration} from '../Configuration';
-import { TouchableOpacity } from 'react-native';
-import { Linking } from 'react-native';
 
 const API_KEY = 'b9b100b8e33845dab3ba0f41512008bd';
 const keyword = 'nba odds';
@@ -40,7 +40,7 @@ export default function NewsScreen({navigation}) {
       const filteredArticles = data.articles.filter(
         article => article.urlToImage !== null && article.urlToImage !== '',
       );
-      setArticles(filteredArticles.slice(0, 2));
+      setArticles(filteredArticles.slice(0, 5));
     } catch (error) {
       console.log(error);
     }
@@ -49,20 +49,19 @@ export default function NewsScreen({navigation}) {
   };
 
   const renderItem = ({item}) => (
-    <View style={styles.articleContainer}>
-      {item.urlToImage ? (
-        <ImageBackground source={{uri: item.urlToImage}} style={styles.image}>
-          <TouchableOpacity
-            onPress={() => Linking.openURL(item.url)}
-            style={styles.textContainer}>
-            <Text style={styles.title}>{item.title}</Text>
-            <Text style={styles.author}>{item.author}</Text>
-          </TouchableOpacity>
-        </ImageBackground>
-      ) : null}
-    </View>
+    <TouchableOpacity onPress={() => Linking.openURL(item.url)}>
+      <View style={styles.articleContainer}>
+        {item.urlToImage ? (
+          <ImageBackground source={{uri: item.urlToImage}} style={styles.image}>
+            <View style={styles.textContainer}>
+              <Text style={styles.title}>{item.title}</Text>
+              <Text style={styles.author}>{item.author}</Text>
+            </View>
+          </ImageBackground>
+        ) : null}
+      </View>
+    </TouchableOpacity>
   );
-  
 
   if (loading) {
     return (
@@ -77,13 +76,12 @@ export default function NewsScreen({navigation}) {
     return (
       <View style={styles.container}>
         <FlatList
-          data={articles.slice(0, 3)} // limit the number of articles to 3
+          data={articles}
           renderItem={renderItem}
           keyExtractor={(item, index) => index.toString()}
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={fetchNews} />
           }
-          scrollEnabled={false} // disable scrolling
         />
       </View>
     );
@@ -102,7 +100,7 @@ const styles = StyleSheet.create({
     borderBottomColor: '#ccc',
   },
   image: {
-    height: 250,
+    height: 200,
     resizeMode: 'cover',
     justifyContent: 'flex-end',
     alignItems: 'flex-start',
