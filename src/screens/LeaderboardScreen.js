@@ -28,7 +28,6 @@ async function createBetWinLeaders() {
   await firestore()
     .collection('users')
     .orderBy('betWins', 'desc')
-    .limit(10)
     .get()
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
@@ -49,7 +48,6 @@ async function createBalanceLeaders() {
   await firestore()
     .collection('users')
     .orderBy('balance', 'desc')
-    .limit(10)
     .get()
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
@@ -65,6 +63,7 @@ async function createBalanceLeaders() {
     });
   // [END get_multiple_all]
 }
+
 
 /* ///////////////////////////////////////////   END CREATE LEADERBOARD BACKEND   //////////////////////////////////////////////// */
 
