@@ -21,6 +21,9 @@ import firestore from '@react-native-firebase/firestore';
 import {set} from 'react-native-reanimated';
 import {AppIcon} from '../AppStyles';
 
+console.disableYellowBox = true;
+
+
 function HomeScreen({navigation}) {
   const auth = useSelector((state) => state.auth);
   const [code, setCode] = useState(''); 
