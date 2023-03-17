@@ -24,13 +24,16 @@ import '../global.js';
 
 function firstTimeSetup(currentid) {
   console.log('FIRST TIME LOGIN');
+  global.first_time_logged = true; 
   let random = Math.floor(Math.random()*(6-1+1))+1;
   let data = {
     balance: 10000,
     betWins: 0,
     profilePhotoNum: random,
+    referralused: false,
   };
   firestore().collection('users').doc(currentid).set(data, {merge: true});
+  firestore().collection('validReferralCodes').doc(currentid.slice(0, 8)).set({id: currentid});
 }
 
 function standardGoogleLogin(currentid) {

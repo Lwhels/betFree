@@ -1,9 +1,12 @@
 import React, {useLayoutEffect, useEffect, useState} from 'react';
 import {
-  ScrollView,
   View,
   StyleSheet,
   Text,
+  TextInput,
+  Alert,
+  Modal,
+  TurboModuleRegistry,
   TouchableHighlight,
   TouchableOpacity,
   Image,
@@ -14,18 +17,181 @@ import {Configuration} from '../Configuration';
 import BasicButton from '../components/BasicButton';
 import Card from 'react-native-elements';
 import '../global.js';
+import firestore from '@react-native-firebase/firestore';
 import {set} from 'react-native-reanimated';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import {AppIcon} from '../AppStyles';
 //import '@fontsource/montserrat';
 
 function HomeScreen({navigation}) {
   const auth = useSelector((state) => state.auth);
+  const [code, setCode] = useState(''); 
+  const [modalVisible, setModalVisible] = useState(true);
 
   useLayoutEffect(() => {
     navigation.setOptions({
       title: 'Home',
     });
   }, []);
+
+  async function updateReferralUse(){
+    await firestore() 
+      .collection('users')
+      .doc(global.currentuid)
+      .update({referralused: true})
+    console.log('updateRef');
+  }
+
+  async function checkCode(ref){
+    idOfOther = '';
+    let go = false;
+    await firestore().collection("validReferralCodes").doc(ref).get()
+    .then((users) => {
+      console.log('USERS', users)
+      if (!users['_exists']){
+        Alert.alert('Invalid code');
+        setModalVisible(true);
+        return false;
+      }
+      else {
+        let data = users.data();
+        idOfOther = data.id;
+        go = true;
+      }
+    });
+    
+    if (go){
+      await firestore().collection('users').doc(global.currentuid).get().then((users) => {
+        let data = users.data();
+        if(data.referralused){
+          Alert.alert('Referral used');
+          setModalVisible(true);
+          return false;
+        }
+        else {
+          firestore().collection('users').doc(idOfOther).get().then((users) => {
+            let data = users.data();
+            let balance = data.balance;
+            firestore().collection('users').doc(idOfOther).update({balance: balance + 10000})
+          });
+          firestore().collection('users').doc(global.currentuid).get().then((users) => {
+            let data = users.data();
+            let balance = data.balance;
+            firestore().collection('users').doc(global.currentuid).update({balance: balance + 10000}).then(() => {
+              updateReferralUse();
+              console.log('updateReferral');
+            });
+          });
+          setModalVisible(!modalVisible);
+          return true;
+        }
+      });
+    }
+    
+  }
+
+    const onPress = () => {  
+      checkCode(code); 
+    }
+
+
+  if (global.first_time_logged){
+    return (
+      <View style={styles.container}>
+        <Text style={styles.title}>
+          Welcome, {auth.user?.fullname ?? 'User'}!
+        </Text>
+        <Modal 
+        visible={modalVisible}
+        animationType='slide'
+        transparent={true}
+        onRequestClose= {()=> {setModalVisible(!modalVisible)}}
+        
+        >
+          <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+          <Text style = {{fontWeight: '400', fontSize: 22}}>
+            It's your first time logging in! 
+          </Text>
+          <Text style = {{fontWeight: '300', fontSize: 20, marginTop: 10, marginBottom: 15}}>
+            Add a friend's referral code for some extra "cash". 
+          </Text>
+        <TextInput
+          style = {{
+            marginTop: 5,
+            borderColor: '#000000',
+            borderWidth: 1,
+            padding: '2%',
+            borderRadius: 10,
+            marginBottom: 10,
+            width: 180,
+            height: 30,
+          }}
+          placeholder=" Referral Code "
+          placeholderTextColor={AppStyles.color.grey}
+          onChangeText = {code => setCode(code)}
+          ></TextInput>
+          <View 
+          style = {{
+            flexDirection: 'row',
+            alignItems: 'center'
+          }}>
+            <TouchableOpacity
+            style = {{
+              marginTop: 10, 
+              marginRight: 10,
+            }}
+            onPress={onPress}>
+            <Text
+                style = {{
+                 color: 'green',
+                 fontWeight: '500',
+                 fontSize: 18,
+                 }}
+             >Submit</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style = {{
+              marginTop: 10, 
+              marginLeft: 10
+            }}
+            onPress={onPress}>
+            <Text
+            style = {{
+              color: 'maroon',
+              fontWeight: '500',
+              fontSize: 18,
+            }}
+            >Close</Text>
+          </TouchableOpacity>
+          </View>
+          
+          </View>
+          </View>
+        </Modal>
+        
+          
+        <BasicButton
+          onPress={() => navigation.navigate('Betting Page')}
+          title="Make Bets Here!"
+        />
+        <BasicButton
+          onPress={() => navigation.navigate('Current Bets')}
+          title="My Bets"
+        />
+        <BasicButton onPress={() => navigation.navigate('News')} title="News" />
+        <BasicButton
+          onPress={() => navigation.navigate('Leaderboard')}
+          title="Leaderboard"
+        />
+        <BasicButton
+          onPress={() => navigation.navigate('Scores')}
+          title="Scores"
+        />
+      </View>
+    );
+  }
+  else {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>
@@ -105,6 +271,7 @@ function HomeScreen({navigation}) {
       </View>
     </View>
   );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -128,6 +295,19 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     marginLeft: 5,
   },
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+  },
   rowOfCards: {
     flexDirection: 'row',
     width: '90%',
@@ -146,6 +326,29 @@ const styles = StyleSheet.create({
       width: 0,
       height: 2,
     },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+  buttonOpen: {
+    backgroundColor: '#F194FF',
+  },
+  buttonClose: {
+    backgroundColor: '#2196F3',
+  },
+  textStyle: {
+    color: 'black',
+    fontWeight: '400',
+    textAlign: 'center',
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: 'center',
     shadowOpacity: 1,
     shadowRadius: 4,
     elevation: 8,
