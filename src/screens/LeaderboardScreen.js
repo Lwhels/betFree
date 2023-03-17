@@ -18,6 +18,7 @@ import {Configuration} from '../Configuration';
 import firestore from '@react-native-firebase/firestore';
 import 'firebase/compat/firestore';
 import {AppIcon} from '../AppStyles';
+import {TextInput} from 'react-native-gesture-handler';
 
 /* ///////////////////////////////////////////   CREATE LEADERBOARD BACKEND   //////////////////////////////////////////////// */
 
@@ -28,7 +29,6 @@ async function createBetWinLeaders() {
   await firestore()
     .collection('users')
     .orderBy('betWins', 'desc')
-    .limit(10)
     .get()
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
@@ -49,7 +49,6 @@ async function createBalanceLeaders() {
   await firestore()
     .collection('users')
     .orderBy('balance', 'desc')
-    .limit(10)
     .get()
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
@@ -72,6 +71,7 @@ export default function LeaderboardScreen({navigation}) {
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(true);
   const [show, setShow] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
 
   async function leaderboard() {
     setLoading(true);
@@ -143,6 +143,20 @@ export default function LeaderboardScreen({navigation}) {
     leaderboard();
   }, []);
 
+  var betWinLeadersToDisplay = [];
+  for (let i = 0; i < betWinLeaders.length; i++) {
+    if (searchTerm == '' || betWinLeaders[i].name.includes(searchTerm)) {
+      betWinLeadersToDisplay.push(betWinLeaders[i]);
+    }
+  }
+
+  var balanceLeadersToDisplay = [];
+  for (let i = 0; i < balanceLeaders.length; i++) {
+    if (searchTerm == '' || balanceLeaders[i].name.includes(searchTerm)) {
+      balanceLeadersToDisplay.push(balanceLeaders[i]);
+    }
+  }
+
   if (loading) {
     return (
       <ActivityIndicator
@@ -164,14 +178,48 @@ export default function LeaderboardScreen({navigation}) {
           {' '}
           Sort by:{' '}
         </Text>
-        {renderButton(show)}
+        <Text>{renderButton(show)}</Text>
+        <View
+          style={[
+            {
+              flexDirection: 'row',
+              alignItems: 'center',
+              backgroundColor: '#2c6f99',
+              shadowColor: '#000',
+              color: 'white',
+              shadowColor: 'rgb(0, 0, 0)',
+              shadowOffset: {
+                width: 3,
+                height: 3,
+              },
+              shadowOpacity: 0.5,
+              shadowRadius: 2,
+              elevation: 2,
+              borderRadius: 30,
+              width: '40%',
+              marginTop: 15,
+            },
+          ]}>
+          <Image
+            source={AppIcon.images.search}
+            style={{width: 15, height: 15, color: 'white'}}></Image>
+          <TextInput
+            placeholder="name"
+            placeholderTextColor="#FFF"
+            underlineColorAndroid="transparent"
+            onChangeText={setSearchTerm}
+            value={searchTerm}
+            style={{color: 'white'}}
+            maxLength={9}
+          />
+        </View>
         <Text> {'\n'} </Text>
         {show === true ? (
           <FlatList
             refreshControl={
               <RefreshControl refreshing={refreshing} onRefresh={leaderboard} />
             }
-            data={balanceLeaders}
+            data={balanceLeadersToDisplay}
             renderItem={({item}) => (
               <View style={styles.previewContainer}>
                 <View
@@ -205,7 +253,9 @@ export default function LeaderboardScreen({navigation}) {
                     },
                   ]}>
                   <Text style={styles.nameText}> {item.name} </Text>
-                  <Text style={styles.winText}>${item.balance.toFixed(2)} </Text>
+                  <Text style={styles.winText}>
+                    ${item.balance.toFixed(2)}{' '}
+                  </Text>
                 </View>
               </View>
             )}
@@ -216,7 +266,7 @@ export default function LeaderboardScreen({navigation}) {
             refreshControl={
               <RefreshControl refreshing={refreshing} onRefresh={leaderboard} />
             }
-            data={betWinLeaders}
+            data={betWinLeadersToDisplay}
             renderItem={({item}) => (
               <View style={styles.previewContainer}>
                 <View
@@ -282,8 +332,9 @@ const styles = StyleSheet.create({
   toggleButton: {
     backgroundColor: '#2c6f99',
     shadowColor: '#000',
+    color: 'white',
     shadowColor: 'rgb(0, 0, 0)',
-      shadowOffset: {
+    shadowOffset: {
       width: 3,
       height: 3,
     },
@@ -303,13 +354,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#2c6f99',
     shadowColor: '#000',
     shadowColor: 'rgb(0, 0, 0)',
-            shadowOffset: {
-              width: 3,
-              height: 3,
-            },
-            shadowOpacity: 0.5,
-            shadowRadius: 2,
-            elevation: 2,
+    shadowOffset: {
+      width: 3,
+      height: 3,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 2,
+    elevation: 2,
     elevation: 7,
     marginBottom: 45,
     borderRadius: 15,
