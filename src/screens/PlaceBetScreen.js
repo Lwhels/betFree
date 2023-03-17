@@ -336,14 +336,14 @@ export default function PlaceBetScreen({navigation}) {
                       alignContent: 'center',
                     },
                   ]}>
-                  <Text style={{color: AppStyles.color.text, marginRight: -4}}>
+                  <Text style={{color: AppStyles.color.text, marginRight: 0}}>
                     Stake: $
                   </Text>
                   <TextInput
                     style={{
                       color: AppStyles.color.grey,
                       height: 36,
-                      marginTop: 5,
+                      alignContent: 'center',
                     }}
                     placeholder="0.00"
                     placeholderTextColor={AppStyles.color.text}
@@ -500,14 +500,15 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 35,
     alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
+    shadowColor: 'rgb(0, 0, 0)',
+            shadowOffset: {
+              width: 3,
+              height: 3,
+            },
+            shadowOpacity: 0.5,
+            shadowRadius: 5,
+            elevation: 2,
+            backgroundColor: 'white',
   },
   button: {
     borderRadius: 20,
@@ -539,14 +540,14 @@ const styles = StyleSheet.create({
     height: 80,
     borderRadius: 20,
     backgroundColor: '#2c6f99',
-    shadowColor: '#000',
+    shadowColor: 'rgb(0, 0, 0)',
     shadowOffset: {
-      width: 0,
-      height: 2,
+      width: 3,
+      height: 3,
     },
-    shadowOpacity: 1,
-    shadowRadius: 20,
-    elevation: 8,
+    shadowOpacity: 0.5,
+    shadowRadius: 1,
+    elevation: 2,
   },
   flexCol: {
     flexDirection: 'column',

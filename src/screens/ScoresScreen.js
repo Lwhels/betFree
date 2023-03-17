@@ -189,7 +189,7 @@ export default function ScoresScreen({navigation}) {
             setModalVisible(!modalVisible);
           }}>
           <View style={styles.centeredView}>
-            <View style={styles.modalView}>
+            <View style={styles.modalView} >
               <Text>Team:</Text>
               <SelectDropdown
                 data={teams}
@@ -210,7 +210,7 @@ export default function ScoresScreen({navigation}) {
               />
 
               <TouchableOpacity
-                style={[styles.button, styles.buttonOpen]}
+                style={[styles.button, styles.buttonOpen, {marginTop: '3%'}]}
                 onPress={() => closeModal()}>
                 <Text style={styles.textStyle}>close</Text>
               </TouchableOpacity>
@@ -325,7 +325,7 @@ export default function ScoresScreen({navigation}) {
                     //backgroundColor: 'steelblue',
                     justifyContent: 'center',
                     alignSelf: 'center',
-                    paddingLeft: 20,
+                    paddingLeft: 10,
                   },
                 ]}>
                 <Text style={styles.textColor}>{gameStatus(item)}</Text>
@@ -357,13 +357,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '#2c6f99',
     shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 1,
-    shadowRadius: 20,
-    elevation: 8,
+    shadowColor: 'rgb(0, 0, 0)',
+            shadowOffset: {
+              width: 3,
+              height: 3,
+            },
+            shadowOpacity: 0.5,
+            shadowRadius: 2,
+            elevation: 2,
     marginBottom: 20,
     borderRadius: 15,
   },
@@ -453,13 +454,15 @@ const styles = StyleSheet.create({
     padding: 35,
     alignItems: 'center',
     shadowColor: '#000',
+    shadowColor: 'rgb(0, 0, 0)',
     shadowOffset: {
-      width: 0,
-      height: 2,
+      width: 3,
+      height: 3,
     },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
+    shadowOpacity: 0.5,
+    shadowRadius: 5,
+    elevation: 2,
+    backgroundColor: 'white',
   },
   button: {
     borderRadius: 20,
@@ -470,13 +473,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonOpen: {
-    backgroundColor: '#F194FF',
+    backgroundColor: 'tomato',
   },
   buttonClose: {
     backgroundColor: '#2196F3',
   },
   textStyle: {
-    color: 'black',
+    color: 'white',
     fontWeight: '400',
     textAlign: 'center',
   },
