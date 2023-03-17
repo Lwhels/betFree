@@ -108,7 +108,7 @@ function WelcomeScreen({navigation}) {
   }
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Say hello to your new app</Text>
+      <Text style={styles.title}>Welcome to Bet Free!</Text>
       <TouchableOpacity
         style={styles.loginContainer}
         onPress={() => navigation.navigate('Login')}>
