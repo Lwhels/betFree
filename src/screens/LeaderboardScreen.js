@@ -178,13 +178,13 @@ export default function LeaderboardScreen({navigation}) {
           {' '}
           Sort by:{' '}
         </Text>
-        <Text>{renderButton(show)}</Text>
+        {renderButton(show)}
         <View
           style={[
             {
               flexDirection: 'row',
               alignItems: 'center',
-              backgroundColor: '#2c6f99',
+              backgroundColor: '#D3D3D3',
               shadowColor: '#000',
               color: 'white',
               shadowColor: 'rgb(0, 0, 0)',
@@ -198,19 +198,20 @@ export default function LeaderboardScreen({navigation}) {
               borderRadius: 30,
               width: '40%',
               marginTop: 15,
+              height: '6%',
             },
           ]}>
-          <Image
+            <Image
             source={AppIcon.images.search}
-            style={{width: 15, height: 15, color: 'white'}}></Image>
+            style={{width: 20, height: 20, marginLeft: 15, marginRight: 8}}></Image>
           <TextInput
             placeholder="name"
-            placeholderTextColor="#FFF"
+            placeholderTextColor="#5A5A5A"
             underlineColorAndroid="transparent"
             onChangeText={setSearchTerm}
             value={searchTerm}
-            style={{color: 'white'}}
-            maxLength={9}
+            style={{color: '#5A5A5A'}}
+            maxLength={7}
           />
         </View>
         <Text> {'\n'} </Text>
