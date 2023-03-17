@@ -67,7 +67,7 @@ export default function ScoresScreen({navigation}) {
     'New York Knicks',
     'Oklahoma City Thunder',
     'Orlando Magic',
-    'Philadelphia Sixers',
+    'Philadelphia 76ers',
     'Phoenix Suns',
     'Portland Trail Blazers',
     'Sacramento Kings',
