@@ -15,6 +15,8 @@ import {Configuration} from '../Configuration';
 import firestore from '@react-native-firebase/firestore';
 import '../global.js';
 
+console.disableYellowBox = true;
+
 /* /////////////////////////////////////////////   UPDATE AND CHECK BETS    //////////////////////////////////////////// */
 
 function homeWin(game) {
@@ -355,7 +357,7 @@ export default function CurrentBets({navigation}) {
                     style={{
                       flexDirection: 'row',
                       alignItems: 'center',
-                      alignSelf: 'center',
+                      marginLeft: 8,
                     }}>
 
                     <View style={{flexDirection: 'column'}}>
@@ -380,6 +382,27 @@ export default function CurrentBets({navigation}) {
             data={pastbets}
             renderItem={({item}) => (
               <View style={styles.previewContainer}>
+              <View
+                style={[
+                  styles.box,
+                  {
+                    flexBasis: 50,
+                    flexGrow: 0,
+                    flexShrink: 1,
+                    //backgroundColor: 'aliceblue',
+                    justifyContent: 'space-around',
+                  },
+                ]}>
+                    <Image
+                      source={{
+                        uri: imageDict[item.teamBetOn],
+                      }}
+                      style={[
+                        styles.userPhoto,
+                        {marginRight: 15, marginLeft: 10},
+                      ]}
+                    />
+              </View>
                 <View
                   style={[
                     styles.box,
@@ -388,22 +411,10 @@ export default function CurrentBets({navigation}) {
                       flexGrow: 1,
                       flexShrink: 0,
                       //backgroundColor: 'powderblue',
-                      justifyContent: 'center',
                       justifyContent: 'space-evenly',
                     },
                   ]}>
-                  <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                    <Image
-                      source={{
-                        uri: imageDict[item.teamBetOn],
-                      }}
-                      style={[
-                        styles.userPhoto,
-                        {marginLeft: 10, marginRight: 15},
-                      ]}
-                    />
-
-                    <View
+                   <View
                       style={{
                         flexDirection: 'column',
                         alignItems: 'flex-start',
@@ -414,7 +425,6 @@ export default function CurrentBets({navigation}) {
                       <View style={{height: '5%'}}></View>
                       <Text style={[styles.betAmount]}>{output(item)} </Text>
                     </View>
-                  </View>
                 </View>
               </View>
             )}
