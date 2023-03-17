@@ -205,7 +205,7 @@ export default function LeaderboardScreen({navigation}) {
                     },
                   ]}>
                   <Text style={styles.nameText}> {item.name} </Text>
-                  <Text>${item.balance.toFixed(2)} </Text>
+                  <Text style={styles.winText}>${item.balance.toFixed(2)} </Text>
                 </View>
               </View>
             )}
@@ -282,13 +282,14 @@ const styles = StyleSheet.create({
   toggleButton: {
     backgroundColor: '#2c6f99',
     shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
+    shadowColor: 'rgb(0, 0, 0)',
+      shadowOffset: {
+      width: 3,
+      height: 3,
     },
-    shadowOpacity: 1,
-    shadowRadius: 20,
-    elevation: 8,
+    shadowOpacity: 0.5,
+    shadowRadius: 2,
+    elevation: 2,
     borderRadius: 30,
     padding: 10,
     marginTop: 10,
@@ -301,12 +302,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '#2c6f99',
     shadowColor: '#000',
-    shadowOffset: {
-      width: 2,
-      height: 6,
-    },
-    shadowOpacity: 1,
-    shadowRadius: 15,
+    shadowColor: 'rgb(0, 0, 0)',
+            shadowOffset: {
+              width: 3,
+              height: 3,
+            },
+            shadowOpacity: 0.5,
+            shadowRadius: 2,
+            elevation: 2,
     elevation: 7,
     marginBottom: 45,
     borderRadius: 15,
