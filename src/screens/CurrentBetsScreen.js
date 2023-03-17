@@ -271,7 +271,7 @@ export default function CurrentBets({navigation}) {
   }
 
   function renderTitle(show) {
-    if (show) {
+    if (!show) {
       return <Text>Active Bets</Text>;
     } else {
       return <Text>Past Bets</Text>;
@@ -302,7 +302,7 @@ export default function CurrentBets({navigation}) {
       <View style={styles.container}>
         <Image
           source={AppIcon.images.stocks}
-          style={{width: 150, height: 100, marginTop: 5}}
+          style={{width: 155, height: 165, marginTop: 5}}
         />
         <Text style={styles.title}> {renderTitle(show)} </Text>
         <Text style={{marginTop: 15, fontSize: 20, fontWeight: '300'}}>
@@ -319,6 +319,27 @@ export default function CurrentBets({navigation}) {
             data={activebets}
             renderItem={({item}) => (
               <View style={styles.previewContainer}>
+              <View
+                style={[
+                  styles.box,
+                  {
+                    flexBasis: 50,
+                    flexGrow: 0,
+                    flexShrink: 1,
+                    //backgroundColor: 'aliceblue',
+                    justifyContent: 'space-around',
+                  },
+                ]}>
+                    <Image
+                      source={{
+                        uri: imageDict[item.teamBetOn],
+                      }}
+                      style={[
+                        styles.userPhoto,
+                        {marginRight: 15, marginLeft: 10},
+                      ]}
+                    />
+              </View>
                 <View
                   style={[
                     styles.box,
@@ -336,15 +357,7 @@ export default function CurrentBets({navigation}) {
                       alignItems: 'center',
                       alignSelf: 'center',
                     }}>
-                    <Image
-                      source={{
-                        uri: imageDict[item.teamBetOn],
-                      }}
-                      style={[
-                        styles.userPhoto,
-                        {marginRight: 15, marginLeft: 10},
-                      ]}
-                    />
+
                     <View style={{flexDirection: 'column'}}>
                       <Text style={styles.betOn}>
                         {'Team Bet On: \n' + item.teamBetOn}
@@ -446,7 +459,7 @@ const styles = StyleSheet.create({
       width: 0,
       height: 2,
     },
-    shadowOpacity: 1,
+    shadowOpacity: 0.25,
     shadowRadius: 20,
     elevation: 8,
     borderRadius: 30,
@@ -465,8 +478,8 @@ const styles = StyleSheet.create({
       width: 2,
       height: 6,
     },
-    shadowOpacity: 1,
-    shadowRadius: 15,
+    shadowOpacity: 0.2,
+    shadowRadius: 1,
     elevation: 7,
     marginBottom: 45,
     borderRadius: 15,
