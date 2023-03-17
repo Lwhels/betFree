@@ -78,6 +78,7 @@ export const AppIcon = {
     closeeye: require('../assets/icons/closeeye.png'),
     medal: require('../assets/icons/medal.png'),
     trophy: require('../assets/icons/trophy.png'),
+    stocks: require('../assets/icons/stocks.png'),
   },
 };
 
