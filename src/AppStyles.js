@@ -79,6 +79,7 @@ export const AppIcon = {
     medal: require('../assets/icons/medal.png'),
     trophy: require('../assets/icons/trophy.png'),
     stocks: require('../assets/icons/stocks.png'),
+    search: require('../assets/icons/search.png'),
   },
 };
 
