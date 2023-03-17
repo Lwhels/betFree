@@ -4,9 +4,9 @@ import {
   StyleSheet,
   Text,
   TextInput,
-  Button,
   Alert,
   Modal,
+  TurboModuleRegistry,
 } from 'react-native';
 import {connect, useSelector} from 'react-redux';
 import {AppStyles} from '../AppStyles';
@@ -28,26 +28,66 @@ function HomeScreen({navigation}) {
     });
   }, []);
 
-  const checkCode = () => {
-    firestore().collection("validReferralCodes").doc(global.currentuid).get()
+  async function updateReferralUse(){
+    await firestore() 
+      .collection('users')
+      .doc(global.currentuid)
+      .update({referralused: true})
+    console.log('updateRef');
+  }
+
+  async function checkCode(ref){
+    idOfOther = '';
+    let go = false;
+    await firestore().collection("validReferralCodes").doc(ref).get()
     .then((users) => {
-      var data = users.data();
-      if (!data.exists){
-        Alert.alert('Invalid referral code');
+      console.log('USERS', users)
+      if (!users['_exists']){
+        Alert.alert('Invalid code');
+        setModalVisible(true);
         return false;
       }
       else {
-        let userid1 = data.id;
-        firestore().collection('users').doc(userid1).update("balance", FieldValue.increment(10000));
-        firestore().collection('users').doc(global.currentuid).update("balance", FieldValue.increment(10000));
-        return true;
+        let data = users.data();
+        idOfOther = data.id;
+        go = true;
       }
     });
+    
+    if (go){
+      await firestore().collection('users').doc(global.currentuid).get().then((users) => {
+        let data = users.data();
+        if(data.referralused){
+          Alert.alert('Referral used');
+          setModalVisible(true);
+          return false;
+        }
+        else {
+          firestore().collection('users').doc(idOfOther).get().then((users) => {
+            let data = users.data();
+            let balance = data.balance;
+            firestore().collection('users').doc(idOfOther).update({balance: balance + 10000})
+          });
+          firestore().collection('users').doc(global.currentuid).get().then((users) => {
+            let data = users.data();
+            let balance = data.balance;
+            firestore().collection('users').doc(global.currentuid).update({balance: balance + 10000}).then(() => {
+              updateReferralUse();
+              console.log('updateReferral');
+            });
+          });
+          setModalVisible(!modalVisible);
+          return true;
+        }
+      });
+    }
+    
   }
 
-    const onPress = () => {
-      setModalVisible(!modalVisible)
+    const onPress = () => {  
+      checkCode(code); 
     }
+
 
   if (global.first_time_logged){
     return (

@@ -10,7 +10,7 @@ function ProfileScreen({navigation}) {
   const [email, setEmail]  = useState('')
   const [username, setUsername] = useState('')
   const [image, setImage] = useState('')
-
+  const [referralCode, setReferralCode] = useState('')
   const [profilePhotoID, setProfilePhotoID] = useState(1) 
 
 
@@ -25,6 +25,7 @@ function ProfileScreen({navigation}) {
         setBalance(data.balance)
         setEmail(data.email)
         setProfilePhotoID(data.profilePhotoNum)
+        setReferralCode(data.id.slice(0, 8))
         if (profilePhotoID ==1 ){
           setImage (require("../../assets/images/basketballProfilePic.png"))
         } else if (profilePhotoID ==2){
@@ -49,7 +50,7 @@ function ProfileScreen({navigation}) {
       <Text style = {styles.fieldTitles}> Email </Text>
       <Text style = {styles.fields} > {email} </Text>
       <Text style = {styles.fieldTitles}> Your referral code: </Text>
-      <Text style = {styles.fields} > ur mom 420  </Text>
+      <Text style = {styles.fields} > {referralCode} </Text>
     </View>
   );
 }

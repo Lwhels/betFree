@@ -30,6 +30,7 @@ function firstTimeSetup(currentid) {
     balance: 10000,
     betWins: 0,
     profilePhotoNum: random,
+    referralused: false,
   };
   firestore().collection('users').doc(currentid).set(data, {merge: true});
   firestore().collection('validReferralCodes').doc(currentid.slice(0, 8)).set({id: currentid});
