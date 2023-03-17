@@ -5,6 +5,7 @@ import {AppIcon} from '../AppStyles';
 import auther from '@react-native-firebase/auth';
 import {useDispatch} from 'react-redux';
 import {logout} from '../reducers';
+import '../global.js'
 
 export default function DrawerContainer({navigation}) {
   const dispatch = useDispatch();
@@ -35,6 +36,7 @@ export default function DrawerContainer({navigation}) {
               .then(() => {
                 dispatch(logout());
                 navigation.navigate('LoginStack');
+                global.first_time_logged = false;
               }); //logout on redux
           }}
         />

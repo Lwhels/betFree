@@ -20,7 +20,6 @@ import '../global.js';
 import firestore from '@react-native-firebase/firestore';
 import {set} from 'react-native-reanimated';
 import {AppIcon} from '../AppStyles';
-//import '@fontsource/montserrat';
 
 function HomeScreen({navigation}) {
   const auth = useSelector((state) => state.auth);
@@ -93,13 +92,12 @@ function HomeScreen({navigation}) {
       checkCode(code); 
     }
 
-
+    const onClose = () => {
+      setModalVisible(!modalVisible)
+    }
   if (global.first_time_logged){
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>
-          Welcome, {auth.user?.fullname ?? 'User'}!
-        </Text>
         <Modal 
         visible={modalVisible}
         animationType='slide'
@@ -154,7 +152,7 @@ function HomeScreen({navigation}) {
               marginTop: 10, 
               marginLeft: 10
             }}
-            onPress={onPress}>
+            onPress={onClose}>
             <Text
             style = {{
               color: 'maroon',
@@ -170,32 +168,10 @@ function HomeScreen({navigation}) {
         </Modal>
         
           
-        <BasicButton
-          onPress={() => navigation.navigate('Betting Page')}
-          title="Make Bets Here!"
-        />
-        <BasicButton
-          onPress={() => navigation.navigate('Current Bets')}
-          title="My Bets"
-        />
-        <BasicButton onPress={() => navigation.navigate('News')} title="News" />
-        <BasicButton
-          onPress={() => navigation.navigate('Leaderboard')}
-          title="Leaderboard"
-        />
-        <BasicButton
-          onPress={() => navigation.navigate('Scores')}
-          title="Scores"
-        />
-      </View>
-    );
-  }
-  else {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>
-        Welcome, {auth.user?.fullname ?? 'User'}!
-      </Text>
+      <View style={styles.container}>
+        <Text style={styles.title}>
+          Welcome, {auth.user?.fullname ?? 'User'}!
+        </Text>
       <View style={styles.rowOfCards}>
         <TouchableOpacity
           onPress={() => navigation.navigate('Betting Page')}
@@ -269,6 +245,88 @@ function HomeScreen({navigation}) {
         </TouchableOpacity>
       </View>
     </View>
+      </View>
+    );
+  }
+  else {
+  return (
+    <View style={styles.container}>
+        <Text style={styles.title}>
+          Welcome, {auth.user?.fullname ?? 'User'}!
+        </Text>
+    <View style={styles.rowOfCards}>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('Betting Page')}
+        style={styles.card}>
+        <View style={styles.insideCard}>
+          <Image
+            source={AppIcon.images.makebets}
+            style={[styles.cardImage, {height: 55, width: 55}]}></Image>
+          <Text style={styles.cardText}>Place Bets</Text>
+        </View>
+      </TouchableOpacity>
+      <View style={{width: '15%'}}></View>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('Current Bets')}
+        style={styles.card}>
+        <View style={styles.insideCard}>
+          <Image
+            source={AppIcon.images.mybets}
+            style={[styles.cardImage, {height: 60, width: 43}]}></Image>
+          <Text style={[styles.cardText, {marginTop: -5}]}>My Bets</Text>
+        </View>
+      </TouchableOpacity>
+    </View>
+    <View style={styles.rowOfCards}>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('News')}
+        style={styles.card}>
+        <View style={styles.insideCard}>
+          <Image
+            source={AppIcon.images.news}
+            style={[styles.cardImage, {height: 55, width: 55}]}></Image>
+          <Text style={styles.cardText}>News</Text>
+        </View>
+      </TouchableOpacity>
+      <View style={{width: '15%'}}></View>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('Leaderboard')}
+        style={styles.card}>
+        <View style={styles.insideCard}>
+          <Image
+            source={AppIcon.images.leaderboard}
+            style={[
+              styles.cardImage,
+              {height: 60, width: 45, marginLeft: 7},
+            ]}></Image>
+          <Text style={[styles.cardText, {marginTop: -5}]}>Leaderboard</Text>
+        </View>
+      </TouchableOpacity>
+    </View>
+    <View style={styles.rowOfCards}>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('Scores')}
+        style={styles.card}>
+        <View style={styles.insideCard}>
+          <Image
+            source={AppIcon.images.scores}
+            style={[styles.cardImage, {height: 55, width: 60}]}></Image>
+          <Text style={styles.cardText}>Scores</Text>
+        </View>
+      </TouchableOpacity>
+      <View style={{width: '15%'}}></View>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('Profile Page')}
+        style={styles.card}>
+        <View style={styles.insideCard}>
+          <Image
+            source={AppIcon.images.basketball2}
+            style={[styles.cardImage, {height: 55, width: 55}]}></Image>
+          <Text style={styles.cardText}>Profile</Text>
+        </View>
+      </TouchableOpacity>
+    </View>
+  </View>
   );
   }
 }
