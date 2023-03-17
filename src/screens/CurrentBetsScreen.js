@@ -15,7 +15,7 @@ import {Configuration} from '../Configuration';
 import firestore from '@react-native-firebase/firestore';
 import '../global.js';
 
-console.disableYellowBox = true;
+
 
 /* /////////////////////////////////////////////   UPDATE AND CHECK BETS    //////////////////////////////////////////// */
 
@@ -253,7 +253,7 @@ export default function CurrentBets({navigation}) {
 
   /*     END LOAD ARRAY MATERIALS FOR FRONTEND      */
   function renderButton(show) {
-    if (show) {
+    if (!show) {
       return (
         <TouchableHighlight
           style={styles.toggleButton}
@@ -273,7 +273,7 @@ export default function CurrentBets({navigation}) {
   }
 
   function renderTitle(show) {
-    if (!show) {
+    if (show) {
       return <Text>Active Bets</Text>;
     } else {
       return <Text>Past Bets</Text>;
