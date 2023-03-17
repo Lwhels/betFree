@@ -25,7 +25,7 @@ const LoginStack = () => (
   <Stack.Navigator
     initialRouteName="Welcome"
     screenOptions={{
-      headerTintColor: 'green',
+      headerTintColor: AppStyles.color.tint,
       headerTitleStyle: styles.headerTitleStyle,
       headerMode: 'float',
     }}>
@@ -39,7 +39,7 @@ const HomeStack = () => (
   <Stack.Navigator
     initialRouteName="Home"
     screenOptions={{
-      headerTintColor: 'green',
+      headerTintColor: AppStyles.color.tint,
       headerTitleStyle: styles.headerTitleStyle,
       headerMode: 'float',
     }}>
@@ -174,8 +174,6 @@ const DrawerStack = () => (
     <Drawer.Screen name="Tab" component={TabNavigator} />
   </Drawer.Navigator>
 );
-
-
 
 // Manifest of possible screens
 const RootNavigator = () => (

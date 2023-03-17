@@ -22,6 +22,9 @@ import '../global.js';
 function expectedReturn(selectedTeam, currentBet, betAmount) {
   var converted = 0;
   var odds;
+  if (selectedTeam == 'No Team' || betAmount == 0) {
+    return betAmount;
+  }
   if (selectedTeam == currentBet['game']['teams']['home']['name']) {
     odds = convertOdds(
       currentBet['bookmakers'][0]['bets'][1]['values'][0]['odd'],
@@ -124,7 +127,6 @@ export default function PlaceBetScreen({navigation}) {
   useEffect(() => {
     fetchBets();
   }, []);
-  // Remove games that are already finished from flatlist here
 
   var oddsToDisplay = [];
   for (let i = 0; i < odds.length; i++) {
@@ -142,7 +144,7 @@ export default function PlaceBetScreen({navigation}) {
       item['game']['status']['short'] == 'FT' ||
       item['game']['status']['short'] == 'AOT'
     ) {
-      Alert.alert('Game has already ended');
+      Alert.alert('Game Has Already Ended');
       return;
     }
 
@@ -155,18 +157,18 @@ export default function PlaceBetScreen({navigation}) {
   }
   function placeBet() {
     if (selectedTeam == 'No Team') {
-      Alert.alert('please select a team');
+      Alert.alert('Please Select A Team');
       return;
     }
     for (let i = 0; i < betAmount.length; i++) {
       if (betAmount[i] < '0' || betAmount[i] > 9) {
-        Alert.alert('please enter an positive integer bet amount');
+        Alert.alert('Please Enter A Positive Integer Bet Amount');
         return;
       }
     }
 
     if (betAmount <= 0) {
-      Alert.alert('please enter a valid bet amount');
+      Alert.alert('Please Enter A Valid Bet Amount');
       return;
     }
     firestore() // check if the user has enough balance
@@ -176,7 +178,7 @@ export default function PlaceBetScreen({navigation}) {
       .then((users) => {
         var data = users.data();
         if (data.balance < betAmount) {
-          Alert.alert('Insufficient funds');
+          Alert.alert('Insufficient Funds');
           return;
         } // if they have enough balance, allow the bet to be placed.
         let current = new Date();
@@ -216,7 +218,7 @@ export default function PlaceBetScreen({navigation}) {
           .set(bets, {merge: true});
       });
     setModalVisible(!modalVisible);
-    Alert.alert('bet placed!');
+    Alert.alert('Bet Placed!');
     setBetAmount(0);
     setSelectedTeam('No Team');
   }
@@ -251,8 +253,8 @@ export default function PlaceBetScreen({navigation}) {
   } else {
     return (
       <View style={styles.container} visible={!loading}>
-        <Text style={styles.title}> Place Bets Here! </Text>
-        <Text style={styles.body}> Balance: {balance} </Text>
+        <Text style={styles.title}> Bets</Text>
+        <Text style={styles.balance}> Balance: ${balance.toFixed(2)} </Text>
         <Modal
           animationType="slide"
           transparent={true}
@@ -262,9 +264,11 @@ export default function PlaceBetScreen({navigation}) {
             setModalVisible(!modalVisible);
           }}>
           <View style={styles.centeredView}>
-            <View style={styles.modalView}>
+            <View style={[styles.modalView, {backgroundColor: 'grey'}]}>
               <View style={styles.flexCol}>
-                <Text>Selected Team: {selectedTeam}</Text>
+                <Text style={{color: 'white', marginBottom: 5}}>
+                  Selected Team: {selectedTeam}
+                </Text>
                 <View style={styles.flexRow}>
                   <View
                     style={[
@@ -283,9 +287,16 @@ export default function PlaceBetScreen({navigation}) {
                         style={styles.userPhoto}
                       />
                     </TouchableOpacity>
-                    <Text> {textOdds(currentBet, 1)} </Text>
+                    <Text style={{color: 'white'}}>
+                      {' '}
+                      {textOdds(currentBet, 1)}{' '}
+                    </Text>
                   </View>
-                  <Text> @ </Text>
+                  <Text
+                    style={{color: 'white', marginLeft: 10, marginRight: 10}}>
+                    {' '}
+                    @{' '}
+                  </Text>
                   <View
                     style={[
                       {
@@ -303,19 +314,65 @@ export default function PlaceBetScreen({navigation}) {
                         style={styles.userPhoto}
                       />
                     </TouchableOpacity>
-                    <Text> {textOdds(currentBet, 0)} </Text>
+                    <Text style={{color: 'white'}}>
+                      {' '}
+                      {textOdds(currentBet, 0)}{' '}
+                    </Text>
                   </View>
                 </View>
               </View>
-              <TextInput
-                style={styles.body}
-                placeholder="Amount"
-                placeholderTextColor={AppStyles.color.grey}
-                underlineColorAndroid="transparent"
-                onChangeText={setBetAmount}
-                value={betAmount}
-                keyboardType="numeric"
-              />
+              <View>
+                <View
+                  style={[
+                    styles.body,
+                    {
+                      backgroundColor: '#D3D3D3',
+                      borderRadius: 20,
+                      padding: 8,
+                      marginTop: 5,
+                      marginBottom: 5,
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      alignContent: 'center',
+                    },
+                  ]}>
+                  <Text style={{color: AppStyles.color.text, marginRight: -4}}>
+                    Stake: $
+                  </Text>
+                  <TextInput
+                    style={{
+                      color: AppStyles.color.grey,
+                      height: 36,
+                      marginTop: 5,
+                    }}
+                    placeholder="0.00"
+                    placeholderTextColor={AppStyles.color.text}
+                    underlineColorAndroid="transparent"
+                    onChangeText={setBetAmount}
+                    value={betAmount}
+                    keyboardType="numeric"
+                  />
+                </View>
+                <Text
+                  style={[
+                    styles.body,
+                    {
+                      backgroundColor: '#D3D3D3',
+                      borderRadius: 20,
+                      alignSelf: 'center',
+                      padding: 8,
+                      marginTop: 5,
+                      marginBottom: 5,
+                      width: 110,
+                    },
+                  ]}>
+                  Win: $
+                  {(
+                    expectedReturn(selectedTeam, currentBet, betAmount) -
+                    betAmount
+                  ).toFixed(2)}
+                </Text>
+              </View>
               <Text>
                 <TouchableOpacity
                   style={[styles.button, styles.buttonOpen]}
@@ -326,7 +383,7 @@ export default function PlaceBetScreen({navigation}) {
                 <TouchableOpacity
                   style={[styles.button, styles.buttonClose]}
                   onPress={() => closeBet()}>
-                  <Text style={styles.textStyle}>close</Text>
+                  <Text style={styles.textStyle}>Close</Text>
                 </TouchableOpacity>
               </Text>
             </View>
@@ -353,17 +410,25 @@ export default function PlaceBetScreen({navigation}) {
                             }}
                             style={styles.userPhoto}
                           />
-                          <Text> {textOdds(item, 1)} </Text>
+                          <Text style={styles.textStyle}>
+                            {' '}
+                            {textOdds(item, 1)}{' '}
+                          </Text>
                         </View>
 
-                        <Text>{item['game']['teams']['away']['name']} </Text>
+                        <Text style={styles.textStyle}>
+                          {item['game']['teams']['away']['name']}{' '}
+                        </Text>
                       </View>
                       <View style={styles.flexCol}>
-                        <Text> @ </Text>
+                        <Text style={styles.textStyle}> @ </Text>
                       </View>
                       <View style={styles.flexCol}>
                         <View style={styles.flexRow}>
-                          <Text> {textOdds(item, 0)} </Text>
+                          <Text style={styles.textStyle}>
+                            {' '}
+                            {textOdds(item, 0)}{' '}
+                          </Text>
                           <Image
                             source={{
                               uri: item['game']['teams']['home']['logo'],
@@ -371,7 +436,9 @@ export default function PlaceBetScreen({navigation}) {
                             style={styles.userPhoto}
                           />
                         </View>
-                        <Text>{item['game']['teams']['home']['name']}</Text>
+                        <Text style={styles.textStyle}>
+                          {item['game']['teams']['home']['name']}
+                        </Text>
                       </View>
                     </View>
                   </View>
@@ -395,12 +462,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    fontWeight: 'bold',
+    fontWeight: '500',
     color: 'black',
     fontSize: 25,
     textAlign: 'center',
     marginTop: 15,
-    marginBottom: 15,
+    marginBottom: 10,
   },
   userPhoto: {
     width: 40,
@@ -454,18 +521,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#2196F3',
   },
   textStyle: {
-    color: 'black',
+    color: 'white',
     fontWeight: '400',
-    textAlign: 'center',
   },
   modalText: {
     marginBottom: 15,
     textAlign: 'center',
   },
   body: {
-    height: 42,
-    paddingLeft: 20,
-    paddingRight: 20,
+    height: 36,
     color: AppStyles.color.text,
   },
   touchable: {
@@ -473,10 +537,16 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     width: 320,
     height: 80,
-    borderWidth: 1,
-    borderRadius: 7,
-
-    //flexDirection: 'column',
+    borderRadius: 20,
+    backgroundColor: '#2c6f99',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 1,
+    shadowRadius: 20,
+    elevation: 8,
   },
   flexCol: {
     flexDirection: 'column',
@@ -485,5 +555,11 @@ const styles = StyleSheet.create({
   flexRow: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  balance: {
+    color: '#2c6f99',
+    fontWeight: '400',
+    textAlign: 'center',
+    marginBottom: '5%',
   },
 });
