@@ -19,7 +19,6 @@ import Card from 'react-native-elements';
 import '../global.js';
 import firestore from '@react-native-firebase/firestore';
 import {set} from 'react-native-reanimated';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import {AppIcon} from '../AppStyles';
 //import '@fontsource/montserrat';
 
@@ -361,7 +360,6 @@ const styles = StyleSheet.create({
   cardText: {
     marginBottom: '3%',
     color: 'white',
-    fontFamily: 'Montserrat',
     fontWeight: '600',
     fontSize: 18,
   },

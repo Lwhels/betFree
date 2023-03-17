@@ -6,7 +6,6 @@ import '../global.js';
 import {AppStyles} from '../AppStyles.js';
 
 function ProfileScreen({navigation}) {
-<<<<<<< HEAD
   const [balance, setBalance]  = useState(0) 
   const [email, setEmail]  = useState('')
   const [username, setUsername] = useState('')
@@ -41,14 +40,6 @@ function ProfileScreen({navigation}) {
           setImage (require ("../../assets/images/whistleProfilePic.png"))
         }
       });
-=======
-  const [balance, setBalance] = useState(0);
-  const [email, setEmail] = useState('');
-  const [username, setUsername] = useState('');
-  const [image, setImage] = useState('');
-
-  const [profilePhotoID, setProfilePhotoID] = useState(1);
->>>>>>> main
 
   firestore()
     .collection('users')
@@ -76,7 +67,6 @@ function ProfileScreen({navigation}) {
     });
 
   return (
-<<<<<<< HEAD
     <View >
       <Image style = {styles.userImg} source={image}/> 
       <Text style = {styles.username}> {username} </Text>
@@ -85,16 +75,6 @@ function ProfileScreen({navigation}) {
       <Text style = {styles.fields} > {email} </Text>
       <Text style = {styles.fieldTitles}> Your referral code: </Text>
       <Text style = {styles.fields} > {referralCode} </Text>
-=======
-    <View>
-      <Image style={styles.userImg} source={image} />
-      <Text style={styles.username}> {username} </Text>
-      <Text style={styles.balance}> Your balance: ${balance}</Text>
-      <Text style={styles.fieldTitles}> Email </Text>
-      <Text style={styles.fields}> {email} </Text>
-      <Text style={styles.fieldTitles}> Your referral code: </Text>
-      <Text style={styles.fields}> ur mom 420 </Text>
->>>>>>> main
     </View>
   );
 }
