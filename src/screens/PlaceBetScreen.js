@@ -19,6 +19,8 @@ import {Configuration} from '../Configuration';
 import firestore from '@react-native-firebase/firestore';
 import '../global.js';
 
+console.disableYellowBox = true;
+
 function expectedReturn(selectedTeam, currentBet, betAmount) {
   var converted = 0;
   var odds;
@@ -155,13 +157,14 @@ export default function PlaceBetScreen({navigation}) {
   function selectTeam(team) {
     setSelectedTeam(team);
   }
-  function placeBet() {
+  async function placeBet() {
     if (selectedTeam == 'No Team') {
       Alert.alert('Please Select A Team');
       return;
     }
+    console.log(betAmount);
     for (let i = 0; i < betAmount.length; i++) {
-      if (betAmount[i] < '0' || betAmount[i] > 9) {
+      if (betAmount[i] < '0' || betAmount[i] > '9') {
         Alert.alert('Please Enter A Positive Integer Bet Amount');
         return;
       }
@@ -179,8 +182,12 @@ export default function PlaceBetScreen({navigation}) {
         var data = users.data();
         if (data.balance < betAmount) {
           Alert.alert('Insufficient Funds');
+          setBetAmount(0);
+          setSelectedTeam('No Team');
           return;
-        } // if they have enough balance, allow the bet to be placed.
+        } else{
+          Alert.alert('Bet Placed!');
+        }// if they have enough balance, allow the bet to be placed.
         let current = new Date();
         let cDate =
           current.getFullYear() +
@@ -216,9 +223,11 @@ export default function PlaceBetScreen({navigation}) {
           .collection('activebets')
           .doc(dateTime)
           .set(bets, {merge: true});
+      }) 
+      .catch((error) => {
+        console.log(error) //when error
       });
     setModalVisible(!modalVisible);
-    Alert.alert('Bet Placed!');
     setBetAmount(0);
     setSelectedTeam('No Team');
   }
@@ -239,6 +248,8 @@ export default function PlaceBetScreen({navigation}) {
     .get()
     .then((users) => {
       setBalance(users.data().balance);
+    }) .catch((error) => {
+      console.log(error) //when error
     });
 
   if (loading) {

@@ -65,7 +65,7 @@ function HomeScreen({navigation}) {
       await firestore().collection('users').doc(global.currentuid).get().then((users) => {
         let data = users.data();
         if(data.referralused){
-          Alert.alert('Referral used');
+          Alert.alert('Already Entered a Referral Code');
           setModalVisible(true);
           return false;
         }
@@ -81,6 +81,7 @@ function HomeScreen({navigation}) {
             firestore().collection('users').doc(global.currentuid).update({balance: balance + 10000}).then(() => {
               updateReferralUse();
               console.log('updateReferral');
+              Alert.alert('Code Applied!');
             });
           });
           setModalVisible(!modalVisible);
@@ -367,6 +368,8 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 35,
     alignItems: 'center',
+    borderColor: "grey",
+    borderWidth:1,
   },
   rowOfCards: {
     flexDirection: 'row',
