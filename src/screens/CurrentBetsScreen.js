@@ -15,6 +15,7 @@ import {Configuration} from '../Configuration';
 import firestore from '@react-native-firebase/firestore';
 import '../global.js';
 
+console.disableYellowBox = true;
 /* /////////////////////////////////////////////   UPDATE AND CHECK BETS    //////////////////////////////////////////// */
 
 function homeWin(game) {
