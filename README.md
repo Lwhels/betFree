@@ -27,3 +27,13 @@ The menu button is represented with 3 horizontal lines, and when clicked opens a
 	The “News” button opens the page titled “NBA Media” and contains five recent articles about the NBA that might affect your betting decisions. To open the article simply click the title of the article and you will be redirected outside of the app to the article. On the News page you can navigate to the home page by clicking the “Home” button in the top left corner or in the button center of the screen.
 	The “Leaderboard” button opens the Leaderboard pages that contains a list of the top 10 players in one of two categories. The categories listed are “Highest Balance” and “Bet Wins” you can toggle to the other leaderboard by clicking the “Sort by:” button which will contain the category not currently being displayed. You can scroll down on the squares listing the players to see players lower down on the leaderboard. On the Leaderboard page you can navigate to the home page by clicking the “Home” button in the top left corner or in the button center of the screen.
 	Finally the scores button navigates the user to the “Scores Page” the scores page lists 50 of the most recent scores around the NBA. You can scroll down to see older scores as well as click an orange button, or the “Filter” button. Clicking the “Filter” button opens a popup where you can select a team to filter the scores to only that team's scores.  You can scroll to pick any team you like or you can select “All” to see every team in the NBA. Once you have selected the team you wish to select “close” to close the popup. On the Scores page you can navigate to the home page by clicking the “Home” button in the top left corner or in the button center of the screen.
+
+
+Works Cited:
+Developers, Instamobile. “React Native Starter Kit - Free Download.” Instamobile, https://instamobile.io/app-templates/react-native-starter-kit-firebase/. 
+“Firebase Documentation.” Google, Google, https://firebase.google.com/docs. 
+JavaScript and HTML Dom Reference, https://www.w3schools.com/jsref/. 
+“React Native · Learn Once, Write Anywhere.” React Native RSS, https://reactnative.dev/. 
+“Object.keys() - Javascript: MDN.” JavaScript | MDN, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys. 
+Stack Overflow, https://stackoverflow.com/. 
+Vector Networks – Figma Help Center. https://help.figma.com/hc/en-us/articles/360040450213-Vector-Networks. 
